@@ -3,5 +3,6 @@
   "projectname": "check_composition%2F",
   "setting": {
     "compileHotReLoad": true
-  }
+  },
+  "libVersion": "3.7.0"
 }

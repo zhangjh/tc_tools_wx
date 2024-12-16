@@ -1,9 +1,7 @@
 // index.js
-const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-
 Page({
   data: {
-    img: "../../resources/1.jpg" 
+    img: "../../resources/1.jpg",
     // + Math.ceil(Math.random() * 30) + ".jpg",
   },
   onReady: {
@@ -22,7 +20,17 @@ Page({
       }
     })
   },
-  startScan(e) {
+  onProgress(e) {
+    console.log(e);
+  },
+  onChange(e) {
+    console.log(e);
+  },
+  onFail(e) {
+    console.log('onFail', e)
+  },
+  onSuccess(e) {
     console.log("scan");
+    console.log(e);
   }
 })

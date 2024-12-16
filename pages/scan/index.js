@@ -22,4 +22,7 @@ Page({
       }
     })
   },
+  startScan(e) {
+    console.log("scan");
+  }
 })

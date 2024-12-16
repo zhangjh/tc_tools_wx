@@ -5,6 +5,7 @@
     "wux-image": "/miniprogram_npm/wux-weapp/image/index",
     "wux-upload": "/miniprogram_npm/wux-weapp/upload/index",
     "wux-card": "/miniprogram_npm/wux-weapp/card/index",
-    "wux-wing-blank": "/miniprogram_npm/wux-weapp/wing-blank/index"
+    "wux-wing-blank": "/miniprogram_npm/wux-weapp/wing-blank/index",
+    "wux-icon": "/miniprogram_npm/wux-weapp/icon/index"
   }
 }

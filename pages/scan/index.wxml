@@ -4,12 +4,30 @@
       <image src="{{img}}" mode="widthFix" />
   </view>
   <view class="tip">
+    <wux-card full bordered="{{ false }}">
+      <view slot="body">
+        <span>快速识别食品配料，了解成分安全性</span>
+      </view>
+      <view slot="body">
+        <span>长期食用含添加剂食品有害健康</span>
+      </view>
+      <view slot="body">
+        <span>鉴定结果仅供参考</span>
+      </view>
+    </wux-card>
+  </view>
+  <view class="camera">
+    <view class="img-placeholder">
+      <image src="/resources/camera.png" />
+      <wux-row>开始识别配料表</wux-row>
+      <wux-row class="small">支持拍照或从相册选择</wux-row>
+    </view>
+    <view class="upload-btn large" bind:tap="startScan">
+        <span>开始识别</span>
+    </view>
     <wux-row>
-      长期食用含添加剂食品有害健康！
-    </wux-row>
-    <wux-row>
-      鉴定结果仅供参考
-    </wux-row>
+      
+    </wux-row> 
   </view>
   <!-- <wux-wing-blank size="default">
     <wux-card>

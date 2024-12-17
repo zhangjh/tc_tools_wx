@@ -1,0 +1,18 @@
+/* pages/detail/index.wxss */
+.origin-img {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 350px;
+}
+
+.analysis view {
+  /* border: 1px solid blue; */
+  width: 95%;
+  padding: 5px;
+  word-wrap: break-word;
+  word-break: break-all;
+}

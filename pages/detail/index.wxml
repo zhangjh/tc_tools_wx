@@ -1,0 +1,33 @@
+<!--pages/detail/index.wxml-->
+<view class="container">
+  <view class="origin-img">
+    <wux-wing-blank size="default">
+      <wux-card
+        bordered="{{ false }}"
+        title="原始图片"
+        thumb="/resources/image.png"
+      >
+        <view slot="body">
+          <image src="{{originImg}}" mode="aspectFill" />
+        </view>
+      </wux-card>
+    </wux-wing-blank>
+  </view>
+  
+  <view class="analysis">
+    <wux-wing-blank size="default">
+      <wux-card
+        full
+        bordered="{{ false }}"
+        title="  成分分析"
+        thumb="/resources/ana.png"
+        >
+        <view slot="body">
+          {{ analysisContent }}
+        </view>
+      </wux-card>
+    </wux-wing-blank>
+    
+  </view>
+ 
+</view>

@@ -1,11 +1,20 @@
 {
   "pages": [
-    "pages/scan/index"
+    "pages/scan/index",
+    "pages/detail/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "科技狠活鉴定器",
     "navigationBarBackgroundColor": "#ffffff"
+  },
+  "usingComponents": {
+    "wux-row": "/miniprogram_npm/wux-weapp/row/index",
+    "wux-col": "/miniprogram_npm/wux-weapp/col/index",
+    "wux-card": "/miniprogram_npm/wux-weapp/card/index"
+  },
+  "useExtendedLib": {
+    "weui": true
   },
   "style": "v2",
   "componentFramework": "glass-easel",

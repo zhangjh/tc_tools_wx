@@ -32,5 +32,23 @@ Page({
   onSuccess(e) {
     console.log("scan");
     console.log(e);
+  },
+  startScan() {
+    console.log("scan");
+    wx.chooseMedia({
+      count: 1,
+      mediaType: "image",
+      success: res => {
+        console.log(res);
+        const file = res.tempFiles[0].tempFilePath;
+        console.log(file);
+        wx.redirectTo({
+          url: '/pages/detail/index?img=' + file,
+        })
+      },
+      fail: err => {
+        console.log(err);
+      }
+    });
   }
 })

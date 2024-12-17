@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-cell-group": "/miniprogram_npm/wux-weapp/cell-group/index",
+    "wux-cell": "/miniprogram_npm/wux-weapp/cell/index",
+    "wux-progress": "/miniprogram_npm/wux-weapp/progress/index"
+  }
 }

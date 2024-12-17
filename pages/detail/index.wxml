@@ -4,8 +4,9 @@
     <wux-wing-blank size="default">
       <wux-card
         bordered="{{ false }}"
-        title="原始图片"
+        title="  原始图片"
         thumb="/resources/image.png"
+        bind:tap="onPreviewImg"
       >
         <view slot="body">
           <image src="{{originImg}}" mode="aspectFill" />
@@ -13,21 +14,50 @@
       </wux-card>
     </wux-wing-blank>
   </view>
-  
+
   <view class="analysis">
     <wux-wing-blank size="default">
       <wux-card
-        full
         bordered="{{ false }}"
         title="  成分分析"
         thumb="/resources/ana.png"
         >
-        <view slot="body">
-          {{ analysisContent }}
+        <view slot="body" class="analysis-content">
+          <view wx:if="{{analysisContent.length}}">
+            <block wx:for="{{analysisContent}}" wx:key="index">
+              <wux-cell
+                  style="background-color: aliceblue;"
+                  wux-class="cell"
+                  thumb="/resources/dot.png"
+                  title="{{item.key}}"
+                  extra=""
+                  hasLine="false"
+                  is-link
+                  bind:click="onDetailClick"
+                  data-key="{{item.key}}"
+                  data-desc="{{item.value}}"
+                  >
+                </wux-cell>
+            </block>
+
+            <button 
+              wx:if="{{analysisContent.length}}" 
+              class="share-btn" type="primary"
+              data-analysis-content="{{analysisContent}}"
+              data-origin-img="{{originImg}}"
+              bind:tap="onShareAppMessage" open-type="share">分享分析结果</button>
+          </view>
+          <view wx:else="{{analysisContent.length}}">
+            <wux-progress 
+              activeColor="green"
+              stroke-width="18" 
+              shape="square"
+              status="progress"
+              percent="{{percent}}" />
+          </view>
         </view>
       </wux-card>
     </wux-wing-blank>
-    
   </view>
  
 </view>

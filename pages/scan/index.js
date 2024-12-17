@@ -50,5 +50,10 @@ Page({
         console.log(err);
       }
     });
-  }
+  },
+  onShareTimeline() {
+    return {
+      title: "[科技狠活鉴定器]分享一个神奇小工具，你也来试试"
+    };
+  },
 })

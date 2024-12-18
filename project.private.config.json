@@ -17,7 +17,7 @@
           "scene": null
         },
         {
-          "name": "pages/detail/index",
+          "name": "pages/scan/index",
           "pathName": "pages/scan/index",
           "query": "",
           "launchMode": "default",

@@ -6,7 +6,7 @@ Page({
    */
   data: {
     originImg: "",
-    percent: 0,
+    percent: 100,
     analysisContent: []
   },
 
@@ -14,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options);
+    // console.log(options);
     const img = options.img;
     if(img) {
       // 识别场景
@@ -52,12 +52,13 @@ Page({
       },
       url: 'https://tx.zhangjh.cn/composite/checkComposite',
       success: res => {
-        console.log(res);
+        // console.log(res);
         const resJO = JSON.parse(res.data);
         if(resJO.success) {
           if(timer) {
             clearInterval(timer);
           }
+          // console.log(resJO.data);
           this.setData({
             percent: 100,
             analysisContent: resJO.data
@@ -77,10 +78,8 @@ Page({
   },
 
   onDetailClick(e) {
-    console.log(e);
     const key = e.target.dataset.key;
     const desc = e.target.dataset.desc;
-    console.log(desc);
     if(key && desc) {
       wx.showModal({
         title: key,
@@ -145,7 +144,6 @@ Page({
    */
   onShareAppMessage() {
     const data = e.target.dataset;
-    console.log(data);
     return {
       title: "看看我分析的这个配料表",
       path: "/pages/detail/index?data=" + JSON.stringify(data)

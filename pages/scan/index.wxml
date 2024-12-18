@@ -23,18 +23,6 @@
       <wux-row class="small">支持拍照或从相册选择</wux-row>
     </view>
     <view class="upload-btn large">
-      <!-- <wux-upload
-        max="1"
-        count="1"
-        progress
-        url="https://www.skyvow.cn/api/common/file"
-        bind:change="onChange"
-        bind:progress="onProgress"
-        bind:fail="onFail"
-        bind:success="onSuccess"
-      >
-        <text>开始识别</text>
-      </wux-upload> -->
       <text bind:tap="startScan">开始识别</text>
     </view>
   </view>

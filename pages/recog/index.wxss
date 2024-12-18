@@ -1,6 +1,6 @@
 /* pages/recog/index.wxss */
 .content {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   width: 100%;
   height: 100%;
 }
@@ -10,7 +10,7 @@
   /* mask是绝对定位的，不继承父元素高宽，重新设置 */
   height: 95%;
   width: 95%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   background-blend-mode: multiply;
   background-color: white;
   filter: opacity(0.5);
@@ -60,4 +60,42 @@
   justify-content: center;
   align-items: center;
   vertical-align: middle;
+}
+
+.origin-img {
+  width: 100%;
+  /* border: 1px solid red; */
+}
+
+.recog-content {
+  height: 50%;
+  /* border: 1px solid red; */
+}
+
+.recog-content swiper {
+  /* border: 2px solid white; */
+  padding: 2px;
+  margin: 2px;
+  border-radius: 2px;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.swiper-item-title {
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.swiper-item-body {
+  /* border: 1px solid black; */
+  display: block;
+  color: black;
+  height: 200px;
+  padding: 5px;
+  margin: 5px;
 }

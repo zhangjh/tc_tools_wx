@@ -5,7 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bgClass: "bg-plant"
+    // 默认植物
+    tabKey: "plant",
+    // tab背景图
+    bgClass: "bg-plant",
+    // 识别原图
+    originImg: "",
+    // 识别进度
+    percent: 0,
+    // 识别内容
+    content: []
   },
 
   /**
@@ -14,7 +23,7 @@ Page({
   onLoad(options) {
     wx.setNavigationBarTitle({
       title: '太初识物'
-    })
+    });    
   },
 
   /**
@@ -69,7 +78,75 @@ Page({
     console.log(e);
     const tabKey = e.detail.key;
     this.setData({
+      tabKey: tabKey,
       bgClass: "bg-" + tabKey
+    });
+  },
+  onPreviewImg() {
+    wx.previewImage({
+      urls: [this.data.originImg],
+    });
+  },
+  startScan() {
+    const tabKey = this.data.tabKey;
+    wx.chooseMedia({
+      count: 1,
+      mediaType: "image",
+      success: res => {
+        const file = res.tempFiles[0].tempFilePath;
+        // 选择图片后设置图片并设置进度20%
+        this.setData({
+          originImg: file,
+          percent: 20,
+          // 开始识别时去除背景图
+          bgClass: ""
+        });
+        // 开始处理计时，并设置进度更新
+        let timer = setInterval(() => {
+          if(this.data.percent == 90) {
+            clearInterval(timer);
+            return;
+          }
+          this.setData({
+            percent: this.data.percent + 5
+          });
+        }, 1000);
+        const recogType = "recog" + tabKey.charAt(0).toUpperCase() + tabKey.slice(1);
+        wx.uploadFile({
+          filePath: file,
+          name: 'file',
+          formData: {
+            // 转成recogAnimal形式
+            type: recogType
+          },
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          url: 'https://tx.zhangjh.cn/wxChat/recog',
+          success: res => {
+            console.log(res);
+            const resJO = JSON.parse(res.data);
+            if(resJO.success) {
+              if(timer) {
+                clearInterval(timer);
+              }
+              // console.log(resJO.data);
+              this.setData({
+                percent: 100,
+                content: resJO.data
+              });
+            } else {
+              console.log(resJO.errorMsg);
+            }
+          },
+          fail: err => {
+            console.log(err);
+          }
+        });
+      },
+      fail: err => {
+        console.log(err);
+      }
     });
   }
 })

@@ -1,8 +1,6 @@
 {
   "usingComponents": {
-    "wux-image": "/miniprogram_npm/wux-weapp/image/index",
-    "wux-upload": "/miniprogram_npm/wux-weapp/upload/index",
-    "wux-wing-blank": "/miniprogram_npm/wux-weapp/wing-blank/index",
-    "mp-uploader": "weui-miniprogram/uploader/uploader"
+    "wux-row": "/miniprogram_npm/wux-weapp/row/index",
+    "wux-card": "/miniprogram_npm/wux-weapp/card/index"
   }
 }

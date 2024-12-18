@@ -9,9 +9,6 @@
     "navigationBarBackgroundColor": "#ffffff"
   },
   "usingComponents": {
-    "wux-row": "/miniprogram_npm/wux-weapp/row/index",
-    "wux-col": "/miniprogram_npm/wux-weapp/col/index",
-    "wux-card": "/miniprogram_npm/wux-weapp/card/index"
   },
   "useExtendedLib": {
     "weui": true

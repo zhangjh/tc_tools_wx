@@ -25,17 +25,17 @@
         <view slot="body" class="analysis-content">
           <block wx:for="{{analysisContent}}" wx:key="index">
             <wux-cell
-                style="background-color: aliceblue;"
-                wux-class="cell"
-                thumb="/resources/dot.png"
-                title="{{item.key}}"
-                hasLine="false"
-                is-link
-                bind:click="onDetailClick"
-                data-key="{{item.key}}"
-                data-desc="{{item.value}}"
-                >
-              </wux-cell>
+              style="background-color: aliceblue;"
+              wux-class="cell"
+              thumb="/resources/dot.png"
+              title="{{item.key}}"
+              hasLine="false"
+              is-link
+              bind:click="onDetailClick"
+              data-key="{{item.key}}"
+              data-desc="{{item.value}}"
+              >
+            </wux-cell>
           </block>
           <block wx:if="{{percent === 100 && analysisContent.length === 0}}">
             <view class="empty-result">未识别到有效成分</view>

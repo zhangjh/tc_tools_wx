@@ -3,6 +3,11 @@ Page({
   data: {
     img: "/resources/unsplash/" + Math.ceil(Math.random() * 30) + ".jpg",
   },
+  onLoad(options) {
+    wx.setNavigationBarTitle({
+      title: '科技与狠活鉴定器'
+    })
+  },
   onReady: {
 
   },

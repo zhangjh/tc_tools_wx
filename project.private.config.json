@@ -1,6 +1,6 @@
 {
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "projectname": "check_composition%2F",
+  "projectname": "check_composition",
   "setting": {
     "compileHotReLoad": true,
     "urlCheck": false
@@ -10,15 +10,22 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/detail/index",
-          "pathName": "pages/detail/index",
+          "name": "pages/recog/index",
+          "pathName": "pages/recog/index",
           "query": "",
           "launchMode": "default",
           "scene": null
         },
         {
-          "name": "pages/scan/index",
-          "pathName": "pages/scan/index",
+          "name": "pages/composition/scan/index",
+          "pathName": "pages/composition/scan/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
           "query": "",
           "launchMode": "default",
           "scene": null

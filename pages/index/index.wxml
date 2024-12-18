@@ -1,0 +1,14 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <view class="content">
+    <wux-grids col="2">
+      <block wx:for="{{items}}" wx:key="index">
+        <wux-grid bind:click="onClick" data-path="{{item.path}}">
+          <image src="{{item.logo}}" />
+          <view class="wux-dark">{{item.name}}</view>
+          <view class="small wux-ellipsis-10 wux-positive">{{item.desc}}</view>
+        </wux-grid>
+      </block>
+    </wux-grids>
+  </view>
+</view>

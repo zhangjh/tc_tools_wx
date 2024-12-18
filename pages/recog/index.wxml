@@ -1,0 +1,17 @@
+<!--pages/recog/index.wxml-->
+<view class="container">
+  <view class="content">
+    <view class="mask {{bgClass}}" style="position: absolute;"></view>
+    <wux-tabs defaultCurrent="plant" scroll="true" bind:change="onTabChange">
+        <wux-tab key="plant" title="植物识别"></wux-tab>
+        <wux-tab key="animal" title="动物识别"></wux-tab>
+        <wux-tab key="logo" title="品牌识别"></wux-tab>
+        <wux-tab key="star" title="名人识别"></wux-tab>
+    </wux-tabs>
+    <view class="camera">
+      <view class="upload-btn large">
+        <text bind:tap="startScan">开始识别</text>
+      </view>
+    </view>
+  </view>
+</view>

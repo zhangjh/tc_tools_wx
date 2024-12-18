@@ -4,6 +4,7 @@
 page {
   color: grey;
   width: 95%;
+  height: 95%;
   margin: 10px;
 }
 

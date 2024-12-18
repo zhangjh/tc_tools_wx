@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "wux-wing-blank": "/miniprogram_npm/wux-weapp/wing-blank/index",
     "wux-cell": "/miniprogram_npm/wux-weapp/cell/index",
     "wux-card": "/miniprogram_npm/wux-weapp/card/index",
     "wux-progress": "/miniprogram_npm/wux-weapp/progress/index"

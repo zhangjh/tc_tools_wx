@@ -8,7 +8,7 @@
         thumb="/resources/image.png"
         bind:tap="onPreviewImg"
       >
-        <view slot="body">
+        <view slot="body" style="text-align: center;">
           <image src="{{originImg}}" mode="aspectFill" />
         </view>
       </wux-card>

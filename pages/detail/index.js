@@ -41,7 +41,7 @@ Page({
         return;
       }
       this.setData({
-        percent: this.data.percent + 10
+        percent: this.data.percent + 8
       });
     }, 1000);
     wx.uploadFile({

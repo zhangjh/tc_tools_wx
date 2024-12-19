@@ -1,0 +1,100 @@
+/* pages/ocr/index.wxss */
+.camera {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid gray; */
+}
+
+.upload-btn {
+  border: 1px solid #07c160;
+  background-color: #07c160;
+  color: white;
+  margin: 10px 0;
+  width: 80%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.tip {
+  /* border: 1px solid black; */
+  width: 100%;
+}
+
+.card-container {
+  /* border: 1px solid blue; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-container {
+  /* border: 1px solid red; */
+  display: flex;
+  margin: 10px;
+}
+
+.item {
+  border-radius: 4px;
+  width: 100%;
+  margin: 10px;
+  padding: 5px;
+}
+
+.wux-card {
+  background-color: #eff6ff;
+  border: 1px solid red;
+  width: 150px;
+  height: 100%;
+  margin: 10px;
+}
+
+.card-body {
+  height: 100%;
+  border: 1px solid black;
+}
+
+.tip-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.tip-title span {
+  margin-left: 5px;
+}
+
+.center {
+  text-align: center;
+}
+
+.darkblue {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.lightgreen {
+  background-color: #f0fdf4;
+  color: #15803d;
+}
+
+.purple {
+  background-color: #faf5ff;
+  color: #7e22ce;
+}
+
+.orange {
+  background-color: #fff7ed;
+  color: #c2410c;
+}

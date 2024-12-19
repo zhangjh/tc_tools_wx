@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wux-progress": "/miniprogram_npm/wux-weapp/progress/index",
+    "towxml": "/towxml/towxml"
+  }
+}

@@ -20,7 +20,7 @@ Page({
     }, {
       name: "太初OCR",
       type: "tools",
-      desc: "快速OCR提取文本",
+      desc: "快速OCR识别，从图片中提取文本",
       logo: "/resources/ocr.png",
       path: "/pages/ocr/index",
     }]

@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/composition/scan/index",
     "pages/composition/detail/index",
-    "pages/recog/index"
+    "pages/recog/index",
+    "pages/ocr/index",
+    "pages/ocr/detail/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -1,7 +1,7 @@
 // index.js
 Page({
   data: {
-    img: "/resources/unsplash/" + Math.ceil(Math.random() * 30) + ".jpg",
+    img: "/resources/unsplash/" + Math.ceil(Math.random() * 3) + ".jpg",
   },
   onLoad(options) {
     wx.setNavigationBarTitle({
@@ -24,13 +24,14 @@ Page({
     })
   },
   startScan() {
+    console.log("scan");
     wx.chooseMedia({
       count: 1,
       mediaType: "image",
       success: res => {
         const file = res.tempFiles[0].tempFilePath;
         wx.redirectTo({
-          url: '/pages/detail/index?img=' + file,
+          url: '/pages/composition/detail/index?img=' + file,
         })
       },
       fail: err => {

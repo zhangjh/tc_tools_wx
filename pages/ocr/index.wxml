@@ -1,0 +1,44 @@
+<!--pages/ocr/index.wxml-->
+<view class="container">
+  <view class="tip">
+    <view class="card-container">
+      <view class="item-container">
+        <view class="item center darkblue">
+          <view class="tip-title">
+            <wux-icon type="md-globe" />
+            <span>多语言支持</span>
+          </view>
+          <view>支持中英文混合识别</view>
+        </view>
+        <view class="item center lightgreen">
+          <view class="tip-title">
+            <wux-icon type="md-document" />  
+            <span>拼音支持</span>
+          </view>
+          <view>支持拼音识别</view>
+        </view>
+      </view>
+      <view class="item-container">
+        <view class="item center purple">
+          <view class="tip-title">
+            <wux-icon type="md-arrow-forward" />  
+            <span>快速处理</span>
+          </view>
+          <view>秒级响应提取</view>
+        </view>
+        <view class="item center orange">
+          <view class="tip-title">
+            <wux-icon type="md-copy" />
+            <span>一键复制</span>
+          </view>
+          <view>识别后快速复制</view>
+        </view>
+      </view>
+    </view>   
+  </view>
+  <view class="camera">
+    <view class="upload-btn large">
+      <span bind:tap="startScan">开始使用</span>
+    </view>
+  </view>
+</view>

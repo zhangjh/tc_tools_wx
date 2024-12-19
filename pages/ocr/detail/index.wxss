@@ -1,0 +1,24 @@
+/* pages/ocr/detail/index.wxss */
+.origin-img {
+  width: 100%;
+}
+
+.empty-result {
+  text-align: center;
+  padding: 50rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.ocr-content {
+  height: 45%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.operate-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

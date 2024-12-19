@@ -1,6 +1,8 @@
 /* pages/ocr/detail/index.wxss */
 .origin-img {
   width: 100%;
+  height: 45%;
+  /* border: 1px solid red; */
 }
 
 .empty-result {
@@ -14,10 +16,13 @@
   height: 45%;
   width: 100%;
   overflow-y: auto;
+  /* border: 1px solid red; */
 }
 
 .operate-btns {
+  /* border: 1px solid red; */
   display: flex;
+  height: 10%;
   flex-direction: row;
   justify-content: center;
   align-items: center;

@@ -6,7 +6,7 @@ Page({
    */
   data: {
     originImg: "",
-    percent: 100,
+    percent: 0,
     analysisContent: []
   },
 
@@ -36,7 +36,7 @@ Page({
 
   scanImg(img) {
     let timer = setInterval(() => {
-      if(this.data.percent == 90) {
+      if(this.data.percent === 90) {
         clearInterval(timer);
         return;
       }

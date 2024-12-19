@@ -15,6 +15,7 @@ Page({
    */
   onLoad(options) {
     const img = options.img;
+    console.log(img);
     if(img) {
       // 识别场景
       this.setData({
@@ -123,6 +124,7 @@ Page({
   },
 
   onPreviewImg() {
+    console.log("preview");
     wx.previewImage({
       urls: [this.data.originImg],
     })

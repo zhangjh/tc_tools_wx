@@ -16,7 +16,15 @@
   </view>
 
   <view class="analysis">
-    <wux-wing-blank size="default">
+    <view wx:if="{{percent !== 100}}">
+      <wux-progress 
+        activeColor="green"
+        stroke-width="18"
+        shape="square"
+        status="progress"
+        percent="{{percent}}" />
+    </view>
+    <wux-wing-blank size="default" wx:if="{{analysisContent.length > 0}}">
       <wux-card
         bordered="{{ false }}"
         title="  成分分析"
@@ -46,14 +54,6 @@
             data-analysis-content="{{analysisContent}}"
             data-origin-img="{{originImg}}"
             bind:tap="onShareAppMessage" open-type="share">分享分析结果</button>
-          <view wx:if="{{percent !== 100}}">
-            <wux-progress 
-              activeColor="green"
-              stroke-width="18" 
-              shape="square"
-              status="progress"
-              percent="{{percent}}" />
-          </view>
         </view>
       </wux-card>
     </wux-wing-blank>

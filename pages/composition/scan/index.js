@@ -1,7 +1,7 @@
 // index.js
 Page({
   data: {
-    img: "/resources/unsplash/" + Math.ceil(Math.random() * 3) + ".jpg",
+    img: "https://unsplash.zhangjh.cn/" + Math.ceil(Math.random() * 3) + ".jpg",
   },
   onLoad(options) {
     wx.setNavigationBarTitle({

@@ -1,16 +1,14 @@
 <!--pages/ocr/detail/index.wxml-->
 <view class="container">
-  <view class="origin-img">
-    <wux-wing-blank size="default">
-      <wux-card
-        bordered="{{ false }}"
-        bind:tap="onPreviewImg"
-      >
-        <view slot="body" style="text-align: center;">
-          <image src="{{originImg}}" mode="aspectFill" />
-        </view>
-      </wux-card>
-    </wux-wing-blank>
+  <view class="origin-img" wx:if="{{originImg}}">
+    <wux-card
+      bordered="{{ false }}"
+      bind:tap="onPreviewImg"
+    >
+      <view slot="body" style="text-align: center;">
+        <image src="{{originImg}}" mode="aspectFill" />
+      </view>
+    </wux-card>
   </view>
 
   <view class="ocr-content" wx:if="{{percent !== 0}}">
@@ -26,11 +24,11 @@
     <block wx:if="{{percent === 100 && !ocrContent}}">
       <view class="empty-result">未识别到文本内容</view>
     </block>
+  </view>
 
-    <view wx:if="{{ ocrContent }}" class="operate-btns">
-      <button type="primary" bind:tap="back2Scan">继续使用</button>
-      <button type="ghost" bind:tap="onCopyClick">点击复制</button>
-    </view>
+  <view class="operate-btns" wx:if="{{ ocrContent }}">
+    <button type="primary" bind:tap="back2Scan">继续使用</button>
+    <button type="ghost" bind:tap="onCopyClick">点击复制</button>
   </view>
  
 </view>

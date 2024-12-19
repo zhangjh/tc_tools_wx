@@ -8,9 +8,24 @@
   align-items: center;
 }
 
+.wux-grids {
+  /* border: 1px solid blue; */
+}
+
+.item {
+  border: 1px solid whitesmoke;
+  /* margin: 5px; */
+  /* background-color: orange; */
+  border-radius: 5px;
+
+  /* background-color: #e0e0e0;  */
+  box-shadow: 
+      5px 5px 10px #aaa,   /* 右下阴影 */
+      -5px -5px 10px #fff; /* 左上高光 */
+}
+
 .wux-grid {
-  width: 150px;
-  height: 200px;
+  /* height: 20%; */
   /* border: 1px solid red; */
 }
 

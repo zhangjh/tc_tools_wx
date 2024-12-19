@@ -1,11 +1,11 @@
 /* pages/index/index.wxss */
 .content {
   width: 100%;
-  /* border: 1px solid red; */
-  display: flex;
+  /* border: 1px solid blue; */
+  /* display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .wux-grids {
@@ -14,6 +14,8 @@
 
 .item {
   border: 1px solid whitesmoke;
+  height: 180px;
+  padding: 5px;
   /* margin: 5px; */
   /* background-color: orange; */
   border-radius: 5px;
@@ -25,7 +27,7 @@
 }
 
 .wux-grid {
-  /* height: 20%; */
+  height: 20%;
   /* border: 1px solid red; */
 }
 

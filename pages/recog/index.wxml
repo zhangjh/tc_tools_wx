@@ -3,13 +3,10 @@
   <view class="content">
     <view class="mask {{bgClass}}" style="position: absolute;"></view>
     <wux-tabs 
-      defaultCurrent="plant" 
-      scroll="true" 
       bind:change="onTabChange">
         <wux-tab key="plant" title="植物识别"></wux-tab>
         <wux-tab key="animal" title="动物识别"></wux-tab>
         <wux-tab key="logo" title="品牌识别"></wux-tab>
-        <wux-tab key="star" title="名人识别"></wux-tab>
     </wux-tabs>
 
     <view class="origin-img" wx:if="{{originImg}}">
@@ -26,7 +23,16 @@
     </view>
 
     <!-- 识别内容分析 -->
-    <view class="recog-content" wx:if="{{percent === 100}}">
+    <view class="recog-content" wx:if="{{percent !== 0}}">
+       <!-- 进度 -->
+      <view wx:if="{{percent !== 100}}">
+        <wux-progress 
+          activeColor="green"
+          stroke-width="18" 
+          shape="square"
+          status="progress"
+          percent="{{percent}}" />
+      </view>
       <swiper
         indicator-dots="true"
         >
@@ -41,19 +47,10 @@
         </block>
       </swiper>
     </view>
-    <!-- 进度 -->
-      <view wx:if="{{percent !== 100}}">
-        <wux-progress 
-          activeColor="green"
-          stroke-width="18" 
-          shape="square"
-          status="progress"
-          percent="{{percent}}" />
-      </view>
 
-    <view class="camera" wx:if="{{!originImg}}">
+    <view class="camera {{originImg ? '' : 'init'}}">
       <view class="upload-btn large">
-        <text bind:tap="startScan">开始识别</text>
+        <text bind:tap="startScan">{{ originImg ? "继续识别" : "开始识别"}}</text>
       </view>
     </view>
     

@@ -14,15 +14,15 @@ Page({
     }, {
       name: "太初识物",
       type: "tools",
-      desc: "快速识别动植物",
-      logo: "",
+      desc: "快速识别动植物、品牌等信息",
+      logo: "/resources/recog.png",
       path: "/pages/recog/index",
     }, {
       name: "太初OCR",
       type: "tools",
       desc: "快速OCR提取文本",
-      logo: "",
-      path: "",
+      logo: "/resources/ocr.png",
+      path: "/pages/ocr/index",
     }]
   },
 

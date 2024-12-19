@@ -75,11 +75,15 @@ Page({
 
   },
   onTabChange(e) {
+    // tab切换需要重置回初始状态
     console.log(e);
     const tabKey = e.detail.key;
     this.setData({
       tabKey: tabKey,
-      bgClass: "bg-" + tabKey
+      bgClass: "bg-" + tabKey,
+      originImg: "",
+      percent: 0,
+      content: []
     });
   },
   onPreviewImg() {
@@ -133,7 +137,7 @@ Page({
               // console.log(resJO.data);
               this.setData({
                 percent: 100,
-                content: resJO.data
+                content: resJO.data ? resJO.data : "未识别到内容"
               });
             } else {
               console.log(resJO.errorMsg);

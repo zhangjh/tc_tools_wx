@@ -5,7 +5,93 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    items: [{
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '',
+      icon: '',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '',
+      icon: '',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '',
+      icon: '',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '春雨无声',
+      icon: '/resources/ana.png',
+      source: '',
+      type: '',
+    }, {
+      name: '',
+      icon: '',
+      source: '',
+      type: '',
+    }],
+    currentSound: {
+      name: '春雨无声',
+      icon: '/resources/camera.png',
+      source: '',
+      type: ''
+    }
   },
 
   /**

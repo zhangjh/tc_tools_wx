@@ -1,2 +1,38 @@
 <!--pages/voice/index.wxml-->
-<text>pages/voice/index.wxml</text>
+<view class="container">
+  <view class="player">
+    <image src="{{currentSound.icon}}" />
+    <view class="title">{{currentSound.name}}</view> 
+    <view class="play-control">
+      <image class="play-btn" src="{{isPlaying ? '/images/pause.png' : '/images/play.png'}}" bindtap="togglePlay"/>
+    </view>
+    <!-- <view class="wave-container"></view> -->
+    <view class="music-container">
+      <view class="note note1"></view>
+      <view class="note note2"></view>
+      <view class="note note3"></view>
+      <view class="note note4"></view>
+      <view class="note note5"></view>
+      <view class="note note6"></view>
+      <view class="note note7"></view>
+      <view class="note note8"></view>
+      <view class="note note9"></view>
+      <view class="note note10"></view>
+    </view>
+  </view>
+
+  <view class="card-container">
+    <wux-grids col="4" bordered="{{false}}">
+      <block wx:for="{{items}}" wx:key="index">
+        <wux-grid bind:click="onClick" data-path="{{item.source}}">
+          <view class="item">
+            <view class="icon">
+              <image src="{{item.icon}}" />
+            </view>
+            <view class="title">{{item.name}}</view>
+          </view>
+        </wux-grid>
+      </block>
+    </wux-grids>
+  </view>
+</view>

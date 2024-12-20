@@ -8,6 +8,17 @@ page {
   margin: 10px;
 }
 
+/* 通用的全宽高居中布局容器类 */
+.center-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
 .large {
   font-size: 1.2rem;
 }
@@ -31,4 +42,26 @@ page {
   justify-content: space-between;
   /* padding: 200rpx 0; */
   box-sizing: border-box;
+  /* background-color: #F0F8FF; */
 } 
+
+.upload-btn {
+  width: 90%;
+  height: 48px;
+  margin: 0 auto;
+  background: #00B578;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  /* border-radius: 24px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,181,120,0.2);
+  transition: all 0.3s ease;
+}
+
+.upload-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(0,181,120,0.15);
+}

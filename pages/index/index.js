@@ -23,6 +23,12 @@ Page({
       desc: "快速OCR识别，从图片中提取文本",
       logo: "/resources/ocr.png",
       path: "/pages/ocr/index",
+    }, {
+      name: "白噪声",
+      type: "tools",
+      desc: "多种不同类型白噪声，助您缓解压力、快速入眠",
+      logo: "/resources/voice.png",
+      path: "/pages/voice/index"
     }]
   },
 

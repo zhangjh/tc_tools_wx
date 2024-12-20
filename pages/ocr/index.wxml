@@ -21,12 +21,28 @@
       <view class="item-container">
         <view class="item center purple">
           <view class="tip-title">
+            <wux-icon type="md-brush" />  
+            <span>手写体支持</span>
+          </view>
+          <view>支持手写文字识别</view>
+        </view>
+        <view class="item center orange">
+          <view class="tip-title">
+            <wux-icon type="md-grid" />
+            <span>表格支持</span>
+          </view>
+          <view>内容保留表格形式</view>
+        </view>
+      </view>
+      <view class="item-container">
+        <view class="item center indigo">
+          <view class="tip-title">
             <wux-icon type="md-arrow-forward" />  
             <span>快速处理</span>
           </view>
           <view>秒级响应提取</view>
         </view>
-        <view class="item center orange">
+        <view class="item center rose">
           <view class="tip-title">
             <wux-icon type="md-copy" />
             <span>一键复制</span>
@@ -36,7 +52,7 @@
       </view>
     </view>   
   </view>
-  <view class="camera">
+  <view class="center-container">
     <view class="upload-btn large">
       <span bind:tap="startScan">开始使用</span>
     </view>

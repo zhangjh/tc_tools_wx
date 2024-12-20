@@ -5,7 +5,8 @@
     "pages/composition/detail/index",
     "pages/recog/index",
     "pages/ocr/index",
-    "pages/ocr/detail/index"
+    "pages/ocr/detail/index",
+    "pages/voice/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -6,8 +6,8 @@
         <wux-grid bind:click="onClick" data-path="{{item.path}}">
           <view class="item">
             <image src="{{item.logo}}" />
-            <view class="wux-dark large">{{item.name}}</view>
-            <view class="small wux-ellipsis-10 wux-positive">{{item.desc}}</view>
+            <view class="title">{{item.name}}</view>
+            <view class="wux-ellipsis-10 desc">{{item.desc}}</view>
           </view>
         </wux-grid>
       </block>

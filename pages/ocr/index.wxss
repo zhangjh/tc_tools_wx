@@ -1,28 +1,4 @@
 /* pages/ocr/index.wxss */
-.camera {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* border: 1px solid gray; */
-}
-
-.upload-btn {
-  border: 1px solid #07c160;
-  background-color: #07c160;
-  color: white;
-  margin: 10px 0;
-  width: 80%;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  vertical-align: middle;
-}
-
 .tip {
   /* border: 1px solid black; */
   width: 100%;
@@ -30,6 +6,7 @@
 
 .card-container {
   /* border: 1px solid blue; */
+  padding: 20px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -50,16 +27,16 @@
 }
 
 .wux-card {
-  background-color: #eff6ff;
+  /* background-color: #eff6ff;
   border: 1px solid red;
   width: 150px;
   height: 100%;
-  margin: 10px;
+  margin: 10px; */
 }
 
 .card-body {
-  height: 100%;
-  border: 1px solid black;
+  /* height: 100%;
+  border: 1px solid black; */
 }
 
 .tip-title {
@@ -68,11 +45,12 @@
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 600;
+  margin: 4px 0;
 }
 
 .tip-title span {
-  margin-left: 5px;
+  margin: 0 10px;
 }
 
 .center {
@@ -97,4 +75,14 @@
 .orange {
   background-color: #fff7ed;
   color: #c2410c;
+}
+
+.indigo {
+  background-color: #eef2ff;
+  color: #534fcc;
+}
+
+.rose {
+  background-color: #fff1f2;
+  color: #be123c;
 }

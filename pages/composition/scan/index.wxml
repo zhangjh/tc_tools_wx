@@ -16,7 +16,7 @@
       </view>
     </wux-card>
   </view>
-  <view class="camera">
+  <view class="center-container">
     <view class="img-placeholder">
       <image src="/resources/camera.png" />
       <wux-row>开始识别配料表</wux-row>

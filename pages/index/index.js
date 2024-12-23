@@ -24,7 +24,7 @@ Page({
       logo: "/resources/ocr.png",
       path: "/pages/ocr/index",
     }, {
-      name: "白噪声",
+      name: "助眠减压白噪声",
       type: "tools",
       desc: "多种不同类型白噪声，助您缓解压力、快速入眠",
       logo: "/resources/voice.png",
@@ -89,7 +89,6 @@ Page({
   },
   onClick(e) {
     const path = e.target.dataset.path;
-    console.log(path);
     wx.redirectTo({
       url: path,
     });

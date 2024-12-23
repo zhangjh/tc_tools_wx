@@ -25,7 +25,7 @@
   <view class="card-container">
     <wux-grids col="4" bordered="{{false}}">
       <block wx:for="{{items}}" wx:key="index">
-        <wux-grid bind:click="onClick" data-path="{{item.source}}">
+        <wux-grid bind:click="onClickAudio" data-sound="{{item}}">
           <view class="item">
             <view class="icon">
               <image src="{{item.icon}}" />

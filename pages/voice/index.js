@@ -6,89 +6,89 @@ Page({
    */
   data: {
     items: [{
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '春雨',
+      icon: '/resources/voice/rain.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '夏雨',
+      icon: '/resources/voice/big_rain.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '海浪',
+      icon: '/resources/voice/wave.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '',
-      icon: '',
+      name: '雷声',
+      icon: '/resources/voice/thunder.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '鸟鸣',
+      icon: '/resources/voice/bird.png',
       source: '',
-      type: '',
+      type: 'animal',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '夜虫',
+      icon: '/resources/voice/night.png',
       source: '',
-      type: '',
+      type: 'animal',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '流水',
+      icon: '/resources/voice/flow.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '',
-      icon: '',
+      name: '爆竹',
+      icon: '/resources/voice/fireworks.png',
       source: '',
-      type: '',
+      type: 'other',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '篝火',
+      icon: '/resources/voice/fire.png',
       source: '',
-      type: '',
+      type: 'other',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '听风',
+      icon: '/resources/voice/wind.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '瀑布',
+      icon: '/resources/voice/waterfall.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '',
-      icon: '',
+      name: '小溪',
+      icon: '/resources/voice/stream.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '树林',
+      icon: '/resources/voice/trees.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '落叶',
+      icon: '/resources/voice/leaf.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '春雨无声',
-      icon: '/resources/ana.png',
+      name: '冬雪',
+      icon: '/resources/voice/snow.png',
       source: '',
-      type: '',
+      type: 'nature',
     }, {
-      name: '',
-      icon: '',
+      name: '乡村',
+      icon: '/resources/voice/village.png',
       source: '',
-      type: '',
+      type: 'other',
     }],
     currentSound: {
-      name: '春雨无声',
-      icon: '/resources/camera.png',
+      name: '春雨',
+      icon: '/resources/voice/rain.png',
       source: '/resources/voice/brown-noise-by-digitalspa-170337.mp3',
       type: ''
     },
@@ -107,7 +107,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    wx.setNavigationBarTitle({
+      title: '白噪声'
+    }); 
   },
 
   /**
@@ -161,6 +163,12 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  onClickAudio(e) {
+    const sound = e.target.dataset.sound;
+    this.setData({
+      currentSound: sound
+    });
   },
   togglePlay() {
     const playingStatus = !this.data.isPlaying;

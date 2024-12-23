@@ -8,6 +8,14 @@ page {
   margin: 10px;
 }
 
+.show {
+  visibility: visible;
+}
+
+.hide {
+  visibility: hidden;
+}
+
 /* 通用的全宽高居中布局容器类 */
 .center-container {
   height: 100%;

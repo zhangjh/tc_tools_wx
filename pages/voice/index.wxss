@@ -4,41 +4,58 @@
   height: 100%;
   /* border: 1px solid red; */
   /* background-color: rgb(87, 146, 87); */
-  background-color: #005580;
+  background-color: #86bad3;
   color: #fff;
 }
 
 .music-container {
   display: flex;
   gap: 10px;
+  margin-top: 20px;
+  height: 50px;
+  /* border: 1px solid red; */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .note {
   width: 5px;
   height: 20px;
-  background-color: #61dafb;
+  background-color: #dbe7eb;
   border-radius: 5px;
-  animation: jump 1.5s linear infinite;
+  animation: jump 2.5s linear infinite;
 }
 
 .note1 {
   animation-delay: 0s;
 }
-
 .note2 {
   animation-delay: 0.2s;
 }
-
 .note3 {
   animation-delay: 0.4s;
 }
-
 .note4 {
   animation-delay: 0.6s;
 }
-
 .note5 {
   animation-delay: 0.8s;
+}
+.note6 {
+  animation-delay: 0.8s;
+}
+.note7 {
+  animation-delay: 1.0s;
+}
+.note8 {
+  animation-delay: 1.2s;
+}
+.note9 {
+  animation-delay: 1.4s;
+}
+.note10 {
+  animation-delay: 1.6s;
 }
 
 @keyframes jump {
@@ -72,8 +89,21 @@
 }
 
 .player .play-control {
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
+}
+
+.play-control image {
+  width: 24px;
+  height: 24px;
+}
+
+.timer {
+  margin-left: 20px;
 }
 
 .card-container {
@@ -84,6 +114,10 @@
   flex-direction: row;
   justify-content: center;
   overflow-y: auto;
+}
+
+.wux-grids {
+  background-color: red;
 }
 
 .item {

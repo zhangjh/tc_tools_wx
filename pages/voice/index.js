@@ -89,9 +89,13 @@ Page({
     currentSound: {
       name: '春雨无声',
       icon: '/resources/camera.png',
-      source: '',
+      source: '/resources/voice/brown-noise-by-digitalspa-170337.mp3',
       type: ''
-    }
+    },
+    isPlaying: false,
+    audioContext: null,
+    // 一共可播放[0, duration]
+    duration: null
   },
 
   /**
@@ -126,7 +130,11 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    const audioContext = this.data.audioContext;
+    if(audioContext) {
+      audioContext.stop();
+      audioContext.destroy();
+    }
   },
 
   /**
@@ -148,5 +156,46 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  togglePlay() {
+    const curStatus = !this.data.isPlaying;
+    this.setData({
+      isPlaying: curStatus
+    });
+    let audioContext = this.data.audioContext;
+    if(curStatus) {
+      // 开始播放当前音频
+      if(!audioContext) {
+        audioContext = wx.createInnerAudioContext({
+          useWebAudioImplement: false
+        });
+        this.setData({
+          audioContext
+        });
+      }
+      audioContext.src = this.data.currentSound.source;
+      audioContext.onCanplay(() => {
+        const duration = Math.ceil(audioContext.duration);
+        console.log(duration);
+        this.setData({
+          duration: duration
+        });
+        let timer = setInterval(() => {
+          const remained = this.data.duration - 1;
+          this.setData({
+            duration: remained
+          });
+          if(remained === 0) {
+            clearInterval(timer);
+            // todo: 增加循环播放模式
+            audioContext.stop();
+            audioContext.destroy();
+          }
+        }, 1000);
+      });
+      audioContext.play();
+    } else {
+      audioContext.pause();
+    }
   }
 })

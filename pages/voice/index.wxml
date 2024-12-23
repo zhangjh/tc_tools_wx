@@ -3,11 +3,7 @@
   <view class="player">
     <image src="{{currentSound.icon}}" />
     <view class="title">{{currentSound.name}}</view> 
-    <view class="play-control">
-      <image class="play-btn" src="{{isPlaying ? '/images/pause.png' : '/images/play.png'}}" bindtap="togglePlay"/>
-    </view>
-    <!-- <view class="wave-container"></view> -->
-    <view class="music-container">
+    <view class="music-container {{isPlaying ? 'show' : 'hide'}}">
       <view class="note note1"></view>
       <view class="note note2"></view>
       <view class="note note3"></view>
@@ -18,6 +14,11 @@
       <view class="note note8"></view>
       <view class="note note9"></view>
       <view class="note note10"></view>
+    </view>
+    <view class="duration {{isPlaying ? 'show' : 'hide'}}">{{duration ? duration : ''}}</view>
+    <view class="play-control">
+      <image class="play-btn" src="{{isPlaying ? '/resources/pause.png' : '/resources/play.png'}}" bindtap="togglePlay"/>
+      <!-- <image class="timer {{isPlaying ? 'show' : 'hide'}}" src="/resources/timer.png" /> -->
     </view>
   </view>
 

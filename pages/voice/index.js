@@ -19,7 +19,7 @@ Page({
     }, {
       name: '海浪',
       icon: '/resources/voice/wave.png',
-      source: '',
+      source: sourcePre + '/voice/ocean-waves.mp3',
       type: 'nature',
     }, {
       name: '雷声',
@@ -39,7 +39,7 @@ Page({
     }, {
       name: '流水',
       icon: '/resources/voice/flow.png',
-      source: '',
+      source: sourcePre + '/voice/flowing-water.mp3',
       type: 'nature',
     }, {
       name: '爆竹',

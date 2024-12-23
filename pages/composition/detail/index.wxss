@@ -29,6 +29,7 @@
   font-size: 28rpx;
 }
 
-.share-btn {
+.btn-group button {
   margin: 10px;
+  width: 100%;
 }

@@ -80,15 +80,22 @@ Page({
   onDetailClick(e) {
     const key = e.target.dataset.key;
     const desc = e.target.dataset.desc;
+    const score = e.target.dataset.score;
     if(key && desc) {
       wx.showModal({
         title: key,
-        content: desc,
+        content: desc + "（" + score + " 分）",
         showCancel: false,
         complete: (res) => {
         }
       })
     }
+  },
+
+  onBackClick() {
+    wx.redirectTo({
+      url: '/pages/composition/scan/index',
+    })
   },
 
   /**

@@ -35,25 +35,28 @@
             <wux-cell
               style="background-color: aliceblue;"
               wux-class="cell"
-              thumb="/resources/dot.png"
+              thumb="{{item.score < 6 ? '/resources/red_dot.png' : '/resources/dot.png' }}"
               title="{{item.key}}"
               hasLine="false"
               is-link
               bind:click="onDetailClick"
               data-key="{{item.key}}"
               data-desc="{{item.value}}"
+              data-score="{{item.score}}"
               >
             </wux-cell>
           </block>
           <block wx:if="{{percent === 100 && analysisContent.length === 0}}">
             <view class="empty-result">未识别到有效成分</view>
           </block>
-          <button 
-            wx:if="{{analysisContent.length}}" 
-            class="share-btn" type="primary"
-            data-analysis-content="{{analysisContent}}"
-            data-origin-img="{{originImg}}"
-            bind:tap="onShareAppMessage" open-type="share">分享分析结果</button>
+          <view class="btn-group" wx:if="{{analysisContent.length}}" >
+            <button type="primary" bind:tap="onBackClick">继续识别</button>
+            <button 
+              class="share-btn" type="primary"
+              data-analysis-content="{{analysisContent}}"
+              data-origin-img="{{originImg}}"
+              bind:tap="onShareAppMessage" open-type="share">分享分析结果</button>
+          </view>
         </view>
       </wux-card>
     </wux-wing-blank>

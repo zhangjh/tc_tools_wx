@@ -15,10 +15,10 @@
       <view class="note note9"></view>
       <view class="note note10"></view>
     </view>
-    <view class="duration {{isPlaying ? 'show' : 'hide'}}">{{duration ? duration : ''}}</view>
+    <view class="duration {{isPlaying ? 'show' : 'hide'}}">{{displayDuration}}</view>
     <view class="play-control">
       <image class="play-btn" src="{{isPlaying ? '/resources/pause.png' : '/resources/play.png'}}" bindtap="togglePlay"/>
-      <!-- <image class="timer {{isPlaying ? 'show' : 'hide'}}" src="/resources/timer.png" /> -->
+      <image class="timer {{isPlaying ? 'show' : 'none'}}" src="/resources/timer.png" bind:tap="onTimerClick"/>
     </view>
   </view>
 

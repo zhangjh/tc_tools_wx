@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/voice/index",
+          "pathName": "pages/voice/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/recog/index",
           "pathName": "pages/recog/index",
           "query": "",

@@ -16,6 +16,10 @@ page {
   visibility: hidden;
 }
 
+.none {
+  display: none;
+}
+
 /* 通用的全宽高居中布局容器类 */
 .center-container {
   height: 100%;

@@ -93,9 +93,14 @@ Page({
       type: ''
     },
     isPlaying: false,
+    // 0:原长，1：15分钟，2：30分钟，3：1小时
+    playMode: 0,
     audioContext: null,
+    audioDuration: null,
     // 一共可播放[0, duration]
-    duration: null
+    duration: null,
+    // 显示的duration
+    displayDuration: "",
   },
 
   /**
@@ -158,12 +163,13 @@ Page({
 
   },
   togglePlay() {
-    const curStatus = !this.data.isPlaying;
+    const playingStatus = !this.data.isPlaying;
     this.setData({
-      isPlaying: curStatus
+      isPlaying: playingStatus
     });
     let audioContext = this.data.audioContext;
-    if(curStatus) {
+    let timer = null;
+    if(playingStatus) {
       // 开始播放当前音频
       if(!audioContext) {
         audioContext = wx.createInnerAudioContext({
@@ -176,26 +182,70 @@ Page({
       audioContext.src = this.data.currentSound.source;
       audioContext.onCanplay(() => {
         const duration = Math.ceil(audioContext.duration);
-        console.log(duration);
         this.setData({
-          duration: duration
+          audioDuration: duration,
+          duration: duration,
+          displayDuration: this.displayDuration(duration),
+          mode: 0
         });
-        let timer = setInterval(() => {
+        timer = setInterval(() => {
           const remained = this.data.duration - 1;
           this.setData({
-            duration: remained
+            duration: remained,
+            displayDuration: this.displayDuration(remained)
           });
           if(remained === 0) {
             clearInterval(timer);
             // todo: 增加循环播放模式
             audioContext.stop();
             audioContext.destroy();
+            this.setData({
+              audioContext: null,
+              isPlaying: false
+            });
           }
         }, 1000);
       });
       audioContext.play();
     } else {
       audioContext.pause();
+      if(timer) {
+        clearInterval(timer);
+      }
+    }
+  },
+  displayDuration(duration) {
+    if(duration === 0) {
+      return "";
+    }
+    if(duration <= 60) {
+      return duration;
+    }
+    let minute = parseInt(duration / 60);
+    let second = duration % 60;
+    if(minute < 10) {
+      minute = "0" + minute;
+    }
+    if(second < 10) {
+      second = "0" + second;
+    }
+    return minute + ":" + second;
+  },
+  onTimerClick() {
+    // 播放中可以调整播放时长，支持四种：原长、15分钟、30小时、1小时
+    const durationMapping = {
+      0: this.data.audioDuration,
+      1: 15 * 60,
+      2: 30 * 60,
+      3: 1 * 60 * 60
+    };
+    if(this.data.isPlaying) {
+      let mode = ++this.data.mode % 4;
+      this.setData({
+        mode,
+        duration: durationMapping[mode],
+        displayDuration: this.displayDuration(durationMapping[mode])
+      });
     }
   }
 })

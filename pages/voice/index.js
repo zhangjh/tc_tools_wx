@@ -1,4 +1,5 @@
 // pages/voice/index.js
+const sourcePre = "https://unsplash.zhangjh.cn";
 Page({
 
   /**
@@ -8,12 +9,12 @@ Page({
     items: [{
       name: '春雨',
       icon: '/resources/voice/rain.png',
-      source: '',
+      source: sourcePre + "/voice/rain_light.mp3",
       type: 'nature',
     }, {
       name: '夏雨',
       icon: '/resources/voice/big_rain.png',
-      source: '',
+      source: sourcePre + '/voice/summer_heavy_rain.mp3',
       type: 'nature',
     }, {
       name: '海浪',
@@ -89,9 +90,10 @@ Page({
     currentSound: {
       name: '春雨',
       icon: '/resources/voice/rain.png',
-      source: '/resources/voice/brown-noise-by-digitalspa-170337.mp3',
+      source: sourcePre + '/voice/rain_light.mp3',
       type: ''
     },
+    timer: null,
     isPlaying: false,
     // 0:原长，1：15分钟，2：30分钟，3：1小时
     playMode: 0,
@@ -110,27 +112,13 @@ Page({
     wx.setNavigationBarTitle({
       title: '白噪声'
     }); 
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+    let audioContext = wx.createInnerAudioContext({
+      useWebAudioImplement: false
+    });
+    audioContext.loop = true;
+    this.setData({
+      audioContext
+    });
   },
 
   /**
@@ -145,20 +133,6 @@ Page({
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage() {
@@ -169,65 +143,85 @@ Page({
     this.setData({
       currentSound: sound
     });
+    // 如果当前有播放，停止当前，重新播放选中
+    this.playAudio();
+  },
+  cleanPlay() {
+    if(this.data.timer) {
+      clearInterval(this.data.timer);
+      this.setData({
+        timer: null,
+        isPlaying: false
+      });
+    }
+    this.data.audioContext.stop();
+  },
+  playAudio() {
+    if(!this.data.currentSound.source) {
+      console.log("音源路径不存在");
+      return;
+    }
+    let audioContext = this.data.audioContext;
+    if(!audioContext) {
+      console.log("页面初始化错误");
+      return;
+    }
+    // 当前可能有其他播放，需要先清理
+    this.cleanPlay();
+    // 开始播放当前声音
+    audioContext.src = this.data.currentSound.source;
+    audioContext.onCanplay(() => {
+      const duration = Math.ceil(audioContext.duration);
+      this.setData({
+        audioDuration: duration,
+        duration: duration,
+        displayDuration: this.displayDuration(duration),
+        mode: 0
+      });
+    });
+    let timer = setInterval(() => {
+      console.log("timer");
+      const remained = this.data.duration - 1;
+      this.setData({
+        duration: remained,
+        displayDuration: this.displayDuration(remained)
+      });
+      if(remained === 0) {
+        console.log("clean timer");
+        this.cleanPlay();
+      }
+    }, 1000);
+    this.setData({
+      timer,
+      isPlaying: true
+    });
+    audioContext.play();
+  },
+  pauseAudio() {
+    let audioContext = this.data.audioContext;
+    if(!audioContext) {
+      console.log("页面初始化错误");
+      return;
+    }
+    audioContext.pause();
+    if(this.data.timer) {
+      clearInterval(this.data.timer);
+    }
+    this.setData({
+      isPlaying: false
+    });
   },
   togglePlay() {
     const playingStatus = !this.data.isPlaying;
-    this.setData({
-      isPlaying: playingStatus
-    });
-    let audioContext = this.data.audioContext;
-    let timer = null;
     if(playingStatus) {
-      // 开始播放当前音频
-      if(!audioContext) {
-        audioContext = wx.createInnerAudioContext({
-          useWebAudioImplement: false
-        });
-        this.setData({
-          audioContext
-        });
-      }
-      audioContext.src = this.data.currentSound.source;
-      audioContext.onCanplay(() => {
-        const duration = Math.ceil(audioContext.duration);
-        this.setData({
-          audioDuration: duration,
-          duration: duration,
-          displayDuration: this.displayDuration(duration),
-          mode: 0
-        });
-        timer = setInterval(() => {
-          const remained = this.data.duration - 1;
-          this.setData({
-            duration: remained,
-            displayDuration: this.displayDuration(remained)
-          });
-          if(remained === 0) {
-            clearInterval(timer);
-            // todo: 增加循环播放模式
-            audioContext.stop();
-            audioContext.destroy();
-            this.setData({
-              audioContext: null,
-              isPlaying: false
-            });
-          }
-        }, 1000);
-      });
-      audioContext.play();
+      this.playAudio();
     } else {
-      audioContext.pause();
-      if(timer) {
-        clearInterval(timer);
-      }
+      this.pauseAudio();
     }
   },
   displayDuration(duration) {
     if(duration === 0) {
       return "";
-    }
-    if(duration <= 60) {
-      return duration;
     }
     let minute = parseInt(duration / 60);
     let second = duration % 60;

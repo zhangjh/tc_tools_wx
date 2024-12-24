@@ -98,8 +98,9 @@ Page({
     // 0:原长，1：15分钟，2：30分钟，3：1小时
     playMode: 0,
     audioContext: null,
+    // 原始时长
     audioDuration: null,
-    // 一共可播放[0, duration]
+    // 一共可播放[0, duration]，倒计时用
     duration: null,
     // 显示的duration
     displayDuration: "",
@@ -140,14 +141,34 @@ Page({
   },
   onClickAudio(e) {
     const sound = e.target.dataset.sound;
+    if(sound.source === this.data.currentSound.source) {
+      console.log("未切换音频");
+      return;
+    }
+    // 切换音频需要重新获取并设置音频时长
     this.setData({
-      currentSound: sound
+      currentSound: sound,
+      audioDuration: null
     });
     // 如果当前有播放，停止当前，重新播放选中
     this.playAudio();
   },
+  // 该方法获取并设置音频的初始时长
+  getAudioDuration() {
+    if(!this.data.audioDuration) {
+      const audioContext = this.data.audioContext;
+      const duration = Math.ceil(audioContext.duration);
+      this.setData({
+        audioDuration: duration,
+        duration: duration,
+        displayDuration: this.displayDuration(duration),
+        mode: 0
+      });
+    }
+  },
   cleanPlay() {
     if(this.data.timer) {
+      console.log(this.data.timer + "cleared");
       clearInterval(this.data.timer);
       this.setData({
         timer: null,
@@ -170,32 +191,34 @@ Page({
     this.cleanPlay();
     // 开始播放当前声音
     audioContext.src = this.data.currentSound.source;
-    audioContext.onCanplay(() => {
-      const duration = Math.ceil(audioContext.duration);
-      this.setData({
-        audioDuration: duration,
-        duration: duration,
-        displayDuration: this.displayDuration(duration),
-        mode: 0
-      });
-    });
-    let timer = setInterval(() => {
-      console.log("timer");
-      const remained = this.data.duration - 1;
-      this.setData({
-        duration: remained,
-        displayDuration: this.displayDuration(remained)
-      });
-      if(remained === 0) {
-        console.log("clean timer");
-        this.cleanPlay();
-      }
-    }, 1000);
-    this.setData({
-      timer,
-      isPlaying: true
-    });
     audioContext.play();
+    audioContext.onPlay(() => {
+      console.log("onPlay");
+      this.getAudioDuration();
+      // onCanPlay事件可能触发多次，保证不重复创建timer
+      if(!this.data.timer) {
+        let timer = setInterval(() => {
+          // 防止onPlay异步函数里没有拿到duration，这里再取一次
+          if(!this.data.duration) {
+            this.getAudioDuration();
+          }
+          const remained = this.data.duration - 1;
+          this.setData({
+            duration: remained,
+            displayDuration: this.displayDuration(remained)
+          });
+          if(remained === 0) {
+            console.log("clean timer");
+            this.cleanPlay();
+          }
+        }, 1000);
+        console.log(timer + "建立了");
+        this.setData({
+          timer,
+          isPlaying: true
+        });
+      }
+    });
   },
   pauseAudio() {
     let audioContext = this.data.audioContext;
@@ -205,15 +228,17 @@ Page({
     }
     audioContext.pause();
     if(this.data.timer) {
+      console.log(this.data.timer + "cleared");
       clearInterval(this.data.timer);
     }
     this.setData({
+      timer: null,
       isPlaying: false
     });
   },
   togglePlay() {
-    const playingStatus = !this.data.isPlaying;
-    if(playingStatus) {
+    const playStatus = !this.data.isPlaying;
+    if(playStatus) {
       this.playAudio();
     } else {
       this.pauseAudio();

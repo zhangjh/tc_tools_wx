@@ -9,7 +9,7 @@ Page({
       name: "科技狠活鉴定器",
       type: "tools",
       desc: "快速识别配料表中存在潜在健康风险的成分",
-      logo: "https://unsplash.zhangjh.cn/logo.png",
+      logo: "/resources/composition.png",
       path: "/pages/composition/scan/index"
     }, {
       name: "太初识物",
@@ -24,7 +24,7 @@ Page({
       logo: "/resources/ocr.png",
       path: "/pages/ocr/index",
     }, {
-      name: "助眠减压白噪声",
+      name: "助眠白噪声",
       type: "tools",
       desc: "多种不同类型白噪声，助您缓解压力、快速入眠",
       logo: "/resources/voice.png",

@@ -1,5 +1,5 @@
 // pages/voice/index.js
-const sourcePre = "https://unsplash.zhangjh.cn";
+const sourcePre = "https://r2.zhangjh.cn";
 Page({
 
   /**
@@ -24,17 +24,17 @@ Page({
     }, {
       name: '雷声',
       icon: '/resources/voice/thunder.png',
-      source: '',
+      source: sourcePre + '/voice/thunder.mp3',
       type: 'nature',
     }, {
       name: '鸟鸣',
       icon: '/resources/voice/bird.png',
-      source: '',
+      source: sourcePre + '/voice/birds.mp3',
       type: 'animal',
     }, {
       name: '夜虫',
       icon: '/resources/voice/night.png',
-      source: '',
+      source: sourcePre + '/voice/night-insect.mp3',
       type: 'animal',
     }, {
       name: '流水',
@@ -44,47 +44,47 @@ Page({
     }, {
       name: '爆竹',
       icon: '/resources/voice/fireworks.png',
-      source: '',
+      source: sourcePre + '/voice/fireworks.mp3',
       type: 'other',
     }, {
       name: '篝火',
       icon: '/resources/voice/fire.png',
-      source: '',
+      source: sourcePre + '/voice/campfire.mp3',
       type: 'other',
     }, {
       name: '听风',
       icon: '/resources/voice/wind.png',
-      source: '',
+      source: sourcePre + '/voice/wind.mp3',
       type: 'nature',
     }, {
       name: '瀑布',
       icon: '/resources/voice/waterfall.png',
-      source: '',
+      source: sourcePre + '/voice/waterfall.mp3',
       type: 'nature',
     }, {
       name: '小溪',
       icon: '/resources/voice/stream.png',
-      source: '',
+      source: sourcePre + '/voice/stream-water.mp3',
       type: 'nature',
     }, {
       name: '树林',
       icon: '/resources/voice/trees.png',
-      source: '',
+      source: sourcePre + '/voice/jungle.mp3',
       type: 'nature',
     }, {
       name: '落叶',
       icon: '/resources/voice/leaf.png',
-      source: '',
+      source: sourcePre + '/voice/walking-leaves.mp3',
       type: 'nature',
     }, {
       name: '冬雪',
       icon: '/resources/voice/snow.png',
-      source: '',
+      source: sourcePre + '/voice/snow.mp3',
       type: 'nature',
     }, {
       name: '乡村',
       icon: '/resources/voice/village.png',
-      source: '',
+      source: sourcePre + '/voice/village.mp3',
       type: 'other',
     }],
     currentSound: {
@@ -110,7 +110,7 @@ Page({
    */
   onLoad(options) {
     wx.setNavigationBarTitle({
-      title: '白噪声'
+      title: '助眠白噪声'
     }); 
     let audioContext = wx.createInnerAudioContext({
       useWebAudioImplement: false

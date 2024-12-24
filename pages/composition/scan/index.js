@@ -5,7 +5,7 @@ Page({
   },
   onLoad(options) {
     wx.setNavigationBarTitle({
-      title: '科技与狠活鉴定器'
+      title: '科技狠活鉴定器'
     })
   },
   onReady: {

@@ -95,7 +95,7 @@ Page({
     const tabKey = this.data.tabKey;
     wx.chooseMedia({
       count: 1,
-      mediaType: "image",
+      mediaType: ["image"],
       success: res => {
         const file = res.tempFiles[0].tempFilePath;
         // 选择图片后设置图片并设置进度20%

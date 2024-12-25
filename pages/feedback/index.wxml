@@ -1,0 +1,27 @@
+<!--pages/feedback/index.wxml-->
+<view class="container">
+  <view class="content">
+    <wux-card title="有问题的工具" extra="{{sceneName}}" full>
+      <view slot="body">
+        <wux-textarea 
+          placeholder="请描述你使用过程中遇到的问题或者是单纯的建议" 
+          rows="10"
+          maxlength="200"
+          hasCount="{{true}}"
+          bind:change	="onTextChange"
+       />
+      </view>
+    </wux-card>
+    <wux-card title="问题截图" full>
+      <view slot="body" class="upload-img">
+        <image src="{{uploadedImg}}" mode="aspectFit" wx:if="{{uploadedImg}}" bind:tap="uploadImg" />
+        <wux-icon type="md-add" size="64" color="grey" bind:tap="uploadImg" wx:if="{{!uploadedImg}}" />
+      </view>
+    </wux-card>
+    <wux-card class="submit-card" full>
+      <view slot="body" class="submit-btn">
+        <button type="primary" bind:tap="onSubmit">提交</button>
+      </view>
+    </wux-card>
+  </view>
+</view>

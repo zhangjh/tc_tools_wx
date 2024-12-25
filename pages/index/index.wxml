@@ -13,4 +13,12 @@
       </block>
     </wux-grids>
   </view>
+  <view class="feedback">
+    <view class="center-container feedback-btn chat">
+      <image src="/resources/chat.png" bind:tap="onFeedBackTap" />
+    </view>
+    <view class="center-container feedback-btn cube">
+      <image src="/resources/cube.png" bind:tap="onIdeaTap" />
+    </view>
+  </view>
 </view>

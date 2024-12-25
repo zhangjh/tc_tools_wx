@@ -6,7 +6,9 @@
     "pages/recog/index",
     "pages/ocr/index",
     "pages/ocr/detail/index",
-    "pages/voice/index"
+    "pages/voice/index",
+    "pages/feedback/index",
+    "pages/idea/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -27,7 +27,7 @@ Page({
     console.log("scan");
     wx.chooseMedia({
       count: 1,
-      mediaType: "image",
+      mediaType: ["image"],
       success: res => {
         const file = res.tempFiles[0].tempFilePath;
         wx.redirectTo({

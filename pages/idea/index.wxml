@@ -1,0 +1,25 @@
+<!--pages/idea/idea.wxml-->
+<view class="container">
+  <view class="content">
+    <wux-card title="我有需求和想法" full>
+      <view slot="body">
+        <wux-textarea 
+          placeholder="您有什么其他的工具需求或者想法可以写在这里，我们会考虑酌情安排开发上线" 
+          rows="10"
+          maxlength="200"
+          hasCount="{{true}}"
+       />
+      </view>
+    </wux-card>
+    <wux-card title="直接加开发者聊聊" full>
+      <view slot="body" class="qrcode">
+        <image src="https://r2.zhangjh.cn/qrcode.jpg" mode="aspectFit" 	show-menu-by-longpress="{{true}}" />        
+      </view>
+    </wux-card>
+    <wux-card class="submit-card" full>
+      <view slot="body" class="submit-btn">
+        <button type="primary" bind:tap="onSubmit">提交</button>
+      </view>
+    </wux-card>
+  </view>
+</view>

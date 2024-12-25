@@ -10,9 +10,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/voice/index",
-          "pathName": "pages/voice/index",
-          "query": "",
+          "name": "pages/feedback/index",
+          "pathName": "pages/feedback/index",
+          "query": "scene=index",
           "launchMode": "default",
           "scene": null
         },

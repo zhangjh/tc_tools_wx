@@ -1,4 +1,5 @@
 // pages/index/index.js
+const app = getApp();
 Page({
 
   /**
@@ -92,5 +93,11 @@ Page({
     wx.redirectTo({
       url: path,
     });
+  },
+  onFeedBackTap() {
+    app.onFeedBackTap("ocr");
+  },
+  onIdeaTap() {
+    app.onIdeaTap("ocr");
   }
 })

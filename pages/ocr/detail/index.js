@@ -130,6 +130,7 @@ Page({
     })
   },
   onCopyClick() {
+    console.log(this.data.ocrContent);
     wx.setClipboardData({
       data: this.data.ocrContent,
     });

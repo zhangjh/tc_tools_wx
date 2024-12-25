@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sceneName: '',
+    visible: false,
+    options: ['科技狠活鉴定器', '太初识物', '太初OCR', '助眠白噪声'],
+    selectedToolName: '请选择',
     question: '',
     uploadedImg: '',
     uploadedImgUrl: ''
@@ -18,17 +20,20 @@ Page({
     wx.setNavigationBarTitle({
       title: '问题反馈',
     });
-    const scene = options.scene;
-    console.log(scene);
-    const mapping = {
-      'composition': '科技狠活鉴定器',
-      'recog': '太初识物',
-      'ocr': '太初OCR',
-      'voice': '助眠白噪声'
-    };
+  },
+  onShowSelect() {
+    console.log("showSelect");
     this.setData({
-      sceneName: mapping[scene]
+      visible: true
     });
+  },
+  onConfirm(e) {
+    if(e.detail.value) {
+      this.setData({
+        selectedToolName: e.detail.value,
+        visible: false
+      });
+    }
   },
   onTextChange(e) {
     if(e.detail.value) {
@@ -76,9 +81,17 @@ Page({
   },
   onSubmit() {
     // todo: 收集用户id
+    if(!this.data.selectedToolName) {
+      return wx.showToast({
+        title: '未选择工具',
+        icon: 'error',
+        mask: true
+      });
+    }
     if(!this.data.question) {
       return wx.showToast({
         title: '未填写问题描述',
+        icon: 'error',
         mask: true
       });
     }
@@ -90,6 +103,7 @@ Page({
       url: 'https://tx.zhangjh.cn/feedback/feedback',
       method: 'POST',
       data: {
+        tool: this.data.selectedToolName,
         question: this.data.question,
         file: this.data.uploadedImgUrl
       },

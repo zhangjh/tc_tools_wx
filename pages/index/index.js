@@ -95,9 +95,13 @@ Page({
     });
   },
   onFeedBackTap() {
-    app.onFeedBackTap("ocr");
+    wx.redirectTo({
+      url: '/pages/feedback/index',
+    })
   },
   onIdeaTap() {
-    app.onIdeaTap("ocr");
+    wx.redirectTo({
+      url: '/pages/idea/index',
+    })
   }
 })

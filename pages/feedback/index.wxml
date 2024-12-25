@@ -1,11 +1,24 @@
 <!--pages/feedback/index.wxml-->
 <view class="container">
   <view class="content">
-    <wux-card title="有问题的工具" extra="{{sceneName}}" full>
+    <wux-popup-select
+      visible="{{ visible }}"
+      controlled
+      value="{{ selectedToolName }}"
+      options="{{ options }}"
+      data-index="1"
+      bind:confirm="onConfirm"
+    />
+    <wux-card title="选择反馈的工具" 
+      extra="{{ selectedToolName }}" 
+      full
+      bind:tap="onShowSelect"
+      ></wux-card>
+    <wux-card title="问题描述" full>
       <view slot="body">
         <wux-textarea 
           placeholder="请描述你使用过程中遇到的问题或者是单纯的建议" 
-          rows="10"
+          rows="6"
           maxlength="200"
           hasCount="{{true}}"
           bind:change	="onTextChange"

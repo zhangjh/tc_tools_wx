@@ -12,30 +12,26 @@
         {
           "name": "pages/feedback/index",
           "pathName": "pages/feedback/index",
-          "query": "scene=index",
-          "launchMode": "default",
-          "scene": null
+          "query": "",
+          "launchMode": "default"
         },
         {
           "name": "pages/recog/index",
           "pathName": "pages/recog/index",
           "query": "",
-          "launchMode": "default",
-          "scene": null
+          "launchMode": "default"
         },
         {
           "name": "pages/composition/scan/index",
           "pathName": "pages/composition/scan/index",
           "query": "",
-          "launchMode": "default",
-          "scene": null
+          "launchMode": "default"
         },
         {
           "name": "pages/index/index",
           "pathName": "pages/index/index",
           "query": "",
-          "launchMode": "default",
-          "scene": null
+          "launchMode": "default"
         }
       ]
     }

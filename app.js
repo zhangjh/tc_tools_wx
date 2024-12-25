@@ -17,16 +17,4 @@ App({
   globalData: {
     userInfo: null
   },
-  onFeedBackTap(scene) {
-    console.log("feedback from " + scene);
-    wx.redirectTo({
-      url: '/pages/feedback/index?scene=' + scene,
-    })
-  },
-  onIdeaTap(scene) {
-    console.log("idea from " + scene);
-    wx.redirectTo({
-      url: '/pages/idea/index?scene=' + scene,
-    })
-  }
 })

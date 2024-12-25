@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "wux-card": "/miniprogram_npm/wux-weapp/card/index",
+    "wux-popup-select": "/miniprogram_npm/wux-weapp/popup-select/index",
     "wux-textarea": "/miniprogram_npm/wux-weapp/textarea/index",
     "wux-upload": "/miniprogram_npm/wux-weapp/upload/index",
     "wux-icon": "/miniprogram_npm/wux-weapp/icon/index"

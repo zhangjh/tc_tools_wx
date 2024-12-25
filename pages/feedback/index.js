@@ -31,9 +31,11 @@ Page({
     });
   },
   onTextChange(e) {
-    this.setData({
-      question: e.detail.value
-    });
+    if(e.detail.value) {
+      this.setData({
+        question: e.detail.value
+      });
+    }
   },
   uploadImg() {
     this.setData({
@@ -74,33 +76,44 @@ Page({
   },
   onSubmit() {
     // todo: 收集用户id
-    if(this.data.question) {
-      wx.request({
-        url: 'https://tx.zhangjh.cn/feedback/feedback',
-        method: 'POST',
-        data: {
-          question: this.data.question,
-          file: this.data.uploadedImgUrl
-        },
-        success: res => {
-          const resJO = JSON.parse(res);
-          if(resJO.success) {
-            wx.showToast({
-              title: '问题提交成功',
-            })
-          } else {
-            console.log(resJO.errorMsg);
-            wx.showToast({
-              title: '问题提交失败',
-            })
-          }
-        },
-        fail: err => {
+    if(!this.data.question) {
+      return wx.showToast({
+        title: '未填写问题描述',
+        mask: true
+      });
+    }
+    wx.showLoading({
+      title: 'loading...',
+      mask: true,
+    });
+    wx.request({
+      url: 'https://tx.zhangjh.cn/feedback/feedback',
+      method: 'POST',
+      data: {
+        question: this.data.question,
+        file: this.data.uploadedImgUrl
+      },
+      success: res => {
+        wx.hideLoading();
+        const data = res.data;
+        if(data.success) {
+          wx.showToast({
+            title: '问题提交成功',
+            mask: true,
+          });
+        } else {
           wx.showToast({
             title: '问题提交失败',
+            mask: true,
+            icon: 'error'
           })
         }
-      })
-    }
+      },
+      fail: err => {
+        wx.showToast({
+          title: '问题提交失败',
+        })
+      }
+    })
   }
 })

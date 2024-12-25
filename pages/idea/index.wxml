@@ -8,6 +8,7 @@
           rows="10"
           maxlength="200"
           hasCount="{{true}}"
+          bind:change="onChange"
        />
       </view>
     </wux-card>

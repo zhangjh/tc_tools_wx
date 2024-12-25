@@ -1,1 +1,4 @@
 /* pages/idea/idea.wxss */
+.qrcode image {
+  height: 180px;
+}

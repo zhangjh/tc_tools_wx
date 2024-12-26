@@ -82,7 +82,7 @@ page {
 .feedback {
   /* border: 1px solid red; */
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 2rem;
   right: 1rem;
 }
 

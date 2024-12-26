@@ -6,38 +6,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: [{
-      name: "科技狠活鉴定器",
-      type: "tools",
-      desc: "快速识别配料表中存在潜在健康风险的成分",
-      logo: "/resources/composition.png",
-      path: "/pages/composition/scan/index"
-    }, {
-      name: "太初识物",
-      type: "tools",
-      desc: "快速识别动植物、品牌等信息",
-      logo: "/resources/recog.png",
-      path: "/pages/recog/index",
-    }, {
-      name: "太初OCR",
-      type: "tools",
-      desc: "快速OCR识别，从图片中提取文本",
-      logo: "/resources/ocr.png",
-      path: "/pages/ocr/index",
-    }, {
-      name: "助眠白噪声",
-      type: "tools",
-      desc: "多种不同类型白噪声，助您缓解压力、快速入眠",
-      logo: "/resources/voice.png",
-      path: "/pages/voice/index"
-    }]
+    items: []
   },
-
+  getItems() {
+    wx.request({
+      url: 'https://tx.zhangjh.cn/wx/getToolItems',
+      success: ret => {
+        if(ret.statusCode === 200 && ret.data.success) {
+          app.globalData.items = ret.data.data;
+          this.setData({
+            items: ret.data.data
+          });
+        }
+      },
+      fail: err => {
+        wx.showToast({
+          title: '获取列表出错',
+          icon: 'error'
+        });
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    // todo：获取当前已经有的工具列表
+    // 获取当前已经有的工具列表
+    this.getItems();
   },
 
   /**
@@ -91,7 +86,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-    
     return {
       title: "[太初工具集]发现一个好用的工具小程序，你也来试试",
       path: "/pages/index/index"

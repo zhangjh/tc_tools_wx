@@ -7,7 +7,7 @@ Page({
    */
   data: {
     visible: false,
-    options: ['科技狠活鉴定器', '太初识物', '太初OCR', '助眠白噪声'],
+    options: [],
     selectedToolName: '请选择',
     question: '',
     uploadedImg: '',
@@ -20,6 +20,13 @@ Page({
   onLoad(options) {
     wx.setNavigationBarTitle({
       title: '问题反馈',
+    });
+    let itemNames = [];
+    for(let item of app.globalData.items) {
+      itemNames.push(item.name);
+    }
+    this.setData({
+      options: itemNames
     });
   },
   onShowSelect() {

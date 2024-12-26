@@ -25,9 +25,10 @@ App({
           }
         });
       }
-    })
+    });
   },
   globalData: {
-    userInfo: {}
+    userInfo: {},
+    items: []
   },
 })

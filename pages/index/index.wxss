@@ -61,6 +61,10 @@
   line-height: 1.5;
 }
 
+.share {
+  position: relative;
+}
+
 .share-btn {
   position: absolute;
   top: 0;

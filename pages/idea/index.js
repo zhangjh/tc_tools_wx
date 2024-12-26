@@ -1,4 +1,5 @@
 // pages/idea/idea.js
+const app = getApp();
 Page({
 
   /**
@@ -24,6 +25,7 @@ Page({
     }
   },
   onSubmit() {
+    const userId = app.globalData.userInfo.userId;
     if(!this.data.ideaContent) {
       return wx.showToast({
         title: '未填写内容',
@@ -39,6 +41,7 @@ Page({
       url: 'https://tx.zhangjh.cn/feedback/idea',
       method: 'POST',
       data: {
+        userId,
         idea: this.data.ideaContent
       },
       success: res => {

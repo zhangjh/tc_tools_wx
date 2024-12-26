@@ -11,10 +11,23 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.request({
+          url: 'https://wx.zhangjh.cn/wx/getOpenId?productType=TC_TOOL&jsCode=' + res.code,
+          success: ret => {
+            if(ret.statusCode === 200 && ret.data.success) {
+              const data = ret.data.data;
+              const openId = data.openId;
+              this.globalData.userInfo.userId = openId;
+            }
+          },
+          fail: err => {
+            console.log("getOpenId err:" + err);
+          }
+        });
       }
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: {}
   },
 })

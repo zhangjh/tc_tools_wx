@@ -1,4 +1,5 @@
 // pages/feedback/index.js
+const app = getApp();
 Page({
 
   /**
@@ -80,7 +81,7 @@ Page({
     });
   },
   onSubmit() {
-    // todo: 收集用户id
+    const userId = app.globalData.userInfo.userId;
     if(!this.data.selectedToolName) {
       return wx.showToast({
         title: '未选择工具',
@@ -103,6 +104,7 @@ Page({
       url: 'https://tx.zhangjh.cn/feedback/feedback',
       method: 'POST',
       data: {
+        userId,
         tool: this.data.selectedToolName,
         question: this.data.question,
         file: this.data.uploadedImgUrl

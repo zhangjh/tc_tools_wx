@@ -14,6 +14,10 @@
     </wux-grids>
   </view>
   <view class="feedback">
+    <view class="center-container feedback-btn share">
+      <image src="/resources/share.png" />
+      <button open-type="share" class="share-btn"></button>
+    </view>
     <view class="center-container feedback-btn chat">
       <image src="/resources/chat.png" bind:tap="onFeedBackTap" />
     </view>

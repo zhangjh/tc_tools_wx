@@ -82,11 +82,20 @@ Page({
 
   },
 
+  onShareTimeline() {
+    return {
+      title: "[太初工具集]发现一个好用的工具小程序，你也来试试"
+    };
+  },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    
+    return {
+      title: "[太初工具集]发现一个好用的工具小程序，你也来试试",
+      path: "/pages/index/index"
+    }
   },
   onClick(e) {
     const path = e.target.dataset.path;

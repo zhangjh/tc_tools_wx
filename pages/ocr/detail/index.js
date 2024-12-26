@@ -7,6 +7,7 @@ Page({
   data: {
     originImg: "",
     percent: 0,
+    ocrText: "",
     ocrContent: ""
   },
 
@@ -107,12 +108,13 @@ Page({
           if(timer) {
             clearInterval(timer);
           }
-          console.log(resJO.data);
+          // console.log(resJO.data);
           const data = resJO.data;
           const text = JSON.parse(data).text;
           const ocrContent = app.towxml(text, "markdown");
           this.setData({
             percent: 100,
+            ocrText: text,
             ocrContent
           });
         }
@@ -130,9 +132,9 @@ Page({
     })
   },
   onCopyClick() {
-    console.log(this.data.ocrContent);
+    console.log(this.data.ocrText);
     wx.setClipboardData({
-      data: this.data.ocrContent,
+      data: this.data.ocrText,
     });
   }
 })

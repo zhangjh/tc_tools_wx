@@ -149,11 +149,11 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {
+  onShareAppMessage(e) {
     const data = e.target.dataset;
     return {
       title: "看看我分析的这个配料表",
-      path: "/pages/detail/index?data=" + JSON.stringify(data)
+      path: "/pages/composition/detail/index?data=" + JSON.stringify(data)
     }
   }
 })

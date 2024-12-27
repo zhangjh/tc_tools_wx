@@ -50,7 +50,7 @@ Page({
       header: {
         'content-type': 'multipart/form-data'
       },
-      url: 'https://tx.zhangjh.cn/composite/checkComposite',
+      url: 'https://wx2.zhangjh.cn/composite/checkComposite',
       success: res => {
         // console.log(res);
         const resJO = JSON.parse(res.data);

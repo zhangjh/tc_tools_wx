@@ -71,7 +71,7 @@ Page({
           header: {
             'content-type': 'multipart/form-data'
           },
-          url: 'https://tx.zhangjh.cn/feedback/uploadFile',
+          url: 'https://wx2.zhangjh.cn/feedback/uploadFile',
           success: res => {
             const resJO = JSON.parse(res.data);
             if(resJO.success) {
@@ -108,7 +108,7 @@ Page({
       mask: true,
     });
     wx.request({
-      url: 'https://tx.zhangjh.cn/feedback/feedback',
+      url: 'https://wx2.zhangjh.cn/feedback/feedback',
       method: 'POST',
       data: {
         userId,

@@ -10,7 +10,7 @@ Page({
   },
   getItems() {
     wx.request({
-      url: 'https://tx.zhangjh.cn/wx/getToolItems',
+      url: 'https://wx2.zhangjh.cn/wx/getToolItems',
       success: ret => {
         if(ret.statusCode === 200 && ret.data.success) {
           app.globalData.items = ret.data.data;
@@ -32,7 +32,13 @@ Page({
    */
   onLoad(options) {
     // 获取当前已经有的工具列表
-    this.getItems();
+    if(!app.globalData.items.length) {
+      this.getItems();
+    } else {
+      this.setData({
+        items: app.globalData.items
+      });
+    }
   },
 
   /**

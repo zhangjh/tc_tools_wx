@@ -126,7 +126,7 @@ Page({
           header: {
             'content-type': 'multipart/form-data'
           },
-          url: 'https://tx.zhangjh.cn/wxChat/recog',
+          url: 'https://wx2.zhangjh.cn/wxChat/recog',
           success: res => {
             console.log(res);
             const resJO = JSON.parse(res.data);

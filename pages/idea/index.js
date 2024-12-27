@@ -38,7 +38,7 @@ Page({
       mask: true,
     });
     wx.request({
-      url: 'https://tx.zhangjh.cn/feedback/idea',
+      url: 'https://wx2.zhangjh.cn/feedback/idea',
       method: 'POST',
       data: {
         userId,

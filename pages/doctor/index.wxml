@@ -1,0 +1,21 @@
+<!--pages/doctor/index.wxml-->
+<view class="container">
+  <view class="content">
+  </view>
+  <view class="submit">
+    <wux-textarea 
+      placeholder="请描述您的症状或感兴趣的健康问题"
+      rows="3"
+      hasCount
+      maxlength="500"
+      bind:change="onChange"
+      bind:confirm="onSubmit"
+    />
+    <view class="submit-btn">
+      <button type="default">
+        <wux-icon class="icon" type="md-paper-plane" />
+        <view class="text">发送</view>
+      </button>
+    </view>
+  </view>
+</view>

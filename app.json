@@ -8,7 +8,8 @@
     "pages/ocr/detail/index",
     "pages/voice/index",
     "pages/feedback/index",
-    "pages/idea/index"
+    "pages/idea/index",
+    "pages/doctor/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

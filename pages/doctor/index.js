@@ -122,6 +122,10 @@ Page({
     }
     const question = this.data.question;
     const context = this.data.context;
+    // 清空输入框
+    this.setData({
+      question: ''
+    });
     wx.showLoading({
       title: 'loading...',
       mask: true,
@@ -152,7 +156,6 @@ Page({
       enableChunked: true,
       responseType: 'text',
       success: res => {
-        wx.hideLoading();
         if(res.statusCode === 200) {
         }
       },
@@ -167,8 +170,8 @@ Page({
      // 监听数据块
      answerArr = this.data.answerArr;
      answer = answerArr[answerArr.length - 1];
-
      requestTask.onChunkReceived((response) => {
+      wx.hideLoading();
       try {
         const chunk = new TextDecoder().decode(response.data);
         // 累加chunk

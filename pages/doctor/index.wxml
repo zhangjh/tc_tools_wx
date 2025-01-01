@@ -4,20 +4,20 @@
     <!-- 顶部AI医生介绍 -->
     <view class="doctor-intro">
       <image class="avatar" src="/resources/doctor.png" />
-      <text class="intro-text">{{introText}}</text>
+      <text class="intro-text leftArrow">{{introText}}</text>
     </view>
     <view class="answer-content">
       <block wx:for="{{answerArr}}" wx:key="index">
         <!-- qa成对出现 -->
-        <view class="content-wrap">
-          <view class="user-content" wx:if="{{item[0]}}">
-            <text class="intro-text">{{item[0].content}}</text>
+        <view>
+          <view class="doctor-intro" wx:if="{{item[0]}}">
+            <text class="intro-text rightArrow">{{item[0].content}}</text>
             <image class="avatar" src="/resources/user.png" />
           </view>
-          <view class="model-content" wx:if="{{item[1]}}">
+          <view class="doctor-intro" wx:if="{{item[1]}}">
             <image class="avatar" src="/resources/doctor.png" />
             <!-- markdown渲染 -->
-            <towxml class="intro-text" nodes="{{item[1].content}}" />
+            <towxml class="intro-text leftArrow" nodes="{{item[1].content}}" />
           </view>
         </view>
       </block>
@@ -28,6 +28,7 @@
         class="input-box" 
         placeholder="请描述您的症状或感兴趣的健康问题..."
         bindinput="onInput"
+        value="{{question}}"
       />
       <view class="action-bar">
         <button class="btn-group" bindtap="chooseImage">

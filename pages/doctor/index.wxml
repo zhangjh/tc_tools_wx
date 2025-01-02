@@ -7,7 +7,7 @@
       <text class="intro-text leftArrow">{{introText}}</text>
     </view>
     <view class="answer-content">
-      <block wx:for="{{answerArr}}" wx:key="index">
+      <block wx:for="{{contentArr}}" wx:key="index">
         <!-- qa成对出现 -->
         <view>
           <view class="doctor-intro" wx:if="{{item[0]}}">

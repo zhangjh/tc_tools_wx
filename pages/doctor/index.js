@@ -6,11 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    introText: "您好！我是您的AI医疗顾问。请描述您的症状或健康问题，我会尽力为您提供专业的建议。请注意：我的建议仅供参考，如有严重症状请及时就医。",
+    introText: "您好！我是您的AI医疗顾问。请描述您的症状或健康问题，我会尽力为您提供专业的建议。请注意：我的建议仅供参考，如有严重症状请及时就医。您的任何问题均不会被记录，请放心提问。",
     question: "",
-    context: [],
+    context: {},
     // 存储pair对：[{role: 'user', content: ''}, {role: 'model', content: ''}]
-    answerArr: []
+    contentArr: []
   },
 
   /**
@@ -70,12 +70,7 @@ Page({
   onShareAppMessage() {
 
   },
-  onChange(e) {
-    
-  },
-  onSubmit() {
 
-  },
   onInput(e) {
     const value = e.detail.value;
     console.log(value);
@@ -90,20 +85,25 @@ Page({
   setChatContext() {
     let context = this.data.context;
     let messages = context.messages ? context.messages : [];
-    let answerArr = this.data.answerArr;
-    let answer = answerArr[answerArr.length - 1];
+    let contentArr = this.data.contentArr;
     // 需要成对出现，否则只是提问不添加到上下文里
-    if(answer && answer.length === 2) {
+    let len = contentArr.length;
+    const lastContent = contentArr[len - 1];
+    if(lastContent && lastContent.length !== 2) {
+      len--;
+    }
+    for (let i = 0; i < len; i++) {
+      const content = contentArr[i];
       messages.push({
-        role: 'user',
+        role: content[0].role,
         parts: [{
-          text: answer[0].content
+          text: content[0].content
         }]
       });
       messages.push({
-        role: 'model',
+        role: content[1].role,
         parts: [{
-          text: answer[1].content
+          text: content[1].chunk
         }]
       });
     }
@@ -111,10 +111,13 @@ Page({
      if(messages.length > 10) {
       messages.shift();
     }
-    context.messages = messages;
-    this.setData({
-      context
-    });
+    console.log(messages);
+    if(messages.length) {
+      context.messages = messages;
+      this.setData({
+        context
+      });
+    }
   },
   sendMessage() {
     if(!this.data.question) {
@@ -133,22 +136,23 @@ Page({
     let data = {
       question
     };
-    if(context && context.length) {
-      data.context = context;
-    }
-    let answerArr = this.data.answerArr;
-    let answer = answerArr[answerArr.length - 1];
-    // 重复提交，或者回答出错了再次提交
-    if(answer && answer[0].role === 'user') {
-      answer[0].content = question;
+    let contentArr = this.data.contentArr;
+    let lastContent = contentArr[contentArr.length - 1];
+    // 重复提交，或者回答出错了再次提交，只需覆盖问题
+    if(lastContent && lastContent.length === 1) {
+      lastContent[0].content = question;
     } else {
       // 新一轮问答添加一个新元素
-      answerArr.push([{
+      contentArr.push([{
         role: 'user',
         content: question
       }]);
     }
     this.setChatContext();
+    if(context && context.messages) {
+      data.context = context;
+    }
+    console.log(data);
     const requestTask = wx.request({
       url: 'https://wx2.zhangjh.cn/wxChat/doctor',
       method: 'POST',
@@ -168,28 +172,27 @@ Page({
       }
     });
      // 监听数据块
-     answerArr = this.data.answerArr;
-     answer = answerArr[answerArr.length - 1];
+     contentArr = this.data.contentArr;
+     lastContent = contentArr[contentArr.length - 1];
      requestTask.onChunkReceived((response) => {
       wx.hideLoading();
       try {
         const chunk = new TextDecoder().decode(response.data);
         // 累加chunk
-        if(!answer[1] || answer[1].role !== 'model') {
-          answer.push({
+        if(!lastContent || lastContent.length < 2) {
+          lastContent.push({
             role: 'model',
             chunk,
             content: app.towxml(chunk, "markdown")
           });
-          console.log();
         } else {
           // markdown
-          answer[1].chunk += chunk,
-          answer[1].content = app.towxml(answer[1].chunk, "markdown");
+          lastContent[1].chunk += chunk;
+          lastContent[1].content = app.towxml(lastContent[1].chunk, "markdown");
         }
-        console.log(answerArr);
+        console.log(contentArr);
         this.setData({
-          answerArr
+          contentArr
         });
       } catch (e) {
         console.error('Process chunk failed:', e);

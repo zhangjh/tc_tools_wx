@@ -148,6 +148,10 @@ Page({
         content: question
       }]);
     }
+    // 及时回显问题，不必等回答响应后再显示
+    this.setData({
+      contentArr
+    });
     this.setChatContext();
     if(context && context.messages) {
       data.context = context;

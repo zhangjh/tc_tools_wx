@@ -12,7 +12,7 @@
        />
       </view>
     </wux-card>
-    <wux-card title="直接加开发者聊聊" full>
+    <wux-card title="直接加开发者聊聊?" full>
       <view slot="body" class="qrcode">
         <image src="https://r2.zhangjh.cn/qrcode.jpg" mode="aspectFit" 	show-menu-by-longpress="{{true}}" />        
       </view>

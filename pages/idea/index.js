@@ -15,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    common.setNavigationBarTitle('需求反馈');
+    common.setTabBarTitle('需求反馈');
   },
   onChange(e) {
     if(e.detail.value) {

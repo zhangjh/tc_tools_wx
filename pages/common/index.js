@@ -32,7 +32,7 @@ module.exports = {
             if(!ret.data) {
               req.cb();
             } else if(ret.data.success) {
-              ret.cb(ret.data.data);
+              req.cb(ret.data.data);
             }
           }
         } else {

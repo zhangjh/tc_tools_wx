@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    introText: "您好！我是您的AI医疗顾问。请描述您的症状或健康问题，我会尽力为您提供专业的建议。请注意：我的建议仅供参考，如有严重症状请及时就医。您的任何问题均不会被记录，请放心提问。",
+    introText: "您好！我是您的AI法律顾问。请描述您的法律咨询问题，我会尽力为您提供专业的建议。请注意：我的建议仅供参考，不代表实际的诉讼结论。您的任何问题均不会被记录，请放心提问。",
     question: "",
     // 最多3张
     uploadedFileList: [],
@@ -20,7 +20,7 @@ Page({
    */
   onLoad(options) {
     wx.setNavigationBarTitle({
-      title: '赛博医生',
+      title: '赛博律师',
     })
   },
 
@@ -33,7 +33,6 @@ Page({
 
   onInput(e) {
     const value = e.detail.value;
-    console.log(value);
     this.setData({
       question: value
     });
@@ -167,7 +166,7 @@ Page({
     }
     console.log(data);
     const requestTask = wx.request({
-      url: 'https://wx2.zhangjh.cn/wxChat/doctor',
+      url: 'https://wx2.zhangjh.cn/wxChat/lawer',
       method: 'POST',
       data,
       enableChunked: true,
@@ -186,7 +185,6 @@ Page({
     });
      // 监听数据块
      contentArr = this.data.contentArr;
-     
      lastContent = contentArr[contentArr.length - 1];
      requestTask.onChunkReceived((response) => {
       wx.hideLoading();

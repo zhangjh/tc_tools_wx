@@ -9,7 +9,8 @@
     "pages/voice/index",
     "pages/feedback/index",
     "pages/idea/index",
-    "pages/doctor/index"
+    "pages/doctor/index",
+    "pages/lawer/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

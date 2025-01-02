@@ -1,0 +1,56 @@
+<!--pages/doctor/index.wxml-->
+<view class="container">
+  <view class="content">
+    <!-- 顶部AI律师介绍 -->
+    <view class="doctor-intro">
+      <image class="avatar" src="/resources/lawer.png" />
+      <text class="intro-text leftArrow">{{introText}}</text>
+    </view>
+    <view class="answer-content">
+      <block wx:for="{{contentArr}}" wx:key="index">
+        <view>
+          <view class="doctor-intro user-message" wx:if="{{item[0]}}">
+            <image class="avatar" src="/resources/user.png" />
+            <view class="content-wrap">
+              <text class="intro-text rightArrow">{{item[0].content}}</text>
+              <block wx:for="{{item[0].uploadedFileList}}" wx:key="index">       
+                <image src="{{item.tempFilePath}}" bind:tap="onPreview" data-url="{{item.tempFilePath}}" />
+              </block>
+            </view>
+          </view>
+          
+          <!-- AI消息 -->
+          <view class="doctor-intro" wx:if="{{item[1]}}">
+            <image class="avatar" src="/resources/lawer.png" />
+            <towxml class="intro-text leftArrow" nodes="{{item[1].content}}" />
+          </view>
+        </view>
+      </block>
+    </view>
+    <!-- 聊天输入区域 -->
+    <view class="chat-input">
+      <textarea 
+        class="input-box" 
+        placeholder="请描述您的法律咨询问题或感兴趣的法律相关问题..."
+        bindinput="onInput"
+        value="{{question}}"
+        showConfirmBar="{{false}}"
+      />
+      
+      <view class="attach-img">
+        <block wx:for="{{uploadedFileList}}" wx:key="index">       
+          <image src="{{item.tempFilePath}}" bind:tap="onPreview" data-url="{{item.tempFilePath}}" />
+          <span bind:tap="onDelete" data-url="{{item}}">X</span>
+        </block>
+      </view>
+      <view class="action-bar">
+        <button class="btn-group" bindtap="chooseImage" disabled="{{uploadedFileList.length >= 3}}">
+          <image src="/resources/image.png" /> 上传图片
+        </button>
+        <button class="btn-group" bindtap="sendMessage" type="primary">
+          <image src="/resources/send.png" /> 发送
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

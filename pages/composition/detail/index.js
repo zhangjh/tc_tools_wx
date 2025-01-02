@@ -1,3 +1,5 @@
+const common = require("../../common/index");
+
 // pages/detail/index.js
 Page({
 
@@ -44,14 +46,10 @@ Page({
         percent: this.data.percent + 8
       });
     }, 1000);
-    wx.uploadFile({
+    common.uploadFile({
       filePath: img,
-      name: 'file',
-      header: {
-        'content-type': 'multipart/form-data'
-      },
-      url: 'https://wx2.zhangjh.cn/composite/checkComposite',
-      success: res => {
+      url: '/composite/checkComposite',
+      cb: res => {
         // console.log(res);
         const resJO = JSON.parse(res.data);
         if(resJO.success) {
@@ -65,16 +63,14 @@ Page({
           });
         }
       },
-      fail: err => {
+      failCb: err => {
         console.log(err);
       }
     });
   },
 
   onPreviewImg() {
-    wx.previewImage({
-      urls: [this.data.originImg],
-    })
+    common.previewImage(this.data.originImg);
   },
 
   onDetailClick(e) {
@@ -96,48 +92,6 @@ Page({
     wx.redirectTo({
       url: '/pages/composition/scan/index',
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
   },
 
   onShareTimeline() {

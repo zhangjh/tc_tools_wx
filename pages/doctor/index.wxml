@@ -40,7 +40,7 @@
       <view class="attach-img">
         <block wx:for="{{uploadedFileList}}" wx:key="index">       
           <image src="{{item.tempFilePath}}" bind:tap="onPreview" data-url="{{item.tempFilePath}}" />
-          <span bind:tap="onDelete" data-url="{{item}}">X</span>
+          <span bind:tap="onDelete" data-url="{{item.tempFilePath}}">X</span>
         </block>
       </view>
       <view class="action-bar">

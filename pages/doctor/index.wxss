@@ -117,7 +117,7 @@
 }
 
 .attach-img image {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 100rpx;
   height: 100rpx;
   margin: 10rpx;

@@ -1,5 +1,7 @@
 // pages/feedback/index.js
 const app = getApp();
+const common = require("../common/index");
+
 Page({
 
   /**
@@ -18,9 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    wx.setNavigationBarTitle({
-      title: '问题反馈',
-    });
+    common.setTabBarTitle('问题反馈');
     let itemNames = [];
     for(let item of app.globalData.items) {
       itemNames.push(item.name);
@@ -65,14 +65,10 @@ Page({
         this.setData({
           uploadedImg: filePath
         });
-        wx.uploadFile({
-          filePath: filePath,
-          name: 'file',
-          header: {
-            'content-type': 'multipart/form-data'
-          },
-          url: 'https://wx2.zhangjh.cn/feedback/uploadFile',
-          success: res => {
+        common.uploadFile({
+          filePath,
+          url: '/feedback/uploadFile',
+          cb: res => {
             const resJO = JSON.parse(res.data);
             if(resJO.success) {
               this.setData({
@@ -107,8 +103,8 @@ Page({
       title: 'loading...',
       mask: true,
     });
-    wx.request({
-      url: 'https://wx2.zhangjh.cn/feedback/feedback',
+    common.wxRequest({
+      url: '/feedback/feedback',
       method: 'POST',
       data: {
         userId,
@@ -116,27 +112,16 @@ Page({
         question: this.data.question,
         file: this.data.uploadedImgUrl
       },
-      success: res => {
+      cb: res => {
         wx.hideLoading();
-        const data = res.data;
-        if(data.success) {
-          wx.showToast({
-            title: '问题提交成功',
-            mask: true,
-          });
-        } else {
-          wx.showToast({
-            title: '问题提交失败',
-            mask: true,
-            icon: 'error'
-          })
-        }
-      },
-      fail: err => {
         wx.showToast({
-          title: '问题提交失败',
-        })
+          title: '问题提交成功',
+          mask: true,
+        });
+      },
+      failCb: err => {
+        console.log(err);
       }
-    })
+    });
   }
 })

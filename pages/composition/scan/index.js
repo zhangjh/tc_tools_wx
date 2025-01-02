@@ -1,12 +1,12 @@
 // index.js
+const common = require("../../common/index");
+
 Page({
   data: {
     img: "https://unsplash.zhangjh.cn/" + Math.ceil(Math.random() * 3) + ".jpg",
   },
   onLoad(options) {
-    wx.setNavigationBarTitle({
-      title: '科技狠活鉴定器'
-    })
+    common.setTabBarTitle('科技狠活鉴定器');
   },
   onReady: {
 
@@ -25,16 +25,16 @@ Page({
   },
   startScan() {
     console.log("scan");
-    wx.chooseMedia({
+    common.chooseMedia({
       count: 1,
       mediaType: ["image"],
-      success: res => {
+      cb: res => {
         const file = res.tempFiles[0].tempFilePath;
         wx.redirectTo({
           url: '/pages/composition/detail/index?img=' + file,
         })
       },
-      fail: err => {
+      failCb: err => {
         console.log(err);
       }
     });

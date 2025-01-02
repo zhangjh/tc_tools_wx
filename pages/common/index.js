@@ -1,9 +1,9 @@
 const debug = false;
-const domain = debug ? "http://localhost:3001" : "https://wx2.zhangjh.cn/";
+const domain = debug ? "http://localhost:3001" : "https://wx2.zhangjh.cn";
 
 module.exports = {
   config: {
-    
+    r2Domain: "https://r2.zhangjh.cn",
   },
   wxRequest: (req) => {
     let url = req.url;
@@ -18,16 +18,22 @@ module.exports = {
         'content-type': 'application/json'
       };
     }
-    wx.request({
+    return wx.request({
       url,
       data: req.data,
       method: req.method,
+      enableChunked: !!req.enableChunked,
       timeout: req.timeout ? req.timeout : 60000,
       complete: req.completeCb,
       success: ret => {
-        if(ret.statusCode === 200 && ret.data.success) {
+        // ret.data为空（流式响应）或者对应success为true
+        if(ret.statusCode === 200) {
           if(req.cb) {
-            ret.cb(ret.data.data);
+            if(!ret.data) {
+              req.cb();
+            } else if(ret.data.success) {
+              ret.cb(ret.data.data);
+            }
           }
         } else {
           console.log(ret.data.errorMsg);
@@ -51,15 +57,12 @@ module.exports = {
       }
     })
   },
-  getItems: () => {
+  getItems: (cb) => {
     wx.request({
-      url: this.constans.domain + '/wx/getToolItems',
+      url: domain + '/wx/getToolItems',
       success: ret => {
         if(ret.statusCode === 200 && ret.data.success) {
-          app.globalData.items = ret.data.data;
-          this.setData({
-            items: ret.data.data
-          });
+          cb(ret.data.data);
         }
       },
       fail: err => {
@@ -84,23 +87,58 @@ module.exports = {
     const count = req.count;
     const mediaType = req.mediaType;
     const sourceType = req.sourceType;
-    wx.chooseMedia({
-      camera: camera,
-      count,
+    let data = {
+      count, 
       mediaType,
-      sourceType,
-      success: (res) => {
+    };
+    if(sourceType) {
+      data.sourceType = sourceType;
+    }
+    data.success = res => {
+      if(req.cb) {
+        req.cb(res);
+      }
+    }
+    data.fail = (err) => {
+      if(req.failCb) {
+        console.log(err);
+        req.failCb(err);
+      }
+    }
+    wx.chooseMedia(data);
+  },
+  uploadFile: (req) => {
+    const filePath = req.filePath;
+    let url = req.url;
+    if(!filePath || !url) {
+      console.log("参数缺失");
+      return;
+    }
+    if(!url.startsWith('http')) {
+      url = domain + url;
+    }
+    wx.uploadFile({
+      filePath,
+      name: 'file',
+      url,
+      header: {
+        'content-type': 'multipart/form-data'
+      },
+      formData: req.formData,
+      success: res => {
         if(req.cb) {
           req.cb(res);
         }
       },
-      fail: (err) => {
+      fail: err => {
         if(req.failCb) {
-          console.log(err);
           req.failCb(err);
         }
-      },
+        wx.showToast({
+          title: '上传失败',
+          icon: 'error'
+        });
+      }
     })
-  },
-  
+  }
 };

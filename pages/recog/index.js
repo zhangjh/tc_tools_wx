@@ -1,4 +1,5 @@
 // pages/recog/index.js
+const common = require("../common/index");
 Page({
 
   /**
@@ -21,51 +22,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    wx.setNavigationBarTitle({
-      title: '太初识物'
-    });    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+    common.setTabBarTitle('太初识物');
   },
 
   /**
@@ -87,16 +44,14 @@ Page({
     });
   },
   onPreviewImg() {
-    wx.previewImage({
-      urls: [this.data.originImg],
-    });
+    common.previewImage(this.data.originImg);
   },
   startScan() {
     const tabKey = this.data.tabKey;
-    wx.chooseMedia({
+    common.chooseMedia({
       count: 1,
       mediaType: ["image"],
-      success: res => {
+      cb: res => {
         const file = res.tempFiles[0].tempFilePath;
         // 选择图片后设置图片并设置进度20%
         this.setData({
@@ -116,18 +71,14 @@ Page({
           });
         }, 1000);
         const recogType = "recog" + tabKey.charAt(0).toUpperCase() + tabKey.slice(1);
-        wx.uploadFile({
+        common.uploadFile({
           filePath: file,
-          name: 'file',
           formData: {
             // 转成recogAnimal形式
             type: recogType
           },
-          header: {
-            'content-type': 'multipart/form-data'
-          },
-          url: 'https://wx2.zhangjh.cn/wxChat/recog',
-          success: res => {
+          url: '/wxChat/recog',
+          cb: res => {
             console.log(res);
             const resJO = JSON.parse(res.data);
             if(resJO.success) {
@@ -143,14 +94,11 @@ Page({
               console.log(resJO.errorMsg);
             }
           },
-          fail: err => {
+          failCb: err => {
             console.log(err);
           }
         });
       },
-      fail: err => {
-        console.log(err);
-      }
     });
   }
 })

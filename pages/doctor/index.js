@@ -1,3 +1,5 @@
+const common = require("../common/index");
+
 // pages/doctor/index.js
 const app = getApp();
 Page({
@@ -19,9 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    wx.setNavigationBarTitle({
-      title: '赛博医生',
-    })
+    common.setTabBarTitle('赛博华佗');
   },
 
   /**
@@ -40,26 +40,23 @@ Page({
   },
   onPreview(e) {
     const url = e.target.dataset.url;
-    wx.previewImage({
-      urls: [url],
-    })
+    common.previewImage(url);
   },
   onDelete(e) {
     const url = e.target.dataset.url;
     let uploadedFileList = this.data.uploadedFileList;
     const updateFileList = uploadedFileList.filter(item => {
-      return item !== url;
+      return item.tempFilePath !== url;
     });
-    console.log(updateFileList);
     this.setData({
       uploadedFileList: updateFileList
     });
   },
   chooseImage() {
-    wx.chooseMedia({
+    common.chooseMedia({
       count: 3,
       mediaType: ["image"],
-      success: res => {
+      cb: res => {
         // const file = res.tempFiles[0].tempFilePath;
         let uploadedFileList = this.data.uploadedFileList;
         res.tempFiles.map(file => {
@@ -69,7 +66,7 @@ Page({
           uploadedFileList
         });
       },
-      fail: err => {
+      failCb: err => {
         console.log(err);
       }
     });
@@ -166,22 +163,15 @@ Page({
       data.files = base64List;
     }
     console.log(data);
-    const requestTask = wx.request({
-      url: 'https://wx2.zhangjh.cn/wxChat/doctor',
+    const requestTask = common.wxRequest({
+      url: '/wxChat/doctor',
       method: 'POST',
       data,
       enableChunked: true,
-      responseType: 'text',
-      success: res => {
-        if(res.statusCode === 200) {
-        }
+      cb: res => {
       },
-      fail: err => {
+      failCb: err => {
         console.log(err);
-        wx.showToast({
-          title: '请求出错',
-          icon: 'error'
-        })
       }
     });
      // 监听数据块
@@ -191,7 +181,7 @@ Page({
      requestTask.onChunkReceived((response) => {
       wx.hideLoading();
       try {
-        const chunk = decodeURIComponent(escape(String.fromCharCode.apply(null, new Uint8Array(response.data)))).trim();
+        const chunk = decodeURIComponent(escape(String.fromCharCode.apply(null, new Uint8Array(response.data))));
         // 累加chunk
         if(!lastContent || lastContent.length < 2) {
           lastContent.push({

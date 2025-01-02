@@ -1,5 +1,6 @@
 // pages/voice/index.js
-const sourcePre = "https://r2.zhangjh.cn";
+const common = require("../common/index");
+const sourcePre = common.config.r2Domain;
 Page({
 
   /**
@@ -110,9 +111,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    wx.setNavigationBarTitle({
-      title: '助眠白噪声'
-    }); 
+    common.setTabBarTitle('助眠白噪声');
     let audioContext = wx.createInnerAudioContext({
       useWebAudioImplement: false
     });

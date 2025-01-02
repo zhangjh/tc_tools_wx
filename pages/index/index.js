@@ -1,5 +1,6 @@
 // pages/index/index.js
 const app = getApp();
+const common = require("../common/index");
 Page({
 
   /**
@@ -9,22 +10,11 @@ Page({
     items: []
   },
   getItems() {
-    wx.request({
-      url: 'https://wx2.zhangjh.cn/wx/getToolItems',
-      success: ret => {
-        if(ret.statusCode === 200 && ret.data.success) {
-          app.globalData.items = ret.data.data;
-          this.setData({
-            items: ret.data.data
-          });
-        }
-      },
-      fail: err => {
-        wx.showToast({
-          title: '获取列表出错',
-          icon: 'error'
-        });
-      }
+    common.getItems(data => {
+      app.globalData.items = data;
+      this.setData({
+        items: data
+      });
     });
   },
   /**

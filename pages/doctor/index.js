@@ -8,6 +8,8 @@ Page({
   data: {
     introText: "您好！我是您的AI医疗顾问。请描述您的症状或健康问题，我会尽力为您提供专业的建议。请注意：我的建议仅供参考，如有严重症状请及时就医。您的任何问题均不会被记录，请放心提问。",
     question: "",
+    // 最多3张
+    uploadedFileList: [],
     context: {},
     // 存储pair对：[{role: 'user', content: ''}, {role: 'model', content: ''}]
     contentArr: []
@@ -20,48 +22,6 @@ Page({
     wx.setNavigationBarTitle({
       title: '赛博医生',
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
   },
 
   /**
@@ -78,8 +38,41 @@ Page({
       question: value
     });
   },
+  onPreview(e) {
+    const url = e.target.dataset.url;
+    wx.previewImage({
+      urls: [url],
+    })
+  },
+  onDelete(e) {
+    const url = e.target.dataset.url;
+    let uploadedFileList = this.data.uploadedFileList;
+    const updateFileList = uploadedFileList.filter(item => {
+      return item !== url;
+    });
+    console.log(updateFileList);
+    this.setData({
+      uploadedFileList: updateFileList
+    });
+  },
   chooseImage() {
-
+    wx.chooseMedia({
+      count: 3,
+      mediaType: ["image"],
+      success: res => {
+        // const file = res.tempFiles[0].tempFilePath;
+        let uploadedFileList = this.data.uploadedFileList;
+        res.tempFiles.map(file => {
+          uploadedFileList.push(file);
+        });
+        this.setData({
+          uploadedFileList
+        });
+      },
+      fail: err => {
+        console.log(err);
+      }
+    });
   },
   // 在提交问题时设置上下文
   setChatContext() {
@@ -124,28 +117,32 @@ Page({
       return;
     }
     const question = this.data.question;
+    const uploadedFileList = this.data.uploadedFileList;
     const context = this.data.context;
-    // 清空输入框
+    // 清空输入框和已上传文件
     this.setData({
-      question: ''
+      question: '',
+      uploadedFileList: []
     });
     wx.showLoading({
       title: 'loading...',
       mask: true,
     });
     let data = {
-      question
+      question,
     };
     let contentArr = this.data.contentArr;
     let lastContent = contentArr[contentArr.length - 1];
     // 重复提交，或者回答出错了再次提交，只需覆盖问题
     if(lastContent && lastContent.length === 1) {
       lastContent[0].content = question;
+      lastContent[0].uploadedFileList = uploadedFileList;
     } else {
       // 新一轮问答添加一个新元素
       contentArr.push([{
         role: 'user',
-        content: question
+        content: question,
+        uploadedFileList
       }]);
     }
     // 及时回显问题，不必等回答响应后再显示
@@ -155,6 +152,18 @@ Page({
     this.setChatContext();
     if(context && context.messages) {
       data.context = context;
+    }
+    if(uploadedFileList) {
+      const fs = wx.getFileSystemManager();
+      const base64List = uploadedFileList.map(file => {
+        const mimeType = "image/jpeg";
+        const base64 = fs.readFileSync(file.tempFilePath, 'base64');
+        return {
+          base64,
+          mimeType
+        };
+      });
+      data.files = base64List;
     }
     console.log(data);
     const requestTask = wx.request({

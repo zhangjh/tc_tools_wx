@@ -8,15 +8,20 @@
     </view>
     <view class="answer-content">
       <block wx:for="{{contentArr}}" wx:key="index">
-        <!-- qa成对出现 -->
         <view>
-          <view class="doctor-intro" wx:if="{{item[0]}}">
-            <text class="intro-text rightArrow">{{item[0].content}}</text>
+          <view class="doctor-intro user-message" wx:if="{{item[0]}}">
             <image class="avatar" src="/resources/user.png" />
+            <view class="content-wrap">
+              <text class="intro-text rightArrow">{{item[0].content}}</text>
+              <block wx:for="{{item[0].uploadedFileList}}" wx:key="index">       
+                <image src="{{item.tempFilePath}}" bind:tap="onPreview" data-url="{{item.tempFilePath}}" />
+              </block>
+            </view>
           </view>
+          
+          <!-- AI消息 -->
           <view class="doctor-intro" wx:if="{{item[1]}}">
             <image class="avatar" src="/resources/doctor.png" />
-            <!-- markdown渲染 -->
             <towxml class="intro-text leftArrow" nodes="{{item[1].content}}" />
           </view>
         </view>
@@ -30,8 +35,15 @@
         bindinput="onInput"
         value="{{question}}"
       />
+      
+      <view class="attach-img">
+        <block wx:for="{{uploadedFileList}}" wx:key="index">       
+          <image src="{{item.tempFilePath}}" bind:tap="onPreview" data-url="{{item.tempFilePath}}" />
+          <span bind:tap="onDelete" data-url="{{item}}">X</span>
+        </block>
+      </view>
       <view class="action-bar">
-        <button class="btn-group" bindtap="chooseImage">
+        <button class="btn-group" bindtap="chooseImage" disabled="{{uploadedFileList.length >= 3}}">
           <image src="/resources/image.png" /> 上传图片
         </button>
         <button class="btn-group" bindtap="sendMessage" type="primary">

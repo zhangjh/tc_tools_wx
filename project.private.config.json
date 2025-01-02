@@ -14,6 +14,13 @@
           "pathName": "pages/doctor/index",
           "query": "",
           "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/doctor/index",
+          "pathName": "pages/doctor/index",
+          "query": "",
+          "launchMode": "default",
           "scene": null,
           "partialCompile": {
             "enabled": true,

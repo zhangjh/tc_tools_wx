@@ -190,7 +190,7 @@ Page({
      requestTask.onChunkReceived((response) => {
       wx.hideLoading();
       try {
-        const chunk = new TextDecoder().decode(response.data);
+        const chunk = decodeURIComponent(escape(String.fromCharCode.apply(null, new Uint8Array(response.data))));
         // 累加chunk
         if(!lastContent || lastContent.length < 2) {
           lastContent.push({

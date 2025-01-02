@@ -34,6 +34,7 @@
         placeholder="请描述您的症状或感兴趣的健康问题..."
         bindinput="onInput"
         value="{{question}}"
+        showConfirmBar="{{false}}"
       />
       
       <view class="attach-img">

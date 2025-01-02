@@ -128,7 +128,7 @@
   display: flex;
   justify-content: flex-end;
   gap: 50rpx; 
-  margin-top: 20rpx;
+  margin: 20rpx 0 5rpx 0;
 }
 
 .btn-group {

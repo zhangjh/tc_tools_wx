@@ -56,7 +56,7 @@
   color: #333;
   line-height: 1.6;
   background: #fff;
-  padding: 20rpx;
+  padding: 10rpx;
   border-radius: 12rpx;
   position: relative;
 }
@@ -144,4 +144,21 @@
 .btn-group image {
   width: 40rpx;
   height: 40rpx;
+}
+
+.ai-message-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.forward button {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.forward image {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 0 40rpx;
 }

@@ -95,7 +95,7 @@ module.exports = {
       });
     }
   },
-  sendMessage() {
+  sendMessage(url) {
     if(!app.page.data.question) {
       return;
     }
@@ -149,7 +149,7 @@ module.exports = {
       data.files = base64List;
     }
     const requestTask = common.wxRequest({
-      url: '/wxChat/lawer',
+      url,
       method: 'POST',
       data,
       enableChunked: true,

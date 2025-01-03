@@ -22,13 +22,7 @@ Page({
    */
   onLoad(options) {
     // 获取当前已经有的工具列表
-    if(!app.globalData.items.length) {
-      this.getItems();
-    } else {
-      this.setData({
-        items: app.globalData.items
-      });
-    }
+    this.getItems();
   },
 
   /**

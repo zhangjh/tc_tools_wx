@@ -23,13 +23,30 @@ Page({
   onLoad(options) {
     chat.init(this);
     chat.setTabBarTitle('赛博律师');
+    const content = options.content;
+    // 非空表示从分享进来的，设置初始分享的答案内容
+    if(content) {
+      this.setData({
+        contentArr: [JSON.parse(content)]
+      });
+    }
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    const content = e.target.dataset.content;
+    const question = content[0].content;
+    let title = question;
+    if(title > 25) {
+      title = question.substring(0, 25) + '...';
+    }
+    // 截断取前25个字
+    return {
+      title: '[赛博律师]' + title,
+      path: '/pages/lawer/index?content=' + JSON.stringify(content)
+    }
   },
 
   onInput(e) {
@@ -55,6 +72,6 @@ Page({
     chat.setChatContext();
   },
   sendMessage() {
-    chat.sendMessage();
+    chat.sendMessage('/wxChat/lawer');
   }
 })

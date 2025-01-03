@@ -18,11 +18,17 @@
               </block>
             </view>
           </view>
-          
           <!-- AI消息 -->
-          <view class="doctor-intro" wx:if="{{item[1]}}">
-            <image class="avatar" src="/resources/doctor.png" />
-            <towxml class="intro-text leftArrow" nodes="{{item[1].content}}" />
+          <view class="ai-message-wrap">
+            <view class="doctor-intro" wx:if="{{item[1]}}">
+              <image class="avatar" src="/resources/doctor.png" />
+              <towxml class="intro-text leftArrow" nodes="{{item[1].content}}" />
+            </view>
+            <view class="forward" wx:if="{{item[1]}}">
+              <button open-type="share" class="share-btn" data-content="{{item}}">
+                <image src="/resources/forward.png" />
+              </button>
+            </view>
           </view>
         </view>
       </block>

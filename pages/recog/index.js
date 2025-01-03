@@ -44,7 +44,7 @@ Page({
     });
   },
   onPreviewImg() {
-    common.previewImage(this.data.originImg);
+    common.imgPreview(this.data.originImg);
   },
   startScan() {
     const tabKey = this.data.tabKey;

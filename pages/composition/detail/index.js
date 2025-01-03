@@ -70,7 +70,7 @@ Page({
   },
 
   onPreviewImg() {
-    common.previewImage(this.data.originImg);
+    common.imgPreview(this.data.originImg);
   },
 
   onDetailClick(e) {

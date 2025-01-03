@@ -14,7 +14,8 @@ Page({
     uploadedFileList: [],
     context: {},
     // 存储pair对：[{role: 'user', content: ''}, {role: 'model', content: ''}]
-    contentArr: []
+    contentArr: [],
+    keyboardHeight: 0,
   },
 
   /**
@@ -22,6 +23,10 @@ Page({
    */
   onLoad(options) {
     common.setTabBarTitle('赛博律师');
+  },
+  onUnload() {
+    // 页面销毁时移除监听
+    wx.offKeyboardHeightChange()
   },
 
   /**
@@ -39,7 +44,7 @@ Page({
   },
   onPreview(e) {
     const url = e.target.dataset.url;
-    common.onPreview(url);
+    common.imgPreview(url);
   },
   onDelete(e) {
     const url = e.target.dataset.url;
@@ -49,6 +54,16 @@ Page({
     });
     this.setData({
       uploadedFileList: updateFileList
+    });
+  },
+  onFocus() {
+    this.setData({
+      keyboardHeight: 140
+    });
+  },
+  onBlur() {
+    this.setData({
+      keyboardHeight: 0
     });
   },
   chooseImage() {

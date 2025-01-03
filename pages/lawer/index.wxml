@@ -28,13 +28,16 @@
       </block>
     </view>
     <!-- 聊天输入区域 -->
-    <view class="chat-input">
+    <view class="chat-input" style="bottom: {{keyboardHeight}}px">
       <textarea 
         class="input-box" 
         placeholder="请描述您的法律咨询问题或感兴趣的法律相关问题..."
         bindinput="onInput"
         value="{{question}}"
         showConfirmBar="{{false}}"
+        adjust-position="false"
+        bindfocus="onFocus"
+        bindblur="onBlur"
       />
       
       <view class="attach-img">

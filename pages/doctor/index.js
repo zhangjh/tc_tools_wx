@@ -1,7 +1,7 @@
-const common = require("../common/index");
-
 // pages/doctor/index.js
 const app = getApp();
+const common = require("../common/index");
+
 Page({
 
   /**
@@ -14,7 +14,8 @@ Page({
     uploadedFileList: [],
     context: {},
     // 存储pair对：[{role: 'user', content: ''}, {role: 'model', content: ''}]
-    contentArr: []
+    contentArr: [],
+    keyboardHeight: 0,
   },
 
   /**
@@ -22,6 +23,10 @@ Page({
    */
   onLoad(options) {
     common.setTabBarTitle('赛博华佗');
+  },
+  onUnload() {
+    // 页面销毁时移除监听
+    wx.offKeyboardHeightChange()
   },
 
   /**
@@ -33,14 +38,13 @@ Page({
 
   onInput(e) {
     const value = e.detail.value;
-    console.log(value);
     this.setData({
       question: value
     });
   },
   onPreview(e) {
     const url = e.target.dataset.url;
-    common.previewImage(url);
+    common.imgPreview(url);
   },
   onDelete(e) {
     const url = e.target.dataset.url;
@@ -50,6 +54,16 @@ Page({
     });
     this.setData({
       uploadedFileList: updateFileList
+    });
+  },
+  onFocus() {
+    this.setData({
+      keyboardHeight: 140
+    });
+  },
+  onBlur() {
+    this.setData({
+      keyboardHeight: 0
     });
   },
   chooseImage() {
@@ -162,7 +176,6 @@ Page({
       });
       data.files = base64List;
     }
-    console.log(data);
     const requestTask = common.wxRequest({
       url: '/wxChat/doctor',
       method: 'POST',
@@ -176,7 +189,6 @@ Page({
     });
      // 监听数据块
      contentArr = this.data.contentArr;
-     
      lastContent = contentArr[contentArr.length - 1];
      requestTask.onChunkReceived((response) => {
       wx.hideLoading();

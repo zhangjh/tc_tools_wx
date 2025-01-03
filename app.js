@@ -1,12 +1,9 @@
 // app.js
 App({
-  towxml:require('./towxml/index'),
+  towxml: require('./towxml/index'),
+  // 代存公用逻辑对应的调用页面实例
+  page: null,
   onLaunch() {
-    // 展示本地存储能力
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {

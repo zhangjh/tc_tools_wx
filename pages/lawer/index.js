@@ -35,7 +35,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {
+  onShareAppMessage(e) {
     const content = e.target.dataset.content;
     const question = content[0].content;
     let title = question;

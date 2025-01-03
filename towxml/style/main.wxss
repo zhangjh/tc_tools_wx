@@ -368,6 +368,19 @@ video {
     height:220px; font-size:0;
 }
 
+.h2w__latex--line {margin:4rpx 8rpx; vertical-align:middle;}
+.h2w__latex--block {display:block; margin:1em auto;} 
+
+.h2w__yuml {display:block;}
+
+.h2w__yumlBox {
+    width:100%;
+    overflow-x:auto;
+}
+.h2w__yumlView {
+    margin:0 auto; padding-bottom:40rpx;
+}
+
 /**代码行号**/
 .h2w__lineNum {
     text-align:right; float:left; padding:0; margin:0 1em 0 0;

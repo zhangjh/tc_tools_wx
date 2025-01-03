@@ -1,4 +1,16 @@
 module.exports = {
+    // LaTex公式、yuml解析服务架设参见 https://github.com/sbfkcel/markdown-server
+
+    // 数学公式解析API
+    latex:{
+        api:'http://towxml.vvadd.com/?tex'
+    },
+
+    // yuml图解析APPI
+    yuml:{
+        api:'http://towxml.vvadd.com/?yuml'
+    },
+
     // markdown解析配置，保留需要的选项即可
     markdown:[
         'sub',                      // 下标支持
@@ -15,13 +27,13 @@ module.exports = {
         'c',
         'bash',
         'css',
-        'dart',
+        //'dart',
         'go',
         'java',
         'javascript',
         'json',
-        'less',
-        'scss',
+        //'less',
+        //'scss',
         'shell',
         'xml',
         'htmlbars',
@@ -121,6 +133,7 @@ module.exports = {
         // 'julia',
         // 'kotlin',
         // 'lasso',
+        // 'latex',
         // 'ldif',
         // 'leaf',
         // 'lisp',
@@ -240,9 +253,12 @@ module.exports = {
 
     // 自定义组件
     components:[
-        'echarts',                  // echarts图表支持
+        //'audio-player',             // 音频组件，建议保留，由于小程序原生audio存在诸多问题，towxml解决了原生音频播放器的相关问题
+        //'echarts',                  // echarts图表支持
+        //'latex',                    // 数学公式支持
         'table',                    // 表格支持
         'todogroup',                // todo支持
+        //'yuml',                     // yuml图表支持
         'img'                       // 图片解析组件
     ],
 

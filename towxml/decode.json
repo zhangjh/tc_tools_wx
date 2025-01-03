@@ -2,7 +2,6 @@
   "component": true,
   "usingComponents": {
     "decode": "/towxml/decode",
-    "echarts": "/towxml/echarts/echarts",
     "table": "/towxml/table/table",
     "todogroup": "/towxml/todogroup/todogroup",
     "img": "/towxml/img/img"

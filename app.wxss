@@ -105,3 +105,7 @@ page {
   border-radius: 9999px;
   background-color: white;
 }
+
+towxml view {
+  font-size: 0.8rem !important;
+}

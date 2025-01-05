@@ -22,7 +22,7 @@ Page({
       // 识别场景
       this.setData({
         originImg: options.img,
-        percent: 20
+        percent: 10
       });
       this.scanImg(img);
     } else if(options.data) {
@@ -43,7 +43,7 @@ Page({
         return;
       }
       this.setData({
-        percent: this.data.percent + 8
+        percent: this.data.percent + 5
       });
     }, 1000);
     common.uploadFile({

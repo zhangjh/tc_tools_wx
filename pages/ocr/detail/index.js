@@ -1,5 +1,6 @@
 // pages/ocr/detail/index.js
 const app = getApp();
+const common = require("../../common/index");
 Page({
   /**
    * 页面的初始数据
@@ -27,54 +28,6 @@ Page({
     }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  },
   back2Scan() {
     wx.redirectTo({
       url: '/pages/ocr/index',
@@ -90,18 +43,14 @@ Page({
         percent: this.data.percent + 8
       });
     }, 1000);
-    wx.uploadFile({
+    common.uploadFile({
       filePath: img,
-      name: 'file',
       formData: {
         // 转成recogAnimal形式
         type: "recogOcr"
       },
-      header: {
-        'content-type': 'multipart/form-data'
-      },
-      url: 'https://wx2.zhangjh.cn/wxChat/recog',
-      success: res => {
+      url: '/wxChat/recog',
+      cb: res => {
         // console.log(res);
         const resJO = JSON.parse(res.data);
         if(resJO.success) {
@@ -119,17 +68,14 @@ Page({
           });
         }
       },
-      fail: err => {
+      failCb: err => {
         console.log(err);
       }
     });
   },
 
   onPreviewImg() {
-    console.log("preview");
-    wx.previewImage({
-      urls: [this.data.originImg],
-    })
+    common.imgPreview(this.data.originImg);
   },
   onCopyClick() {
     console.log(this.data.ocrText);

@@ -4,6 +4,7 @@ const domain = debug ? "http://localhost:3001" : "https://wx2.zhangjh.cn";
 module.exports = {
   config: {
     r2Domain: "https://r2.zhangjh.cn",
+    unsplashDomain: "https://unsplash.zhangjh.cn/",
   },
   wxRequest: (req) => {
     let url = req.url;

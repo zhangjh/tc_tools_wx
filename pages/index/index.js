@@ -9,12 +9,18 @@ Page({
   data: {
     items: []
   },
-  getItems() {
-    common.getItems(data => {
-      app.globalData.items = data;
-      this.setData({
-        items: data
-      });
+  getItems() {    
+    this.setData({
+      items: app.globalData.items
+    });
+    common.getItems(res => {
+      console.log(res);
+      // 有更新覆盖
+      if(res.length !== this.data.items.length) {
+        this.setData({
+          items: res
+        });
+      }
     });
   },
   /**

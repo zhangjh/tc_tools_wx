@@ -3,7 +3,7 @@ const common = require("../../common/index");
 
 Page({
   data: {
-    img: "https://unsplash.zhangjh.cn/" + Math.ceil(Math.random() * 3) + ".jpg",
+    img: common.config.unsplashDomain + Math.ceil(Math.random() * 3) + ".jpg",
   },
   onLoad(options) {
     common.setTabBarTitle('科技狠活鉴定器');

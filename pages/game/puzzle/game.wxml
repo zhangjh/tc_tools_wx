@@ -1,0 +1,26 @@
+<!--pages/game/puzzle/game.wxml-->
+<view class="container">
+  <canvas type="2d" 
+          id="puzzleCanvas" 
+          class="puzzle-canvas"
+          bindtouchstart="onTouchStart">
+  </canvas>
+
+  <view class="controls">
+    <text class="moves">移动次数: {{moves}}</text>
+    <button class="preview-btn" bindtap="togglePreview">
+      {{showPreview ? '关闭预览' : '查看原图'}}
+    </button>
+    <button class="restart-btn" bindtap="restartGame">重新开始</button>
+  </view>
+
+  <!-- Preview Modal -->
+  <view class="preview-modal {{showPreview ? 'show' : ''}}">
+    <view class="preview-container" catchtap="togglePreview">
+      <canvas type="2d" 
+              id="previewCanvas" 
+              class="preview-canvas">
+      </canvas>
+    </view>
+  </view>
+</view>

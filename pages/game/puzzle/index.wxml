@@ -1,0 +1,22 @@
+<!--pages/game/puzzle/index.wxml-->
+<view class="container">
+  <view class="title">拼图游戏</view>
+  
+  <view class="upload-section">
+    <image wx:if="{{tempImagePath}}" 
+           src="{{tempImagePath}}" 
+           mode="aspectFit" 
+           class="preview-image">
+    </image>
+  </view>
+
+  <button class="upload-btn" bindtap="chooseImage">
+    {{tempImagePath ? '重新选图' : '选择图片'}}
+  </button>
+
+  <button class="start-btn" 
+          bindtap="startGame" 
+          disabled="{{!tempImagePath}}">
+    开始游戏
+  </button>
+</view>

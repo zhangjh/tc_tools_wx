@@ -7,7 +7,9 @@
       <input 
         type="text" 
         placeholder="搜索书籍..." 
-        bindinput="onInput" 
+        bindinput="onInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
         value="{{searchQuery}}" 
       />
       <wux-icon class="search-btn" type="md-search" bindtap="onSearch"/>

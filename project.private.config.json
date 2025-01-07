@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/reader/index",
+          "pathName": "pages/reader/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/lawer/index",
           "pathName": "pages/lawer/index",
           "query": "",

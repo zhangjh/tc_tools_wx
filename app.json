@@ -10,7 +10,9 @@
     "pages/feedback/index",
     "pages/idea/index",
     "pages/doctor/index",
-    "pages/lawer/index"
+    "pages/lawer/index",
+    "pages/reader/index",
+    "pages/reader/result"
   ],
   "window": {
     "navigationBarTextStyle": "black",

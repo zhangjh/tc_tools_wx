@@ -1,0 +1,24 @@
+<view class="container">
+  <!-- 搜索结果标题 -->
+  <view class="result-title">
+    <text>搜索结果</text>
+  </view>
+
+  <!-- 搜索结果 -->
+  <block wx:for="{{bookList}}" wx:key="id">
+    <view class="book-item" bind:tap="onDownload" 
+      data-id="{{item.id}}" data-hash="{{item.hash}}">
+      <image class="book-cover" 
+        src="{{item.cover === '/img/cover-not-exists.png' ? '/resources/not_exist.png' : item.cover}}" />
+      <view class="book-details">
+        <text class="book-title">{{item.title}}</text>
+        <text>作者: {{item.author}}</text>
+        <text>语言: {{item.language}}</text>
+        <text>评分: {{item.interestScore}}</text>
+        <text>出版社: {{item.publisher}}</text>
+        <text>格式: {{item.extension}}</text>
+        <text>大小: {{item.filesizeString}}</text>
+      </view>
+    </view>
+  </block>
+</view>

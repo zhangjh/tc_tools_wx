@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="content">
+    <view class="logo">
+      <image src="/resources/favicon.ico" />
+    </view>
+    <view class="search-box">
+      <input 
+        type="text" 
+        placeholder="搜索书籍..." 
+        bindinput="onInput" 
+        value="{{searchQuery}}" 
+      />
+      <wux-icon class="search-btn" type="md-search" bindtap="onSearch"/>
+    </view>
+    <view class="tips">
+      Tips: 免费检索有次数限制，先到先得
+    </view>
+  </view>
+ 
+ 
+</view>

@@ -1,0 +1,55 @@
+.container {
+  /* border: 1px solid red; */
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  /* border: 1px solid green; */
+  width: 200rpx;
+  height: 200rpx;
+  margin: -100rpx 0 100rpx 0;
+}
+
+.logo image {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.search-box {
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+input {
+  flex: 1;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.search-btn {
+  /* border: 1px solid red; */
+  margin-left: -80rpx;
+  z-index: 10;
+}
+
+.tips {
+  color: orange;
+  margin: 20rpx;
+}

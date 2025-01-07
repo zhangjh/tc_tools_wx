@@ -68,7 +68,14 @@ App({
         "desc": "你的私人AI法律顾问，快速解答你的法律问题",
         "logo": "/resources/aiLaw.png",
         "path": "/pages/lawer/index"
-      }
+      },
+      // {
+      //   "name": "智阅找书",
+      //   "type": "tools",
+      //   "desc": "书籍是人类进步的阶梯，电子书搜索下载",
+      //   "logo": "/resources/reader.ico",
+      //   "path": "/pages/reader/index"
+      // },
     ]
   },
 })

@@ -30,6 +30,12 @@ Page({
     });
     this.searchBooks();
   },
+  onShareAppMessage() {
+    return {
+      title: "[太初工具集]发现一个电子书查找小程序，你也来试试",
+      path: "/pages/reader/index"
+    }
+  },
 
   searchBooks() {
     common.wxRequest({

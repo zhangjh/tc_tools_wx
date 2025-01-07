@@ -1,7 +1,7 @@
 <view class="container">
   <view class="content">
     <view class="logo">
-      <image src="/resources/favicon.ico" />
+      <image src="/resources/reader.ico" />
     </view>
     <view class="search-box">
       <input 
@@ -15,7 +15,7 @@
       <wux-icon class="search-btn" type="md-search" bindtap="onSearch"/>
     </view>
     <view class="tips">
-      Tips: 免费检索有次数限制，先到先得
+      <text>Tips: 免费检索有次数限制，先到先得</text>
     </view>
   </view>
  

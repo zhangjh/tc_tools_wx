@@ -63,6 +63,8 @@ Page({
   onDownload(e) {
     const bookid = e.currentTarget.dataset.id;
     const hash = e.currentTarget.dataset.hash;
+    const name = e.currentTarget.dataset.name;
+    const extension = e.currentTarget.dataset.extension;
     wx.showLoading({
       title: '文件下载中',
     });
@@ -77,17 +79,24 @@ Page({
         wx.downloadFile({
           url: res,
           success: ret => {
-            wx.hideLoading();
             const fileManager = wx.getFileSystemManager();
             fileManager.saveFile({
               tempFilePath: ret.tempFilePath,
+              filePath: wx.env.USER_DATA_PATH + "/" + name + "." + extension,
               success: saveRes => {
+                wx.hideLoading();
                 console.log(saveRes.savedFilePath);
                 wx.showToast({
                   title: '下载成功',
                 });
+                wx.openDocument({
+                  filePath: saveRes.savedFilePath,
+                  showMenu: true,
+                  fileType: extension
+                });
               },
               fail: saveErr => {
+                wx.hideLoading();
                 console.error(saveErr);
                 wx.hideLoading();
                 wx.showToast({

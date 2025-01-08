@@ -52,4 +52,5 @@ input {
 .tips {
   color: orange;
   margin: 20rpx;
+  font-size: small;
 }

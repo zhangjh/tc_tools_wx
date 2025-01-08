@@ -17,7 +17,6 @@ Page({
   },
 
   onSearch() {
-    console.log("search");
     const query = this.data.searchQuery.trim();
     if (!query) {
       wx.showToast({

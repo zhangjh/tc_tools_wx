@@ -7,7 +7,8 @@
   <!-- 搜索结果 -->
   <block wx:for="{{bookList}}" wx:key="id">
     <view class="book-item" bind:tap="onDownload" 
-      data-id="{{item.id}}" data-hash="{{item.hash}}">
+      data-id="{{item.id}}" data-hash="{{item.hash}}"
+      data-name="{{item.title}}" data-extension="{{item.extension}}">
       <image class="book-cover" 
         src="{{item.cover === '/img/cover-not-exists.png' ? '/resources/not_exist.png' : item.cover}}" />
       <view class="book-details">

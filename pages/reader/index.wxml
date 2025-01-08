@@ -15,7 +15,8 @@
       <wux-icon class="search-btn" type="md-search" bindtap="onSearch"/>
     </view>
     <view class="tips">
-      <text>Tips: 免费检索有次数限制，先到先得</text>
+      <view>Tips: 免费检索有次数限制，先到先得</view>
+      <view>默认下载位置比较隐蔽，下载后会自动打开预览，可以自行保存到其他位置</view>
     </view>
   </view>
  

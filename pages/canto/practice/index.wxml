@@ -1,5 +1,5 @@
+<!-- <include src="/pages/canto/tabs" /> -->
 <view class="content">
-  <!-- <include src="/pages/canto/tabs" /> -->
 
   <view class="left-panel">
     <image src="{{lyrics.curCoverImg}}" class="responsive-img"></image>
@@ -44,6 +44,9 @@
         bind:tap="recordVoice"
       >
         <i class="iconfont icon-luyin"></i>
+      </view>
+      <view bind:tap="onBack">
+        <i class="iconfont icon-fanhui"></i>
       </view>
       <view style="display: {{ visible.voicePrint ? 'block' : 'none'}}"
         bind:tap="stopRecord"

@@ -17,6 +17,13 @@
           "scene": null
         },
         {
+          "name": "pages/canto/lyric/index",
+          "pathName": "pages/canto/lyric/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/reader/index",
           "pathName": "pages/reader/index",
           "query": "",

@@ -1,5 +1,6 @@
+<include src="/pages/canto/tabs" />
+
 <view class="content">
-  <include src="/pages/canto/tabs" />
 
   <!-- 全局遮罩 -->
   <view class="global-mask" wx:if="{{visible.isMaskVisible}}"></view>
@@ -23,9 +24,9 @@
       </view>
       <view class="lyric-content">
         <block wx:for="{{item.lyrics}}" wx:for-item="line" wx:for-index="lineIndex" wx:key="lineIndex">
-          <text wx:if="{{lineIndex < 3}}">{{line}}\n</text>
-          <text wx:if="{{lineIndex == 3}}">{{line}}\n</text>
-          <text wx:if="{{lineIndex === 3}}" bindtap="toggleLyric" data-index="{{index}}">... ...</text>
+          <view wx:if="{{lineIndex < 3}}">{{line}}</view>
+          <view wx:if="{{lineIndex === 3}}">{{line}}</view>
+          <view wx:if="{{lineIndex === 3}}" bindtap="toggleLyric" data-index="{{index}}">... ...</view>
         </block>
       </view>
       <view class="operation-bar" wx:if="{{item.expanded}}">

@@ -1,5 +1,4 @@
 // pages/practice/index.js
-const app = getApp();
 const common = require('../../common/index');
 const canto = require("../canto");
 const wxAudio = wx.createInnerAudioContext({});
@@ -48,7 +47,11 @@ Page({
     solidStars: [],
     emptyStars: [],
   },
-
+  onBack() {
+    wx.redirectTo({
+      url: '/pages/canto/lyric/index',
+    })
+  },
   // 初始进来显示歌词内容
   showLyricTexts: function() {
     const lyricContent = this.data.lyrics.content;
@@ -207,12 +210,10 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    console.log("onReady");
   },
 
 
   showPractice(curLyrics, curCoverImg) {
-    console.log("onShow");
     // 清空显示状态
     this.setData({
       ttsAudio: "",
@@ -250,14 +251,12 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-    console.log("onHide");
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-    console.log("onUnload");
     this.closeAnimation();
   },
 
@@ -265,14 +264,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-    console.log("pullDown");
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-    console.log("reachBottom");
   },
   onTabChange(e) {
     canto.onTabChange(e);
@@ -341,7 +338,6 @@ Page({
     if(!voiceRole) {
       voiceRole = 0;
     }
-    console.log("text:" + text);
     // tts play，没翻页重复听不请求
     if(this.data.ttsAudio) {
       wxAudio.src = this.data.ttsAudio;
@@ -355,7 +351,7 @@ Page({
     let previousTarget = this.data.ttsAudio || '';
     const target = `${wx.env.USER_DATA_PATH}/${Date.now()}.wav`;
     wx.request({
-      url: common.config.domain + "/canto/voice/play?text=" + text + "&voiceRole=" + voiceRole,
+      url: canto.cantoDomain + "/canto/voice/play?text=" + text + "&voiceRole=" + voiceRole,
       responseType: 'arraybuffer',
       success: res => {
         if(res.statusCode === 200) {
@@ -401,21 +397,19 @@ Page({
       const { tempFilePath } = res;
       const text = this.data.lyrics.content[this.data.lyrics.curIndex];
       // 传输音频给服务端评测
-      wx.showLoading({
-        title: '...',
-      })
+      wx.showLoading();
       wx.uploadFile({
         filePath: tempFilePath,
         name: 'file',
         header: {
           'content-type': 'multipart/form-data'
         },
-        url: common.config.domain + '/canto/voice/evaluateFile',
+        url: canto.cantoDomain + '/canto/voice/evaluateFile',
         formData: {
           text
         },
         success: ret => {
-          console.log(ret);
+          // console.log(ret);
           wx.hideLoading();
           // 根据星级展示星星
           const data = ret.data;

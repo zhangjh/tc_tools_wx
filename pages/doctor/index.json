@@ -3,5 +3,6 @@
     "wux-textarea": "/miniprogram_npm/wux-weapp/textarea/index",
     "wux-icon": "/miniprogram_npm/wux-weapp/icon/index",
     "towxml": "/towxml/towxml"
-  }
+  },
+  "style": "v2"
 }

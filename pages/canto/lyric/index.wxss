@@ -23,6 +23,7 @@
 }
 .filter-bar input,
 .action-bar button {
+  width: 50%;
   margin: 0 5rpx;
   padding: 0 20rpx;
   border: 1px solid #ccc;

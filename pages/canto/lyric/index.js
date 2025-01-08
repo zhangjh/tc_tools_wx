@@ -1,7 +1,7 @@
 const app = getApp();
 const common = require("../../common/index");
 const canto = require("../canto");
-const cantoUrlPre = "https://wx.zhangjh.cn/";
+
 Page({
   data: {
     activeKey: 'lyric',
@@ -104,7 +104,7 @@ Page({
       title: '加载中，请等待...',
     });
     common.wxRequest({
-      url: cantoUrlPre + "/canto/lyric/query",
+      url: canto.cantoDomain + "/canto/lyric/query",
       data: {
         song,
         singer,
@@ -199,7 +199,7 @@ Page({
       title: '搜索中，请等待...',
     })
     common.wxRequest({
-      url: cantoUrlPre + "/canto/lyric/search?song=" + this.data.searchValue.song + "&singer=" + this.data.searchValue.singer + "&album=" + this.data.searchValue.album,
+      url: canto.cantoDomain + "/canto/lyric/search?song=" + this.data.searchValue.song + "&singer=" + this.data.searchValue.singer + "&album=" + this.data.searchValue.album,
       cb: ret => {
         wx.hideLoading();
         const song = ret.song;
@@ -225,7 +225,7 @@ Page({
             if (res.confirm) {
               // 保存
               common.wxRequest({
-                url: cantoUrlPre + "/canto/lyric/save",
+                url: canto.cantoDomain + "/canto/lyric/save",
                 method: "POST",
                 data: {
                   creator: app.globalData.userInfo.userId,
@@ -262,7 +262,7 @@ Page({
     wx.setStorageSync('coverImg', coverImg);
     // 保存跟练记录
     common.wxRequest({
-      url: cantoUrlPre + "/canto/lyric/savePracticed",
+      url: canto.cantoDomain + "/canto/lyric/savePracticed",
       method: "POST",
       data: {
         user: userId,

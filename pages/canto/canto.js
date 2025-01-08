@@ -1,5 +1,5 @@
 module.exports = {
-  cantoDomain: "https://wx.zhangjh.cn/",
+  cantoDomain: "https://wx.zhangjh.cn",
   tabItems: [{
     key: 'lyric',
     title: '歌词',

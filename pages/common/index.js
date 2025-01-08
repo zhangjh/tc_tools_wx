@@ -73,6 +73,7 @@ module.exports = {
       method: req.method,
       enableChunked: !!req.enableChunked,
       timeout: req.timeout ? req.timeout : 60000,
+      responseType: req.responseType ? req.responseType : 'text',
       complete: req.completeCb,
       success: ret => {
         // ret.data为空（流式响应）或者对应success为true

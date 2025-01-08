@@ -1,6 +1,7 @@
 <!--pages/user/index.wxml-->
+<include src="/pages/canto/tabs" />
+
 <view class="content">
-  <include src="/pages/canto/tabs" />
 
   <view>
     <wux-wing-blank size="large" class="card-container">

@@ -1,14 +1,17 @@
-<wux-tabs
-  controlled
-  current="{{ activeKey }}"
-  theme="positive"
-  activeLineMode="full"
-  bind:change="onTabChange"
->
-  <block wx:for="{{ tabItems }}" wx:key="key">
-    <wux-tab key="{{ item.key }}">
-      <image src="{{ item.key === tabs.activeKey ? item.ico_selected : item.ico }}" />
-      <text>{{ item.title }}</text>
-    </wux-tab>
-  </block>
-</wux-tabs>
+<view class="tabs">
+  <wux-tabs
+    wux-class="wux-tabs"
+    controlled
+    current="{{ activeKey }}"
+    theme="positive"
+    activeLineMode="full"
+    bind:change="onTabChange"
+  >
+    <block wx:for="{{ tabItems }}" wx:key="key">
+      <wux-tab key="{{ item.key }}" wux-class="wux-tab">
+        <image src="{{ item.key === tabs.activeKey ? item.ico_selected : item.ico }}" />
+        <text>{{ item.title }}</text>
+      </wux-tab>
+    </block>
+  </wux-tabs>
+</view>

@@ -12,7 +12,10 @@
     "pages/doctor/index",
     "pages/lawer/index",
     "pages/reader/index",
-    "pages/reader/result"
+    "pages/reader/result",
+    "pages/canto/lyric/index",
+    "pages/canto/practice/index",
+    "pages/canto/user/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

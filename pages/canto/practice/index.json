@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "wux-tabs": "/miniprogram_npm/wux-weapp/tabs/index",
+    "wux-tab": "/miniprogram_npm/wux-weapp/tab/index"
+  },
+  "pageOrientation": "landscape"
+}

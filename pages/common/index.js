@@ -1,11 +1,59 @@
 const debug = false;
 const domain = debug ? "http://localhost:3001" : "https://wx2.zhangjh.cn";
 
+const objectEmpty = function (object) {
+  if(!object) {
+    return true;
+  }
+  return Object.keys(object).length === 0;
+}
+const startRecording = function () {
+  const recorderManager = wx.getRecorderManager();
+  recorderManager.onStart(() => {
+    console.log('recorder start');
+  });
+  recorderManager.onError((res) => {
+    console.error('recorder error:', res);
+  });
+  // 录音配置
+  const options = {
+    duration: 60000,  // 最长录音时间（毫秒）
+    sampleRate: 16000,  // 采样率
+    numberOfChannels: 1,  // 录音通道数
+    encodeBitRate: 96000,  // 编码码率
+    format: 'wav'  // 音频格式
+  };
+  recorderManager.start(options);
+}
+// 请求录音权限
+const requestRecordPermission = function() {
+  wx.authorize({
+    scope: 'scope.record',
+    success: () => {
+      startRecording();
+    },
+    fail: () => {
+      wx.showModal({
+        title: '用户未授权',
+        content: '录音功能需要授权才能使用，请在设置中打开授权',
+        showCancel: false,
+        success: modalRes => {
+          if (modalRes.confirm) {
+            wx.openSetting();
+          }
+        }
+      });
+    }
+  });
+}
+
 module.exports = {
   config: {
     r2Domain: "https://r2.zhangjh.cn",
     unsplashDomain: "https://unsplash.zhangjh.cn/",
   },
+  objectEmpty,
+  requestRecordPermission,
   wxRequest: (req) => {
     let url = req.url;
     if(!url.startsWith('http')) {

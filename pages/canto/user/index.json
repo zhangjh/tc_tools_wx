@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "wux-landscape": "/miniprogram_npm/wux-weapp/landscape/index",
+    "wux-tabs": "/miniprogram_npm/wux-weapp/tabs/index",
+    "wux-tab": "/miniprogram_npm/wux-weapp/tab/index",
+    "wux-cell-group": "/miniprogram_npm/wux-weapp/cell-group/index",
+    "wux-cell": "/miniprogram_npm/wux-weapp/cell/index",
+    "wux-card": "/miniprogram_npm/wux-weapp/card/index",
+    "wux-wing-blank": "/miniprogram_npm/wux-weapp/wing-blank/index",
+    "wux-radio-group": "/miniprogram_npm/wux-weapp/radio-group",
+    "wux-radio": "/miniprogram_npm/wux-weapp/radio"
+  }
+}

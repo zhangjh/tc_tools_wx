@@ -1,0 +1,118 @@
+<!--pages/user/index.wxml-->
+<view class="content">
+  <include src="/pages/canto/tabs" />
+
+  <view>
+    <wux-wing-blank size="large" class="card-container">
+      <wux-card>
+        <view slot="body" class="user-info">
+            <i class="iconfont icon-geshou"></i>
+            <view class="user">
+              <view class="user-profile-wrap">
+                  <text 
+                  class="nickName"
+                  style="display: {{userInfo.nickName ? 'block' : 'none'}}"
+                  >用户ID：{{userInfo.nickName}}</text>
+                  <text 
+                      class="user-id"
+                      style="display: {{userInfo.nickName ? 'none' : 'block'}}"
+                  >用户ID：{{userInfo.userId}}</text>
+              </view>
+            </view>
+        </view>
+      </wux-card>
+    </wux-wing-blank>
+
+    <wux-wing-blank size="large" class="card-container">
+      <wux-card>
+        <view slot="body">
+          <wux-cell-group title="我的跟练">
+            <block wx:if="{{practiceds.length === 0}}">
+              <view class="empty-result">暂无跟练记录，去练习吧</view>
+            </block>
+            <block 
+              wx:for="{{practiceds}}" wx:key="index"
+            >
+              <wux-cell
+                style="background-color: aliceblue;"
+                wux-class="cell"
+                thumb="{{item.coverImg}}"
+                title=""
+                extra="{{item.songSummary}}"
+                hasLine="false"
+                >
+              </wux-cell>
+            </block>
+          </wux-cell-group>
+          <view 
+            style="visibility: {{visible.prev ? 'visible' : 'hidden'}}"
+            class="arrow left-arrow"
+            bind:tap="goPrev">
+            <i class="iconfont icon-jiantouzuo"></i>
+          </view>
+          <view 
+            style="visibility: {{visible.next ? 'visible' : 'hidden'}};"
+            class="arrow right-arrow"
+            bind:tap="goNext">
+            <i class="iconfont icon-jiantouyou"></i>
+          </view>
+        </view>
+      </wux-card>
+    </wux-wing-blank>
+
+    <wux-wing-blank size="large" class="card-container">
+      <wux-card>
+        <view slot="body">
+          <wux-radio-group
+              name="voiceRole"
+              value="{{activeVoiceRole}}"
+              title="发音人设置"
+              hasLine="{{false}}"
+              bind:change="onChangeVoiceRole"
+            >
+              <block
+                wx:for="{{voiceRoles}}" wx:key="index"
+                >
+                <wux-radio
+                  thumb="{{item.thumb}}"
+                  color="{{item.color}}" 
+                  title="{{item.name}}"
+                  label="{{item.label}}"
+                  value="{{item.value}}" />
+              </block>
+          </wux-radio-group>
+        </view>
+      </wux-card>
+    </wux-wing-blank>
+  
+    <wux-wing-blank size="large" class="card-container">
+      <wux-card>
+        <view slot="body">
+          <wux-cell-group title="反馈和交流">
+            <wux-cell
+                style="background-color: aliceblue;"
+                wux-class="cell"
+                thumb="/pages/canto/resources/qcode.png"
+                title=""
+                extra="扫码加我"
+                hasLine="false"
+                bind:click="openWx"
+            ></wux-cell>
+          </wux-cell-group>
+        </view>
+      </wux-card>
+    </wux-wing-blank>
+  </view>
+  <wux-landscape visible="{{showPersonalQcode}}" bind:close="bindImage" maskClosable="true">
+    <image src="{{personalQcodeImg}}"
+      mode="aspectFit"
+      show-menu-by-longpress
+    />
+  </wux-landscape>
+  <wux-landscape visible="{{activeShow}}" bind:close="closeQrcode" maskClosable="true">
+    <image src="{{activeQrcode}}" 
+      mode="aspectFit" 
+      show-menu-by-longpress
+    />
+  </wux-landscape>
+</view>

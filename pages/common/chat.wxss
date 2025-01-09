@@ -152,7 +152,7 @@
 }
 
 .forward button {
-  width: 100%;
+  width: 100% !important;
   display: flex;
   flex-direction: row;
 }

@@ -12,6 +12,9 @@ Page({
     },
     pageIndex: 1,
     hasMore: true,
+    // 用来表示当前已有歌词全集
+    allLyricsList: [],
+    // 用来显示列表
     lyricsList: [],
     filteredList: [],
     searchOptions: {
@@ -85,24 +88,37 @@ Page({
     const song = this.data.searchOptions.song;
     const singer = this.data.searchOptions.singer;
     if(!song && !singer) {
-      return;
+      this.data.lyricsList = [];
+      return this.getLyrics();
     }
     this.setData({
       pageIndex: 1
     });
-    this.getLyrics();
+    this.getLyrics(true);
   },
 
   handleLyric(lyric) {
     return lyric.split(",");
   },
 
-  getLyrics: function () {
+  getLyrics: function (filterMode = false) {
     const song = this.data.searchOptions.song;
     const singer = this.data.searchOptions.singer;
     wx.showLoading({
       title: '加载中，请等待...',
     });
+    // 过滤模式不追加
+    if(filterMode) {
+      const existedLyricsList = this.data.allLyricsList;
+      const matched = existedLyricsList.filter(item => {
+        return item.songName.indexOf(song) !== -1;
+      });
+      this.setData({
+        lyricsList: matched
+      });
+      wx.hideLoading();
+      return;
+    }
     common.wxRequest({
       url: canto.cantoDomain + "/canto/lyric/query",
       data: {
@@ -132,6 +148,7 @@ Page({
           lyricsList.push(temp);
         }
         this.setData({
+          allLyricsList: lyricsList,
           lyricsList
         });
         wx.hideLoading();
@@ -242,7 +259,12 @@ Page({
                   wx.showModal({
                     title: '',
                     content: '保存成功',
-                  });                  
+                  });
+                  this.data.visible.searchLyric = false;
+                  this.data.visible.isMaskVisible = false;
+                  this.setData({
+                    visible: this.data.visible
+                  });         
                 }
               });
             }

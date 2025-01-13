@@ -10,8 +10,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/canto/lyric/index",
-          "pathName": "pages/canto/lyric/index",
+          "name": "pages/resume/index",
+          "pathName": "pages/resume/index",
           "query": "",
           "launchMode": "default",
           "scene": null

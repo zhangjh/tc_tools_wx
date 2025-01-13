@@ -15,7 +15,9 @@
     "pages/reader/result",
     "pages/canto/lyric/index",
     "pages/canto/practice/index",
-    "pages/canto/user/index"
+    "pages/canto/user/index",
+    "pages/resume/index",
+    "pages/resume/detail"
   ],
   "window": {
     "navigationBarTextStyle": "black",

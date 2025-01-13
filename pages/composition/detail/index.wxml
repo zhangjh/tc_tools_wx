@@ -35,7 +35,7 @@
             <wux-cell
               style="background-color: aliceblue;"
               wux-class="cell"
-              thumb="{{item.score < 6 ? '/resources/red_dot.png' : '/resources/dot.png' }}"
+              thumb="{{item.score < 8 ? '/resources/red_dot.png' : '/resources/dot.png' }}"
               title="{{item.key}}"
               hasLine="false"
               is-link

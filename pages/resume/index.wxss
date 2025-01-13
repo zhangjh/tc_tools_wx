@@ -1,0 +1,57 @@
+@import '/iconfont/iconfont_resume.wxss';
+
+.card-container {
+  /* border: 1px solid blue; */
+  padding: 20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-container {
+  /* border: 1px solid red; */
+  display: flex;
+  margin: 10px;
+}
+
+.item-icon {
+  margin: 10rpx;
+  padding: 10rpx;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 80rpx;
+}
+
+.item-content {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item-content .title {
+  color: black;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.check {
+  color: #34c759;
+}
+.optimise {
+  color: orange;
+}
+.preview {
+  color: blue;
+}
+.download {
+  color: #e75935;
+}
+
+.tip {
+  margin: 10rpx;
+}

@@ -1,0 +1,14 @@
+<!--pages/resume/detail.wxml-->
+<view class="container">
+  <view class="score">
+    
+  </view>
+  <view class="audit"></view>
+  <view class="advice"></view>
+  <view class="guidance">
+  </view>
+  <view class="md-preview"></view>
+  <view class="upload-btn large">
+      <span bind:tap="onUpload">下载修改简历</span>
+    </view>
+</view>

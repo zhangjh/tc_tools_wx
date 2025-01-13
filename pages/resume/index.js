@@ -32,7 +32,6 @@ Page({
     wx.showLoading({
       title: '正在分析简历...',
     });
-    const fs = wx.getFileSystemManager();
     // 上传r2
     common.uploadFile({
       filePath,
@@ -47,7 +46,9 @@ Page({
             method: 'POST',
             data: {
               file: resJO.data,
-              mimeType: 'application/pdf'
+              mimeType: 'application/pdf',
+              // fileName使用ossKey
+              fileName: resJO.data
             },
             cb: res => {
               console.log(res);

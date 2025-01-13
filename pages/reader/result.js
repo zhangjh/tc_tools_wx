@@ -38,9 +38,13 @@ Page({
   },
 
   searchBooks() {
+    wx.showLoading({
+      title: '搜索中，请稍等...',
+    });
     common.wxRequest({
       url: `/books/search?page=${this.data.page}&limit=${this.data.limit}&keyword=` + encodeURIComponent(this.data.searchQuery),
       cb: res => {
+        wx.hideLoading();
         if(!res || !res.length) {
           this.setData({
             hasMore: false
@@ -57,6 +61,7 @@ Page({
       },
       failCb: err => {
         console.log(err);
+        wx.hideLoading();
       }
     });
   },

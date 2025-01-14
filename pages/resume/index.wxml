@@ -1,48 +1,94 @@
 <view class="container">
-  <view class="description">
-    <view class="card-container">
-      <view class="item-container">
-        <view class="item-icon check">
-          <i class="iconfont icon-fenxikapian"></i>
+  <view class="" style="display: {{ indexShow ? 'block' : 'none' }}">
+    <view class="description">
+      <view class="card-container">
+        <view class="item-container">
+          <view class="item-icon check">
+            <i class="iconfont icon-fenxikapian"></i>
+          </view>
+          <view class="item-content">
+            <view class="title">智能分析</view>
+            <view class="desc">深度分析简历内容，提供专业评分和建议</view>
+          </view>
         </view>
-        <view class="item-content">
-          <view class="title">智能分析</view>
-          <view class="desc">深度分析简历内容，提供专业评分和建议</view>
+        <view class="item-container">
+          <view class="item-icon optimise">
+            <i class="iconfont icon-a-AutoFlash"></i>
+          </view>
+          <view class="item-content">
+            <view class="title">快速优化</view>
+            <view class="desc">自动生成优化建议，帮助您提升简历质量</view>
+          </view>
         </view>
+        <view class="item-container">
+          <view class="item-icon preview">
+            <i class="iconfont icon-yulann"></i>
+          </view>
+          <view class="item-content">
+            <view class="title">内容预览</view>
+            <view class="desc">实时预览优化后的简历内容，确保效果</view>
+          </view>
+        </view>
+        <view class="item-container">
+          <view class="item-icon download">
+            <i class="iconfont icon-xiazai"></i>
+          </view>
+          <view class="item-content">
+            <view class="title">一键下载</view>
+            <view class="desc">轻松下载优化后的简历，随时使用</view>
+          </view>
+        </view>
+      </view>   
+    </view>
+    <view class="resume-upload">
+      <view class="tip">
+        <view>简历通常使用pdf格式，兼容性更好</view>
+        <view>我们不会记录任何你的简历，请放心使用</view>
       </view>
-      <view class="item-container">
-        <view class="item-icon optimise">
-          <i class="iconfont icon-a-AutoFlash"></i>
-        </view>
-        <view class="item-content">
-          <view class="title">快速优化</view>
-          <view class="desc">自动生成优化建议，帮助您提升简历质量</view>
-        </view>
+      <view class="upload-btn large">
+        <span bind:tap="onUpload">选择简历</span>
       </view>
-      <view class="item-container">
-        <view class="item-icon preview">
-          <i class="iconfont icon-yulann"></i>
-        </view>
-        <view class="item-content">
-          <view class="title">内容预览</view>
-          <view class="desc">实时预览优化后的简历内容，确保效果</view>
-        </view>
-      </view>
-      <view class="item-container">
-        <view class="item-icon download">
-          <i class="iconfont icon-xiazai"></i>
-        </view>
-        <view class="item-content">
-          <view class="title">一键下载</view>
-          <view class="desc">轻松下载优化后的简历，随时使用</view>
-        </view>
-      </view>
-    </view>   
+    </view>
   </view>
-  <view class="center-container">
-    <view class="tip">简历通常使用pdf格式，兼容性更好</view>
-    <view class="upload-btn large">
-      <span bind:tap="onUpload">选择简历</span>
+
+  <view class="content" style="display: {{ indexShow ? 'none' : 'block' }};">
+    <view>
+      <wux-card title="简历评分" full="true" thumb="/resources/resume/score.png">
+        <view slot="body"  class="audit-summary">
+          <view class="score">
+            <wux-circle percent="{{resumeDetail.score}}" 
+              color="{{resumeDetail.circleColor}}">{{resumeDetail.score}}
+            </wux-circle>
+          </view>
+          <view class="audit">
+            <towxml nodes="{{resumeDetail.auditMd}}" wx:if="{{resumeDetail.auditMd}}" />  
+          </view>
+        </view>
+      </wux-card>
+    </view>
+    <view class="advice">
+      <wux-card title="修改意见" full="true" thumb="/resources/resume/advice.png">
+        <view slot="body">
+          <towxml nodes="{{resumeDetail.adviceMd}}" wx:if="{{resumeDetail.adviceMd}}" />
+        </view>
+      </wux-card>
+    </view>
+    <view class="guidance">
+      <wux-card title="简历编写指导" full="true" thumb="/resources/resume/guidance.png">
+        <view slot="body">
+          <towxml nodes="{{resumeDetail.guidanceMd}}" wx:if="{{resumeDetail.guidanceMd}}" />
+        </view>
+      </wux-card>
+    </view>
+    <view class="md-preview">
+      <wux-card title="预览修改版本" full="true" thumb="/resources/resume/preview.png"
+        actions="{{resumeDetail.actions}}"
+        bind:action="onDownload"
+      >
+        <view slot="body">
+          <towxml nodes="{{resumeDetail.updatedMd}}" wx:if="{{resumeDetail.updatedMd}}" />
+        </view>
+      </wux-card>
     </view>
   </view>
 </view>

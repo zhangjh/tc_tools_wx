@@ -190,5 +190,47 @@ module.exports = {
         });
       }
     })
+  },
+  downloadFile: (req) => {
+    const downloadFileUrl = req.url;
+    const downloadFileName = req.fileName;
+    const extension = req.extension;
+    wx.showToast({
+      title: '请在下载完成后的预览页面点击右上角自行保存',
+    });
+    wx.downloadFile({
+      url: downloadFileUrl,
+      success: ret => {
+        const fileManager = wx.getFileSystemManager();
+        fileManager.saveFile({
+          tempFilePath: ret.tempFilePath,
+          filePath: wx.env.USER_DATA_PATH + "/" + downloadFileName + "." + extension,
+          success: saveRes => {
+            wx.showToast({
+              title: '下载成功',
+            });
+            wx.openDocument({
+              filePath: saveRes.savedFilePath,
+              showMenu: true,
+              fileType: extension
+            });
+          },
+          fail: saveErr => {
+            console.error(saveErr);
+            wx.showToast({
+              title: '文件存储失败',
+              icon: 'error'
+            });
+          }
+        });
+      },
+      fail: err => {
+        console.log(err);
+        wx.showToast({
+          title: '文件下载失败',
+          icon: 'error'
+        });
+      }
+    });
   }
 };

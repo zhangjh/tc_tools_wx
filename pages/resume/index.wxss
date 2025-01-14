@@ -53,5 +53,53 @@
 }
 
 .tip {
-  margin: 10rpx;
+  margin: 20rpx;
+  text-align: center;
+}
+
+.resume-upload {
+  /* border: 1px solid blue; */
+  height: 400rpx;
+  margin: 20rpx 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  /* border: 1px solid red; */
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+/* 简历内容页样式 */
+.content {
+  /* border: 1px solid blue; */
+}
+
+.audit-summary {
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200rpx;
+  width: 200rpx;
+  border-radius: 100rpx;
+  background-color: whitesmoke;
+  color: red;
+  font-size: 3rem;
+}
+
+.audit {
+  /* border: 1px solid green; */
+  color: gray;
 }

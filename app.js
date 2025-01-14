@@ -42,6 +42,20 @@ App({
         "path": "/pages/recog/index"
       },
       {
+        "name": "智阅找书",
+        "type": "tools",
+        "desc": "书籍是人类进步的阶梯，电子书搜索下载",
+        "logo": "https://r2.zhangjh.cn/logo/reader.ico",
+        "path": "/pages/reader/index"
+      }, 
+      {
+        "name": "粤歌速成",
+        "type": "tools",
+        "desc": "粤语歌曲速成辅助练习工具，AI发音、跟读、智能评判",
+        "logo": "https://r2.zhangjh.cn/logo/canto.png",
+        "path": "/pages/canto/lyric/index"
+      },
+      {
         "name": "太初OCR",
         "type": "tools",
         "desc": "快速OCR识别，从图片中提取文本，支持一键复制",
@@ -56,26 +70,12 @@ App({
         "path": "/pages/voice/index"
       },
       {
-        "name": "赛博华佗",
+        "name": "简历优化大师",
         "type": "tools",
-        "desc": "智能AI诊断，快速识别各种健康问题，你的私人医疗顾问",
-        "logo": "/resources/aiDoctor.png",
-        "path": "/pages/doctor/index"
+        "desc": "智能分析、优化您的简历，助您掌握求职主动，不在简历上矮人一截",
+        "logo": "/resources/resume.png",
+        "path": "/pages/resume/index"
       },
-      {
-        "name": "赛博律师",
-        "type": "tools",
-        "desc": "你的私人AI法律顾问，快速解答你的法律问题",
-        "logo": "/resources/aiLaw.png",
-        "path": "/pages/lawer/index"
-      },
-      // {
-      //   "name": "智阅找书",
-      //   "type": "tools",
-      //   "desc": "书籍是人类进步的阶梯，电子书搜索下载",
-      //   "logo": "/resources/reader.ico",
-      //   "path": "/pages/reader/index"
-      // },
     ]
   },
 })

@@ -81,44 +81,11 @@ Page({
         hashId: hash
       },
       cb: res => {
-        wx.downloadFile({
+        common.downloadFile({
           url: res,
-          success: ret => {
-            const fileManager = wx.getFileSystemManager();
-            fileManager.saveFile({
-              tempFilePath: ret.tempFilePath,
-              filePath: wx.env.USER_DATA_PATH + "/" + name + "." + extension,
-              success: saveRes => {
-                wx.hideLoading();
-                console.log(saveRes.savedFilePath);
-                wx.showToast({
-                  title: '下载成功',
-                });
-                wx.openDocument({
-                  filePath: saveRes.savedFilePath,
-                  showMenu: true,
-                  fileType: extension
-                });
-              },
-              fail: saveErr => {
-                wx.hideLoading();
-                console.error(saveErr);
-                wx.hideLoading();
-                wx.showToast({
-                  title: '文件存储失败',
-                  icon: 'error'
-                });
-              }
-            });
-          },
-          fail: err => {
-            console.log(err);
-            wx.showToast({
-              title: '文件下载失败',
-              icon: 'error'
-            });
-          }
-        })       
+          fileName: name,
+          extension
+        });   
       },
       failCb: err => {
         wx.hideLoading();

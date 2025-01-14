@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "wux-card": "/miniprogram_npm/wux-weapp/card/index",
-    "wux-icon": "/miniprogram_npm/wux-weapp/icon/index"
+    "wux-icon": "/miniprogram_npm/wux-weapp/icon/index",
+    "towxml": "/towxml/towxml",
+    "wux-circle": "/miniprogram_npm/wux-weapp/circle/index"
   }
 }

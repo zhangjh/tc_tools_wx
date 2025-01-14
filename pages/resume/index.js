@@ -1,8 +1,23 @@
 const common = require("../common/index");
+const app = getApp();
 
 Page({
   data: {
-
+    indexShow: true,
+    resumeDetail: {
+      score: 0,
+      // 少于80红色，否则绿色
+      circleColor: '',
+      guidanceMd: '',
+      auditMd: '',
+      adviceMd: '',
+      updated: '',
+      updatedMd: '',
+      actions: [ {
+        type: 'primary',
+        text: '下载',
+      }]
+    }
   },
 
   onLoad(options) {
@@ -13,12 +28,17 @@ Page({
     wx.chooseMessageFile({
       count: 1,
       type: 'file',
-      extension: ['pdf'],
+      extension: ['pdf','docx'],
       success: (res) => {
         const tempFilePath = res.tempFiles[0].path;
+        const fileName = res.tempFiles[0].name;
+        this.setData({
+          uploadFileName: fileName
+        });
         this.analyzeResume(tempFilePath);
       },
       fail: (err) => {
+        console.log(err);
         wx.showToast({
           title: '选择文件失败',
           icon: 'none'
@@ -30,19 +50,23 @@ Page({
   analyzeResume(filePath) {
     console.log(filePath);
     wx.showLoading({
-      title: '正在分析简历...',
+      title: '正在上传简历...',
     });
     // 上传r2
     common.uploadFile({
       filePath,
-      url: 'http://localhost:3001/storage/putObject',
+      url: '/storage/putObject',
       formData: { bucket: 'resume' },
       cb: res => {
         console.log(res);
+        wx.hideLoading();
         const resJO = JSON.parse(res.data);
         if(resJO.success) {
+          wx.showLoading({
+            title: '正在分析简历, 可能需要1分钟...',
+          })
           common.wxRequest({
-            url: 'http://localhost:3001/wxChat/resume',
+            url: '/wxChat/resume',
             method: 'POST',
             data: {
               file: resJO.data,
@@ -53,8 +77,40 @@ Page({
             cb: res => {
               console.log(res);
               wx.hideLoading();
-              wx.redirectTo({
-                url: '/pages/resume/detail?data=' + JSON.stringify(res),
+              // 展示简历内页，隐藏入口页
+              let circleColor = '#ef473a';
+              if(parseInt(res.score) >= 80) {
+                circleColor = '#33cd5f'
+              }
+              let adviceMd = '';
+              if(res.advice) {
+                adviceMd = app.towxml(res.advice, "markdown");
+              }
+              let auditMd = '';
+              if(res.audit) {
+                auditMd = app.towxml(res.audit, "markdown");
+              }
+              let guidanceMd = '';
+              if(res.guidance) {
+                guidanceMd = app.towxml(res.guidance, "markdown");
+              }
+              let updatedMd = '';
+              if(res.updated) {
+                updatedMd = app.towxml(res.updated, "markdown");
+              }
+              let actions = this.data.resumeDetail.actions;
+              this.setData({
+                indexShow: false,
+                resumeDetail: {
+                  score: res.score,
+                  circleColor,
+                  guidanceMd,
+                  auditMd,
+                  adviceMd,
+                  updated: res.updated,
+                  updatedMd,
+                  actions
+                }
               });
             },
             failCb: err => {
@@ -62,6 +118,7 @@ Page({
             }
           });
         } else {
+          wx.hideLoading();
           wx.showToast({
             title: resJO.errorMsg,
             icon: 'error'
@@ -70,7 +127,40 @@ Page({
       },
       failCb: err => {
         console.log(err);
+        wx.hideLoading();
       }
     });
-  }
+  },
+  // 下载依赖服务器
+  onDownload(e) {
+    console.log(e);
+    wx.showLoading({
+      title: '下载中,请稍等...',
+    });
+    if(this.data.resumeDetail.updated) {
+      common.wxRequest({
+        url: 'https://tx.zhangjh.cn/wxChat/md2pdf',
+        method: 'POST',
+        data: {
+          md: this.data.resumeDetail.updated,
+          fileName: this.data.uploadFileName
+        },
+        cb: res => {
+          wx.hideLoading();
+          console.log(res);
+          if(res) {
+            common.downloadFile({
+              url: res,
+              fileName: this.data.uploadFileName,
+              extension: "pdf"
+            });
+          }
+        },
+        failCb: err => {
+          console.log(err);
+          wx.hideLoading();
+        }
+      });
+    }  
+  },
 });

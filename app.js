@@ -56,6 +56,20 @@ App({
         "path": "/pages/canto/lyric/index"
       },
       {
+        "name": "简历优化大师",
+        "type": "tools",
+        "desc": "智能分析、优化您的简历，助您掌握求职主动，不在简历上矮人一截",
+        "logo": "/resources/resume.png",
+        "path": "/pages/resume/index"
+      },
+      {
+        "name": "文案精灵",
+        "type": "tools",
+        "desc": "高质量小红书文案生成器，一键生成引入注目扣题文案，收获更多流量和关注",
+        "logo": "/resources/copywriting.png",
+        "path": "/pages/copywriting/index"
+      },
+      {
         "name": "太初OCR",
         "type": "tools",
         "desc": "快速OCR识别，从图片中提取文本，支持一键复制",
@@ -68,13 +82,6 @@ App({
         "desc": "多种不同类型白噪声，助您缓解压力、快速入眠",
         "logo": "/resources/voice.png",
         "path": "/pages/voice/index"
-      },
-      {
-        "name": "简历优化大师",
-        "type": "tools",
-        "desc": "智能分析、优化您的简历，助您掌握求职主动，不在简历上矮人一截",
-        "logo": "/resources/resume.png",
-        "path": "/pages/resume/index"
       },
     ]
   },

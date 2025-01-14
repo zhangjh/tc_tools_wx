@@ -74,11 +74,6 @@
   overflow-y: auto;
 }
 
-/* 简历内容页样式 */
-.content {
-  /* border: 1px solid blue; */
-}
-
 .audit-summary {
   /* border: 1px solid blue; */
   display: flex;

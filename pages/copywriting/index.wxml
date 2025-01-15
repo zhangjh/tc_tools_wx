@@ -1,2 +1,73 @@
 <!--pages/copywriting/index.wxml-->
-<text>pages/copywriting/index.wxml</text>
+<view class="container">
+  <view class="content" wx:if="{{!resultShow}}">
+    <view class="card-container">
+      <view class="item-container">
+        <wux-card title="上传素材" full="true" thumb="/resources/copywriter/material.png">
+          <view slot="body" class="upload-container" bind:tap="onUpload">
+            <image src="{{previewImg}}" mode="aspectFit" 
+                class="preview" 
+                wx:if="{{previewImg}}" />
+            <view class="upload" wx:if="{{!previewImg}}">
+              <wux-icon type="md-add" size="64"></wux-icon>
+            </view>
+          </view>
+        </wux-card>
+      </view>
+      <view class="item-container">
+        <view class="topic">
+          <wux-card title="文案主题" full="true" thumb="/resources/copywriter/text.png">
+            <view slot="body" class="topic-container">
+              <input 
+                placeholder="输入文案相关主题，最多40字，不填也行..."
+                maxlength="40"
+                bindinput="onTopicChange"
+              />
+            </view>
+          </wux-card>
+        </view>
+        <view class="keyword">
+          <wux-card title="关键词" full="true" thumb="/resources/copywriter/keyword.png">
+            <view slot="body" class="keyword-container">
+              <input 
+                placeholder="输入文案关键词，多个以逗号分隔，不填也行..."
+                bindinput="onKeywordChange"
+              />
+            </view>
+          </wux-card>
+        </view>
+      </view>
+    </view>
+    <view class="btn-group">
+      <view>上传素材，输入主题和关键词</view>
+      <view>让AI为您创作完美文案</view>
+      <view class="upload-btn large">
+        <span bind:tap="onGenerate">开始生成</span>
+      </view>
+    </view>
+  </view>
+
+  <view class="container" wx:if="{{resultShow}}">
+    <wux-card title="候选文案列表" full="true" 
+      thumb="/resources/copywriter/text.png" 
+    >
+      <view slot="body" class="content-list">
+        <block wx:for="{{resultContent.contents}}" wx:key="index">
+          <view class="content-item">
+            <text>{{item}}</text>
+            <view class="item-btn">
+              <button type="primary" bind:tap="onCopy" data-text="{{item}}">选择复制</button>
+            </view>
+          </view>
+        </block>
+      </view>
+    </wux-card>
+    <wux-card title="文案编写建议" full="true"
+      thumb="/resources/resume/advice.png"
+    >
+      <view slot="body" class="advice">
+        <towxml nodes="{{resultContent.adviceMd}}" wx:if="{{resultContent.adviceMd}}" />
+      </view>
+    </wux-card>
+  </view>
+</view>

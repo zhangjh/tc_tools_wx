@@ -1,1 +1,90 @@
-/* pages/copywriting/index.wxss */
+.container {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.content {
+  /* border: 1px solid red; */
+  width: 100%;
+}
+
+.card-container {
+  /* border: 1px solid blue; */
+  padding: 20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-container {
+  /* border: 1px solid red; */
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+}
+
+.preview {
+  height: 400rpx;
+}
+
+.upload-container {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350rpx;
+}
+
+.upload {
+  border: 1px dashed;
+  width: 350rpx;
+  height: 350rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topic-container, .keyword-container {
+  /* border: 1px solid red; */
+  /* display: flex; */
+}
+
+.topic-container input, 
+.keyword-container input {
+  width: 100%;
+  text-align: center;
+}
+
+.btn-group {
+  /* border: 1px solid red; */
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-list {
+  /* border: 1px solid red; */
+  padding: 5rpx;
+}
+
+.content-item {
+  /* border: 1px solid blue; */
+  margin: 10rpx;
+}
+
+.content-item button {
+  width: 60%;
+}
+
+.item-btn {
+  margin: 10rpx;
+}
+
+towxml view {
+  font-size: 1rem !important;
+}

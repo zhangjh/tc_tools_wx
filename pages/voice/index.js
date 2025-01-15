@@ -132,11 +132,18 @@ Page({
     }
   },
 
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage() {
-
+    return {
+      title: "发现一个免费好用的助眠白噪声小程序，推荐给你",
+      path: "/pages/voice/index"
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: "发现一个免费好用的助眠白噪声小程序，推荐给你",
+      query: "",
+      imageUrl: "/resources/voice.png"
+    };
   },
   onClickAudio(e) {
     const sound = e.target.dataset.sound;

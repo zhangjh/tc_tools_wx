@@ -16,11 +16,20 @@ Page({
     common.setTabBarTitle('太初OCR');
   },
 
+  onShareAppMessage() {
+    return {
+      title: "[太初OCR]分享一个好用的免费OCR小程序，推荐你也来用",
+      path: "/pages/ocr/index"
+    }
+  },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {
-
+  onShareTimeline() {
+    return {
+      title: "[太初OCR]分享一个好用的免费OCR小程序",
+      imageUrl: "/resources/ocr.png"
+    };
   },
 
   startScan() {

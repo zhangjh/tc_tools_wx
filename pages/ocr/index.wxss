@@ -26,19 +26,6 @@
   padding: 5px;
 }
 
-.wux-card {
-  /* background-color: #eff6ff;
-  border: 1px solid red;
-  width: 150px;
-  height: 100%;
-  margin: 10px; */
-}
-
-.card-body {
-  /* height: 100%;
-  border: 1px solid black; */
-}
-
 .tip-title {
   display: flex;
   flex-direction: row;

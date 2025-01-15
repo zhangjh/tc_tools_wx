@@ -48,6 +48,12 @@ Page({
       path: '/pages/lawer/index?content=' + JSON.stringify(content)
     }
   },
+  onShareTimeline() {
+    return {
+      title: "[赛博律师]分享一个好用的AI法律顾问小程序",
+      imageUrl: "/resources/aiLaw.png"
+    };
+  },
 
   onInput(e) {
     chat.onInput(e);

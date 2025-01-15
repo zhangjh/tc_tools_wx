@@ -23,6 +23,19 @@ Page({
   onLoad(options) {
     common.setTabBarTitle('简历优化大师');
   },
+  onShareAppMessage() {
+    return {
+      title: "[简历优化大师]发现一个简历优化神器，推荐你也来用",
+      path: "/pages/resume/index"
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: "发现一个简历分析优化神器，快来试一试",
+      query: "",
+      imageUrl: "/resources/resume.png"
+    };
+  },
 
   onUpload() {
     wx.chooseMessageFile({

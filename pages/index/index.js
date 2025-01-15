@@ -13,15 +13,15 @@ Page({
     this.setData({
       items: app.globalData.items
     });
-    common.getItems(res => {
-      console.log(res);
-      // 有更新覆盖
-      if(res.length !== this.data.items.length) {
-        this.setData({
-          items: res
-        });
-      }
-    });
+    // common.getItems(res => {
+    //   console.log(res);
+    //   // 有更新覆盖
+    //   if(res.length !== this.data.items.length) {
+    //     this.setData({
+    //       items: res
+    //     });
+    //   }
+    // });
   },
   /**
    * 生命周期函数--监听页面加载
@@ -29,48 +29,6 @@ Page({
   onLoad(options) {
     // 获取当前已经有的工具列表
     this.getItems();
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
   },
 
   onShareTimeline() {

@@ -29,7 +29,17 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    return {
+      title: "[太初识物]发现一个好用的动植物识别小程序，快来试一试",
+      path: "/pages/recog/index"
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: "[太初识物]发现一个好用的动植物识别小程序，快来试一试",
+      query: "",
+      imageUrl: "/resources/recog.png"
+    };
   },
   onTabChange(e) {
     // tab切换需要重置回初始状态

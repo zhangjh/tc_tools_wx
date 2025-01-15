@@ -48,6 +48,12 @@ Page({
       path: '/pages/doctor/index?content=' + JSON.stringify(content)
     }
   },
+  onShareTimeline() {
+    return {
+      title: "[赛博华佗]分享一个好用的AI医疗顾问小程序",
+      imageUrl: "/resources/aiDoctor.png"
+    };
+  },
 
   onInput(e) {
     chat.onInput(e);

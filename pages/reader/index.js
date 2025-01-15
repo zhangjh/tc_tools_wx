@@ -5,9 +5,16 @@ Page({
 
   onShareAppMessage() {
     return {
-      title: "[太初工具集]发现一个电子书查找小程序，你也来试试",
+      title: "[智阅找书]推荐一个电子书查找小程序，快来试试你要找的书",
       path: "/pages/reader/index"
     }
+  },
+  onShareTimeline() {
+    return {
+      title: "[智阅找书]推荐一个电子书查找小程序，快来试试你要找的书",
+      query: "",
+      imageUrl: "/resources/reader.ico"
+    };
   },
 
   onInput(e) {

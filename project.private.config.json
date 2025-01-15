@@ -10,8 +10,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/resume/index",
-          "pathName": "pages/resume/index",
+          "name": "pages/copywriting/index",
+          "pathName": "pages/copywriting/index",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -24,8 +24,8 @@
           "scene": null
         },
         {
-          "name": "pages/reader/index",
-          "pathName": "pages/reader/index",
+          "name": "pages/resume/index",
+          "pathName": "pages/resume/index",
           "query": "",
           "launchMode": "default",
           "scene": null

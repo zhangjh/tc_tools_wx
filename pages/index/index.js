@@ -13,15 +13,15 @@ Page({
     this.setData({
       items: app.globalData.items
     });
-    // common.getItems(res => {
-    //   console.log(res);
-    //   // 有更新覆盖
-    //   if(res.length !== this.data.items.length) {
-    //     this.setData({
-    //       items: res
-    //     });
-    //   }
-    // });
+    common.getItems(res => {
+      console.log(res);
+      // 有更新覆盖
+      if(res.length !== this.data.items.length) {
+        this.setData({
+          items: res
+        });
+      }
+    });
   },
   /**
    * 生命周期函数--监听页面加载

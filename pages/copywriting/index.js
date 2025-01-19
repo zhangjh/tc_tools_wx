@@ -137,12 +137,10 @@ Page({
           icon: 'error'
         });
       }
-      if(uploading) {
-        return wx.showToast({
-          title: '素材还在上传中',
-          icon: 'loading'
-        });
-      }
+      return wx.showToast({
+        title: '素材还在上传中',
+        icon: 'loading'
+      });
     }
     wx.showLoading({
       title: '生成中，请稍等...',

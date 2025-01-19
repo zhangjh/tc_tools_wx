@@ -8,6 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    visible: false,
+    options: ['小红书','抖音','朋友圈','微博'],
+    selectedPlatform: '小红书',
     material: {
       image: '',
       topic: '',
@@ -91,6 +94,22 @@ Page({
       }
     });
   },
+  onShowSelect() {
+    this.setData({
+      visible: true
+    });
+  },
+  onPlatformChange(e) {
+    this.setData({
+      selectedPlatform: e.detail.value,
+      visible: false
+    });
+  },
+  onPlatformCancel(e) {
+    this.setData({
+      visible: false
+    });
+  },
   onTopicChange(e) {
     console.log(e.detail.value);
     let material = this.data.material;
@@ -136,6 +155,7 @@ Page({
         file: this.data.material.image,
         keyword: this.data.material.keywords,
         topic: this.data.material.topic,
+        platform: this.data.selectedPlatform,
         bucket: 'zhangjh'
       },
       cb: res => {

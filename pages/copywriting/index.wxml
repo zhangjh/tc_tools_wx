@@ -15,6 +15,30 @@
         </wux-card>
       </view>
       <view class="item-container">
+        <wux-popup-select
+          visible="{{ visible }}"
+          controlled
+          value="{{ selectedPlatform }}"
+          options="{{ options }}"
+          data-index="1"
+          bind:confirm="onPlatformChange"
+          bind:cancel="onPlatformCancel"
+        />
+        <view class="platform-container">
+          <wux-card 
+            title="选择平台" 
+            full="true" 
+            thumb="/resources/copywriter/platform.png"
+            bind:tap="onShowSelect"
+            extra="切换其他平台"
+          >
+            <view slot="body" class="platform-content">
+              {{selectedPlatform}}
+            </view>
+          </wux-card>
+        </view>
+      </view>
+      <view class="item-container">
         <view class="topic">
           <wux-card title="文案主题" full="true" thumb="/resources/copywriter/text.png">
             <view slot="body" class="topic-container">
@@ -47,7 +71,7 @@
     </view>
   </view>
 
-  <view class="container" wx:if="{{resultShow}}">
+  <view class="content" wx:if="{{resultShow}}">
     <wux-card title="候选文案列表" full="true" 
       thumb="/resources/copywriter/text.png" 
     >
@@ -56,7 +80,7 @@
           <view class="content-item">
             <text>{{item}}</text>
             <view class="item-btn">
-              <button type="primary" bind:tap="onCopy" data-text="{{item}}">选择复制</button>
+              <button class="small" type="primary" bind:tap="onCopy" data-text="{{item}}">选择复制</button>
             </view>
           </view>
         </block>

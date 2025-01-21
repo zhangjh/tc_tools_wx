@@ -17,6 +17,7 @@ Page({
    */
   onLoad(options) {
     // console.log(options);
+    common.setTabBarTitle('科技狠活鉴定器');
     const img = options.img;
     if(img) {
       // 识别场景

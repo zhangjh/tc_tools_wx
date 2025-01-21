@@ -3,10 +3,16 @@ const common = require("../../common/index");
 
 Page({
   data: {
-    img: common.config.unsplashDomain + Math.ceil(Math.random() * 3) + ".jpg",
+    img: common.config.unsplashDomain + Math.ceil(Math.random() * 30) + ".jpg",
+    imgLoaded: false
   },
   onLoad(options) {
     common.setTabBarTitle('科技狠活鉴定器');
+  },
+  onImgLoad() {
+    this.setData({
+      imgLoaded: true
+    });
   },
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗

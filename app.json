@@ -17,7 +17,8 @@
     "pages/canto/practice/index",
     "pages/canto/user/index",
     "pages/resume/index",
-    "pages/copywriting/index"
+    "pages/copywriting/index",
+    "pages/oral/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

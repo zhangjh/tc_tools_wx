@@ -97,6 +97,13 @@ App({
         "logo": "/resources/voice.png",
         "path": "/pages/voice/index"
       },
+      {
+        "name": "英语开口说",
+        "type": "tools",
+        "desc": "与AI陪练交流，大胆发声，告别窘迫，告别哑巴英语",
+        "logo": "/resources/oral_logo.png",
+        "path": "/pages/oral/index"
+      },
     ]
   },
 })

@@ -11,6 +11,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/oral/index",
+          "pathName": "pages/oral/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/copywriting/index",
           "pathName": "pages/copywriting/index",
           "query": "",
@@ -65,12 +72,6 @@
         {
           "name": "pages/recog/index",
           "pathName": "pages/recog/index",
-          "query": "",
-          "launchMode": "default"
-        },
-        {
-          "name": "pages/composition/scan/index",
-          "pathName": "pages/composition/scan/index",
           "query": "",
           "launchMode": "default"
         },

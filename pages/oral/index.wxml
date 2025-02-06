@@ -1,2 +1,69 @@
 <!--pages/oral/index.wxml-->
-<text>pages/oral/index.wxml</text>
+<view class="container">
+  <!-- Topic Selection Dialog -->
+  <view class="topic-dialog {{showTopicDialog ? 'show' : ''}}" wx:if="{{showTopicDialog}}">
+    <view class="topic-dialog-content">
+      <view class="topic-dialog-header">
+        <text class="topic-dialog-title">想聊点什么话题？</text>
+        <view class="topic-dialog-actions">
+          <view class="refresh-btn" bind:tap="refreshTopics">
+            <i class="iconfont icon-refresh"></i>
+          </view>
+          <view class="close-btn" bind:tap="closeTopicDialog">
+            <i class="iconfont icon-close"></i>
+          </view>
+        </view>
+      </view>
+      <scroll-view class="topics-list" scroll-y="true">
+        <view 
+          class="topic-item" 
+          wx:for="{{topics}}" 
+          wx:key="index"
+          data-index="{{index}}"
+        >
+          <text bind:tap="selectTopic" data-item="{{item}}">{{item}}</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- Header -->
+  <view class="header">
+    <view class="avatar">
+      <image src="/resources/teacher3.png" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <!-- Chat Content -->
+  <scroll-view class="chat-content" scroll-y="true">
+    <view class="message-bubble">
+      <block wx:for="{{ chatContent }}" wx:key="index">
+        <view class="teacher" wx:if="{{ item.teacher }}">
+          <text>{{ item.teacher }}</text>
+          <i class="iconfont icon-bofang" 
+            wx:if="{{ !playing }}"
+            bind:tap="playContent" 
+            data-content="{{item.teacher}}"></i>
+          <i class="iconfont icon-voiceprint" wx:if="{{ playing }}"></i>
+        </view>
+        <view class="me" wx:if="{{ item.me }}">
+          <text>{{ item.me }}</text>
+          <i class="iconfont icon-bofang" 
+            wx:if="{{ !playing }}"
+            bind:tap="playContent" 
+            data-content="{{item.me}}"></i>
+          <i class="iconfont icon-voiceprint" wx:if="{{ playing }}"></i>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <!-- Bottom Toolbar -->
+  <view class="bottom-toolbar">
+    <view class="input-controls">
+      <view class="mic-btn">
+        <i class="iconfont icon-luyin" bind:tap="onRecord"></i> 
+      </view>
+    </view>
+  </view>
+</view>

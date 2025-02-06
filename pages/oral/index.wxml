@@ -17,6 +17,7 @@
       <scroll-view class="topics-list" scroll-y="true">
         <view 
           class="topic-item" 
+          hover-class="topic-item-hover"
           wx:for="{{topics}}" 
           wx:key="index"
           data-index="{{index}}"
@@ -38,20 +39,21 @@
   <scroll-view class="chat-content" scroll-y="true">
     <view class="message-bubble">
       <block wx:for="{{ chatContent }}" wx:key="index">
-        <view class="teacher" wx:if="{{ item.teacher }}">
-          <text>{{ item.teacher }}</text>
+        <view class="model" wx:if="{{ item.role === 'model' }}">
+          <text user-select>{{ item.content }}</text>
           <i class="iconfont icon-bofang" 
             wx:if="{{ !playing }}"
             bind:tap="playContent" 
-            data-content="{{item.teacher}}"></i>
+            data-content="{{item.content}}"></i>
           <i class="iconfont icon-voiceprint" wx:if="{{ playing }}"></i>
         </view>
-        <view class="me" wx:if="{{ item.me }}">
-          <text>{{ item.me }}</text>
+        <view class="user" wx:if="{{ item.role === 'user' }}">
+          <!-- <text user-select wx:if="{{ !item.type }}">{{ item.content }}</text> -->
+          <audio src="{{item.content}}" wx:if="{{item.role === 'user'}}"></audio>
           <i class="iconfont icon-bofang" 
             wx:if="{{ !playing }}"
             bind:tap="playContent" 
-            data-content="{{item.me}}"></i>
+            data-content="{{item.content}}"></i>
           <i class="iconfont icon-voiceprint" wx:if="{{ playing }}"></i>
         </view>
       </block>
@@ -59,11 +61,27 @@
   </scroll-view>
 
   <!-- Bottom Toolbar -->
+  <view wx:if="{{ recording }}" class="voice-wave1">
+    <view class="wave-bar"></view>
+    <view class="wave-bar"></view>
+    <view class="wave-bar"></view>
+    <view class="wave-bar"></view>
+  </view>
   <view class="bottom-toolbar">
-    <view class="input-controls">
-      <view class="mic-btn">
-        <i class="iconfont icon-luyin" bind:tap="onRecord"></i> 
+    <view class="btn-group">
+      <view class="cancel-btn" wx:if="{{ recording }}">
+        <i class="iconfont icon-close" bind:tap="cancelRecord"></i>
       </view>
-    </view>
+      <view class="input-controls">
+        <view class="mic-btn">
+          <i class="iconfont icon-luyin" 
+            wx:if="{{ !recording }}"
+            bind:tap="onRecord"></i>
+          <i class="iconfont icon-send" 
+            wx:if="{{ recording }}"
+            bind:tap="send"></i>
+        </view>
+      </view>
+    </view> 
   </view>
 </view>

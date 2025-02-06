@@ -1,7 +1,6 @@
 {
   "usingComponents": {
     "wux-grids": "/miniprogram_npm/wux-weapp/grids/index",
-    "wux-grid": "/miniprogram_npm/wux-weapp/grid/index",
-    "wux-icon": "/miniprogram_npm/wux-weapp/icon/index"
+    "wux-grid": "/miniprogram_npm/wux-weapp/grid/index"
   }
 }

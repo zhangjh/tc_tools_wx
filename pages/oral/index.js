@@ -125,7 +125,10 @@ Page({
     } else {
       const target = `${wx.env.USER_DATA_PATH}/${Date.now()}.wav`;
       wx.request({
-        url: canto.cantoDomain + "/canto/voice/play?text=" + content + "&voiceRole=" + 0,
+        url: canto.cantoDomain + "/canto/voice/playByOral?text=" + content 
+          + "&voiceName=en-US-EvelynMultilingualNeural"
+          + "&lang=en-GB"
+          + "&rate=medium",
         responseType: 'arraybuffer',
         success: res => {
           if(res.statusCode === 200) {

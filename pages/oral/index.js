@@ -2,7 +2,6 @@
 const common = require("../common/index");
 const fs = wx.getFileSystemManager();
 const canto = require("../canto/canto");
-const chat = require("../common/chat");
 const wxAudio = wx.createInnerAudioContext({});
 
 Page({
@@ -14,9 +13,8 @@ Page({
     showTopicDialog: false,
     topics: [
     ],
-    playing: false,
     /**
-     * [{ role: 'model', content: '', type: 'base64' }]
+     * [{ role: 'model', content: '', type: 'base64', playing: false }]
      */
     chatContent: null,
     playContent: null,
@@ -93,8 +91,7 @@ Page({
     });
   },
   conversation(data) {
-    let content = '';
-    const requestTask = common.wxRequest({
+    common.wxRequest({
       url: '/wxChat/oral',
       method: 'POST',
       data: {
@@ -104,43 +101,55 @@ Page({
         talkMode: data.talkMode,
         context: data.context
       },
-      enableChunked: true,
       cb: res => {
-        console.log("task end");
+        console.log(res);
+        const jo = JSON.parse(res);
+
+        this.buildChatContent('model', jo.conversation);
         // play audio
         this.setData({
-          ttsAudio: null
+          ttsAudio: null,
+          playContent: jo.conversation,
+          chatContent: this.data.chatContent
         });
         this.playContent(this.data.playContent);
-        this.buildChatContent('model', this.data.playContent);
         this.buildContext('model', this.data.playContent);
       }
     });
-    requestTask.onChunkReceived((response) => {
-      try {
-        const chunk = decodeURIComponent(escape(String.fromCharCode.apply(null, new Uint8Array(response.data))));
-        // 动态设值
-        console.log("chunk");
-        content += chunk;
-        this.buildChatContent('model', content);
-        this.setData({
-          chatContent: this.data.chatContent,
-          playContent: content
-        });
-      } catch (e) {
-        console.error('Process chunk failed:', e);
-      }
-    });
+    // requestTask.onChunkReceived((response) => {
+    //   try {
+    //     const chunk = decodeURIComponent(escape(String.fromCharCode.apply(null, new Uint8Array(response.data))));
+    //     // 动态设值
+    //     console.log("chunk");
+    //     content += chunk;
+    //     this.buildChatContent('model', content);
+    //     this.setData({
+    //       chatContent: this.data.chatContent,
+    //       playContent: content
+    //     });
+    //   } catch (e) {
+    //     console.error('Process chunk failed:', e);
+    //   }
+    // });
   },
-  playAudio(target) {
+  setPlayStatus(playContent, status) {
+    let chatContent = this.data.chatContent;
+    for (let chatItem of chatContent) {
+      if(chatItem.content === playContent) {
+        chatItem.playing = status;
+        this.setData({
+          chatContent: this.data.chatContent
+        });
+      }
+    }
+  },
+  playAudio(target, playContent) {
     wxAudio.src = target;
     wxAudio.play();
     // 添加音频播放结束的监听器
     wxAudio.onEnded(() => {
-      // this.hideVoicePrint();
-      this.setData({
-        playing: false
-      });
+      // 关闭播放状态
+      this.setPlayStatus(playContent, false);
     });
   },
   playContent(e) {
@@ -150,36 +159,26 @@ Page({
       content = e.target.dataset.content;
     }
     console.log(content);
-    this.setData({
-      playing: true
-    });
+    // 开启播放状态
+    this.setPlayStatus(content, true);
     if(this.data.playContent === content && this.data.ttsAudio) {
-      this.playAudio(this.data.ttsAudio);
+      this.playAudio(this.data.ttsAudio, content);
     } else {
-      const target = `${wx.env.USER_DATA_PATH}/${Date.now()}.wav`;
-      wx.request({
+      wx.downloadFile({
         url: canto.cantoDomain + "/canto/voice/playByOral?text=" + content 
-          + "&voiceName=en-US-EvelynMultilingualNeural"
-          + "&lang=en-US"
-          + "&rate=medium",
-        responseType: 'arraybuffer',
+        + "&voiceName=en-US-EvelynMultilingualNeural"
+        + "&lang=en-US"
+        + "&rate=medium",
         success: res => {
           if(res.statusCode === 200) {
-            fs.writeFile({
-              filePath: target,
-              data: res.data,
-              encoding: 'binary',
-              success: res => {
-                this.setData({
-                  playContent: content
-                });
-                this.playAudio(target);
-              }
-            });
-            let tmpFiles = this.data.tmpFiles;
-            tmpFiles.push(target);
             this.setData({
-              ttsAudio: target,
+              playContent: content
+            });
+            this.playAudio(res.tempFilePath, content);
+            let tmpFiles = this.data.tmpFiles;
+            tmpFiles.push(res.tempFilePath);
+            this.setData({
+              ttsAudio: res.tempFilePath,
               tmpFiles
             });
           }

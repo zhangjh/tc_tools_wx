@@ -169,7 +169,7 @@ module.exports = {
     }
     wx.uploadFile({
       filePath,
-      name: 'file',
+      name: req.name || 'file',
       url,
       header: {
         'content-type': 'multipart/form-data'
@@ -181,6 +181,7 @@ module.exports = {
         }
       },
       fail: err => {
+        console.log(err);
         if(req.failCb) {
           req.failCb(err);
         }

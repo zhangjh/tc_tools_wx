@@ -22,8 +22,9 @@
           wx:key="index"
           data-index="{{index}}"
           bind:tap="selectTopic"
+          data-item="{{item}}"
         >
-          <text data-item="{{item}}">{{item}}</text>
+          <text>{{item}}</text>
         </view>
       </scroll-view>
     </view>
@@ -49,12 +50,13 @@
           <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>
         </view>
         <view class="user" wx:if="{{ item.role === 'user' }}">
-          <!-- <text user-select wx:if="{{ !item.type }}">{{ item.content }}</text> -->
+          <text user-select wx:if="{{ !item.type }}">{{ item.content }}</text>
           <audio src="{{item.content}}" wx:if="{{item.role === 'user'}}"></audio>
           <i class="iconfont icon-bofang" 
             wx:if="{{ !item.playing }}"
-            bind:tap="playContent"
-            data-content="{{item.content}}"></i>
+            bind:tap="playTmpUserAudio"
+            data-target="{{item.content}}"
+            data-content="{{item.userContent}}"></i>
           <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>
         </view>
       </block>
@@ -62,7 +64,7 @@
   </scroll-view>
 
   <!-- Bottom Toolbar -->
-  <view wx:if="{{ recording }}" class="voice-wave1">
+  <view wx:if="{{ recording }}" class="voice-wave">
     <view class="wave-bar"></view>
     <view class="wave-bar"></view>
     <view class="wave-bar"></view>

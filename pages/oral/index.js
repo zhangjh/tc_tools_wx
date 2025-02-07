@@ -16,9 +16,9 @@ Page({
     /**
      * [{ role: 'model', content: '', type: 'base64', playing: false }]
      */
-    chatContent: null,
-    playContent: null,
-    ttsAudio: null,
+    chatContent: [],
+    playContent: '',
+    ttsAudio: '',
     recording: false,
     context: [],
     tmpFiles: []
@@ -78,7 +78,7 @@ Page({
     });
   },
   selectTopic(e) {
-    const topic = e.target.dataset.item;
+    const topic = e.currentTarget.dataset.item;
     this.closeTopicDialog();
     // 选中主题后主动开启对话
     this.buildContext('user', 'hello');
@@ -91,46 +91,52 @@ Page({
     });
   },
   conversation(data) {
-    common.wxRequest({
-      url: '/wxChat/oral',
-      method: 'POST',
-      data: {
-        topic: data.topic,
-        userContent: data.content,
-        audio: data.audio,
-        talkMode: data.talkMode,
-        context: data.context
-      },
-      cb: res => {
-        console.log(res);
-        const jo = JSON.parse(res);
-
-        this.buildChatContent('model', jo.conversation);
-        // play audio
-        this.setData({
-          ttsAudio: null,
-          playContent: jo.conversation,
-          chatContent: this.data.chatContent
-        });
-        this.playContent(this.data.playContent);
-        this.buildContext('model', this.data.playContent);
-      }
-    });
-    // requestTask.onChunkReceived((response) => {
-    //   try {
-    //     const chunk = decodeURIComponent(escape(String.fromCharCode.apply(null, new Uint8Array(response.data))));
-    //     // 动态设值
-    //     console.log("chunk");
-    //     content += chunk;
-    //     this.buildChatContent('model', content);
-    //     this.setData({
-    //       chatContent: this.data.chatContent,
-    //       playContent: content
-    //     });
-    //   } catch (e) {
-    //     console.error('Process chunk failed:', e);
-    //   }
-    // });
+    let cb = res => {
+      console.log(res);
+          const jo = JSON.parse(res);
+          // 更新用户音频文本(忽略第一个系统初始化打招呼的hello)
+          let chatContent = this.data.chatContent;
+          const len = chatContent.length;
+          if(jo.userContent && len > 2) {
+            let userContent = chatContent[len - 1];
+            userContent.userContent = jo.userContent;
+          }
+          this.buildChatContent('model', jo.conversation);
+          // play audio
+          this.setData({
+            ttsAudio: '',
+            playContent: jo.conversation,
+            chatContent: this.data.chatContent
+          });
+          this.playContent(this.data.playContent);
+          this.buildContext('model', this.data.playContent);
+    };
+    if(data.audio) {
+      common.uploadFile({
+        url: '/wxChat/oral',
+        filePath: data.audio,
+        name: 'audio',
+        formData: {
+          topic: data.topic,
+          talkMode: data.talkMode,
+          context: data.context
+        },
+        cb
+      });
+    } else if(data.content) {
+      common.wxRequest({
+        url: '/wxChat/oral',
+        method: 'POST',
+        data: {
+          topic: data.topic,
+          userContent: data.content,
+          talkMode: data.talkMode,
+          context: data.context
+        },
+        cb
+      });
+    }
+    
   },
   setPlayStatus(playContent, status) {
     let chatContent = this.data.chatContent;
@@ -152,11 +158,16 @@ Page({
       this.setPlayStatus(playContent, false);
     });
   },
+  playTmpUserAudio(e) {
+    const tmpFile = e.currentTarget.dataset.target;
+    const content = e.currentTarget.dataset.userContent;
+    this.playAudio(tmpFile, content);
+  },
   playContent(e) {
     // 默认取状态，如果dataset有值则为主动点击播放
     let content = this.data.playContent;
-    if(e.target) {
-      content = e.target.dataset.content;
+    if(e.currentTarget) {
+      content = e.currentTarget.dataset.content;
     }
     console.log(content);
     // 开启播放状态
@@ -182,6 +193,9 @@ Page({
               tmpFiles
             });
           }
+        },
+        fail: err => {
+          console.log(err);
         }
       });
     }
@@ -261,10 +275,7 @@ Page({
           this.buildContext('user', null, base64Data);
           this.conversation({
             talkMode: 'tutor', 
-            audio: [{
-              mimeType: 'audio/wav',
-              base64: base64Data
-            }],
+            audio: tempFilePath,
             context: {
               messages: this.data.context
             }

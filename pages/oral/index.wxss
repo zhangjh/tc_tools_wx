@@ -88,6 +88,7 @@
 /* Chat Content Styles */
 .chat-content {
   /* border: 1px solid red; */
+  overflow: auto;
   flex: 1;
   padding: 20rpx;
   background-color: #f3f6ff;
@@ -171,9 +172,8 @@
 }
 
 /* Voice Wave Animation Styles */
-.voice-wave1 {
+.voice-wave {
   /* border: 1px solid black; */
-  /* transform: translateX(-50%); */
   display: flex;
   align-items: flex-end;
   justify-content: center;

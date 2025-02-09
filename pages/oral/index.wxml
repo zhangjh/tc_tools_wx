@@ -9,9 +9,9 @@
           <view class="refresh-btn" bind:tap="refreshTopics">
             <i class="iconfont icon-refresh"></i>
           </view>
-          <view class="close-btn" bind:tap="closeTopicDialog">
+          <!-- <view class="close-btn" bind:tap="closeTopicDialog">
             <i class="iconfont icon-close"></i>
-          </view>
+          </view> -->
         </view>
       </view>
       <scroll-view class="topics-list" scroll-y="true">
@@ -34,6 +34,44 @@
   <view class="header">
     <view class="avatar" bind:tap="changeTutor">
       <image src="{{tutor.avatar}}" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <!-- 新增发音人选择弹窗 -->
+  <view class="topic-dialog" wx:if="{{showTutorDialog}}">
+    <view class="topic-dialog-content tutor-select">
+      <view class="topic-dialog-header">
+        <text class="topic-dialog-title">选择发音人</text>
+        <view class="topic-dialog-actions">
+          <view class="close-btn" bind:tap="closeTutorDialog">
+            <i class="iconfont icon-close"></i>
+          </view>
+        </view>
+      </view>
+      <scroll-view class="topics-list" scroll-y="true">
+        <view 
+          class="tutor-item" 
+          wx:for="{{tutors}}" 
+          wx:key="index"
+          bind:tap="selectTutor"
+          data-index="{{index}}"
+        >
+          <view class="image">
+            <image src="{{item.avatar}}" mode="aspectFit"></image>
+          </view>
+          <view>
+            <view class="name">{{item.name}}</view>
+            <view class="small">{{item.desc}}</view>
+          </view>
+          <view class="play">
+            <i class="iconfont icon-bofang" 
+              wx:if="{{ !item.playing }}"
+              bind:tap="playTest" 
+              data-content="{{item.content}}"></i>
+            <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>  
+          </view>
+        </view>
+      </scroll-view>
     </view>
   </view>
 

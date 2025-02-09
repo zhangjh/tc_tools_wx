@@ -43,7 +43,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    tutors,
     tutor: tutors[0],
+    showTutorDialog: false,
     showTopicDialog: false,
     topics: [
     ],
@@ -91,7 +93,24 @@ Page({
 
   },
   changeTutor() {
-    
+    this.setData({
+      showTutorDialog: true
+    });
+  },
+  closeTutorDialog() {
+    this.setData({
+      showTutorDialog: false
+    });
+  },
+  selectTutor(e) {
+    const index = e.currentTarget.dataset.index;
+    this.setData({
+      tutor: tutors[index],
+      showTutorDialog: false,
+      ttsAudio: ''        // 清空当前可能缓存的tts音频
+    });
+    // 切换发音人后立即播放当前内容
+    this.playContent();
   },
   getTopics() {
     wx.showLoading({

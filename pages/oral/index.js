@@ -5,12 +5,45 @@ const canto = require("../canto/canto");
 const wxAudio = wx.createInnerAudioContext({});
 const recorderManager = wx.getRecorderManager();
 
+const tutors = [
+  // default
+  {
+  name: 'Evelyn',
+  desc: 'A youthful voice suite for casual scenarios',
+  voiceName: 'en-US-EvelynMultilingualNeural',
+  avatar: '/resources/oral_tutor/teacher1_sm.png',
+  lang: 'en-US',
+  rate: 'medium',
+}, {
+  name: 'Cora',
+  desc: 'A softer voice with a touch of melancholy that conveys understanding and empathy',
+  voiceName: 'en-US-CoraMultilingualNeural',
+  avatar: '/resources/oral_tutor/teacher2.jpg',
+  lang: 'en-US',
+  rate: 'medium',
+}, {
+  name: 'Elizabeth',
+  desc: 'A professorial voice that\'s clear and authoritative, great for delivering',
+  voiceName: 'en-US-ElizabethNeural',
+  avatar: '/resources/oral_tutor/office_lady.png',
+  lang: 'en-US',
+  rate: 'medium',
+}, {
+  name: 'Adam',
+  desc: 'A deep, engaging voice that feels warm and inviting',
+  voiceName: 'en-US-AdamMultilingualNeural',
+  avatar: '/resources/oral_tutor/teacher3.png',
+  lang: 'en-US',
+  rate: 'medium',
+}];
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    tutor: tutors[0],
     showTopicDialog: false,
     topics: [
     ],
@@ -18,7 +51,8 @@ Page({
      * [{ role: 'model', content: '', type: 'base64', playing: false }]
      */
     chatContent: [],
-    playContent: '',
+    // 开场默认
+    playContent: 'What topic do you want to talk about?',
     ttsAudio: '',
     recording: false,
     context: [],
@@ -30,6 +64,8 @@ Page({
    */
   onLoad(options) {
     common.setTabBarTitle('英语开口说');
+    console.log("onready play");
+    this.playContent();
     // 初始化获取话题
     this.getTopics();
   },
@@ -53,6 +89,9 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  changeTutor() {
+    
   },
   getTopics() {
     wx.showLoading({
@@ -175,9 +214,9 @@ Page({
     } else {
       wx.downloadFile({
         url: canto.cantoDomain + "/canto/voice/playByOral?text=" + content 
-        + "&voiceName=en-US-EvelynMultilingualNeural"
-        + "&lang=en-US"
-        + "&rate=medium",
+        + "&voiceName=" + this.data.tutor.voiceName
+        + "&lang=" + this.data.tutor.lang
+        + "&rate=" + this.data.tutor.rate,
         success: res => {
           if(res.statusCode === 200) {
             this.setData({

@@ -32,8 +32,8 @@
 
   <!-- Header -->
   <view class="header">
-    <view class="avatar">
-      <image src="/resources/teacher3.png" mode="aspectFit"></image>
+    <view class="avatar" bind:tap="changeTutor">
+      <image src="{{tutor.avatar}}" mode="aspectFit"></image>
     </view>
   </view>
 

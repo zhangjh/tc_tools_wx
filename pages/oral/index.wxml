@@ -50,7 +50,7 @@
           <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>
         </view>
         <view class="user" wx:if="{{ item.role === 'user' }}">
-          <text user-select wx:if="{{ !item.type }}">{{ item.content }}</text>
+          <text user-select>{{ item.userContent }}</text>
           <audio src="{{item.content}}" wx:if="{{item.role === 'user'}}"></audio>
           <i class="iconfont icon-bofang" 
             wx:if="{{ !item.playing }}"

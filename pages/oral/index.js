@@ -3,6 +3,7 @@ const common = require("../common/index");
 const fs = wx.getFileSystemManager();
 const canto = require("../canto/canto");
 const wxAudio = wx.createInnerAudioContext({});
+const recorderManager = wx.getRecorderManager();
 
 Page({
 
@@ -86,30 +87,28 @@ Page({
       topic, 
       talkMode: 'tutor', 
       content: 'hello',
-      audio: null,
-      context: null
     });
   },
   conversation(data) {
     let cb = res => {
       console.log(res);
-          const jo = JSON.parse(res);
-          // 更新用户音频文本(忽略第一个系统初始化打招呼的hello)
-          let chatContent = this.data.chatContent;
-          const len = chatContent.length;
-          if(jo.userContent && len > 2) {
-            let userContent = chatContent[len - 1];
-            userContent.userContent = jo.userContent;
-          }
-          this.buildChatContent('model', jo.conversation);
-          // play audio
-          this.setData({
-            ttsAudio: '',
-            playContent: jo.conversation,
-            chatContent: this.data.chatContent
-          });
-          this.playContent(this.data.playContent);
-          this.buildContext('model', this.data.playContent);
+      const resJO = JSON.parse(res);
+      // 更新用户音频文本(忽略第一个系统初始化打招呼的hello)
+      let chatContent = this.data.chatContent;
+      const len = chatContent.length;
+      if(resJO.userContent && len >= 2) {
+        let userContent = chatContent[len - 1];
+        userContent.userContent = resJO.userContent;
+      }
+      this.buildChatContent('model', resJO.conversation);
+      // play audio
+      this.setData({
+        ttsAudio: '',
+        playContent: resJO.conversation,
+        chatContent: this.data.chatContent
+      });
+      this.playContent();
+      this.buildContext('model', this.data.playContent);
     };
     if(data.audio) {
       common.uploadFile({
@@ -117,9 +116,8 @@ Page({
         filePath: data.audio,
         name: 'audio',
         formData: {
-          topic: data.topic,
-          talkMode: data.talkMode,
-          context: data.context
+          talkMode: data.talkMode ? data.talkMode : '',
+          context: data.context ? JSON.stringify(data.context) : ''
         },
         cb
       });
@@ -128,10 +126,10 @@ Page({
         url: '/wxChat/oral',
         method: 'POST',
         data: {
-          topic: data.topic,
+          topic: data.topic ? data.topic : '',
+          talkMode: data.talkMode ? data.talkMode : '',
           userContent: data.content,
-          talkMode: data.talkMode,
-          context: data.context
+          context: data.context ? JSON.stringify(data.context) : ''
         },
         cb
       });
@@ -166,7 +164,7 @@ Page({
   playContent(e) {
     // 默认取状态，如果dataset有值则为主动点击播放
     let content = this.data.playContent;
-    if(e.currentTarget) {
+    if(e && e.currentTarget) {
       content = e.currentTarget.dataset.content;
     }
     console.log(content);
@@ -208,6 +206,7 @@ Page({
     common.requestRecordPermission();
   },
   cancelRecord() {
+    recorderManager.stop();
     this.setData({
       recording: false
     });
@@ -257,7 +256,6 @@ Page({
       recording: false
     });
     // 获取录制的音频
-    const recorderManager = wx.getRecorderManager();
     recorderManager.onStop((res) => {
       console.log('停止录音', res);
       const { tempFilePath } = res;
@@ -273,6 +271,7 @@ Page({
           // 你可以在这里将 Base64 数据上传到服务器或进行其他处理
           this.buildChatContent('user', tempFilePath, 'base64');
           this.buildContext('user', null, base64Data);
+          console.log(this.data.context);
           this.conversation({
             talkMode: 'tutor', 
             audio: tempFilePath,

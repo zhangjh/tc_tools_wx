@@ -65,8 +65,8 @@
     <view class="btn-group">
       <view>上传素材，输入主题和关键词</view>
       <view>让AI为您创作完美文案</view>
-      <view class="upload-btn large">
-        <span bind:tap="onGenerate">开始生成</span>
+      <view class="upload-btn large" bind:tap="onGenerate">
+        <span>开始生成</span>
       </view>
     </view>
   </view>

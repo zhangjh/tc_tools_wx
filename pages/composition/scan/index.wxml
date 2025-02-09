@@ -22,8 +22,10 @@
       <wux-row>开始识别配料表</wux-row>
       <wux-row class="small">支持拍照或从相册选择</wux-row>
     </view>
-    <view class="upload-btn large" wx:if="{{imgLoaded}}">
-      <text bind:tap="startScan">开始识别</text>
+    <view class="upload-btn large" 
+      wx:if="{{imgLoaded}}"  
+      bind:tap="startScan">
+      <text>开始识别</text>
     </view>
   </view>
   

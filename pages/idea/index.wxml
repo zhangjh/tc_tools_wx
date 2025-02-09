@@ -18,8 +18,8 @@
       </view>
     </wux-card>
     <wux-card class="submit-card" full>
-      <view slot="body" class="submit-btn">
-        <button type="primary" bind:tap="onSubmit">提交</button>
+      <view slot="body" class="submit-btn" bind:tap="onSubmit">
+        <button type="primary">提交</button>
       </view>
     </wux-card>
   </view>

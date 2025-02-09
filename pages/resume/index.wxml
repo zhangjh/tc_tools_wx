@@ -45,8 +45,8 @@
         <view>简历通常使用pdf格式，兼容性更好</view>
         <view>我们不会记录任何你的简历，请放心使用</view>
       </view>
-      <view class="upload-btn large">
-        <span bind:tap="onUpload">选择简历</span>
+      <view class="upload-btn large" bind:tap="onUpload">
+        <span>选择简历</span>
       </view>
     </view>
   </view>

@@ -53,8 +53,8 @@
     </view>   
   </view>
   <view class="center-container">
-    <view class="upload-btn large">
-      <span bind:tap="startScan">开始使用</span>
+    <view class="upload-btn large" bind:tap="startScan">
+      <span>开始使用</span>
     </view>
   </view>
 </view>

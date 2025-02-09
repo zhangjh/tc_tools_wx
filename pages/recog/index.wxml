@@ -49,8 +49,8 @@
     </view>
 
     <view class="camera {{originImg ? '' : 'init'}}">
-      <view class="upload-btn large">
-        <text bind:tap="startScan">{{ originImg ? "继续识别" : "开始识别"}}</text>
+      <view class="upload-btn large" bind:tap="startScan">
+        <text>{{ originImg ? "继续识别" : "开始识别"}}</text>
       </view>
     </view>
     

@@ -4,5 +4,6 @@
     "wux-popup-select": "/miniprogram_npm/wux-weapp/popup-select/index",
     "wux-textarea": "/miniprogram_npm/wux-weapp/textarea/index",
     "wux-icon": "/miniprogram_npm/wux-weapp/icon/index"
-  }
+  },
+  "style": "v2"
 }

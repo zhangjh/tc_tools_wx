@@ -52,17 +52,13 @@ Page({
       url: '/composite/checkComposite',
       cb: res => {
         // console.log(res);
-        const resJO = JSON.parse(res.data);
-        if(resJO.success) {
-          if(timer) {
-            clearInterval(timer);
-          }
-          // console.log(resJO.data);
-          this.setData({
-            percent: 100,
-            analysisContent: resJO.data
-          });
+        if(timer) {
+          clearInterval(timer);
         }
+        this.setData({
+          percent: 100,
+          analysisContent: res
+        });
       },
       failCb: err => {
         console.log(err);

@@ -90,19 +90,14 @@ Page({
           url: '/wxChat/recog',
           cb: res => {
             console.log(res);
-            const resJO = JSON.parse(res.data);
-            if(resJO.success) {
-              if(timer) {
-                clearInterval(timer);
-              }
-              // console.log(resJO.data);
-              this.setData({
-                percent: 100,
-                content: resJO.data ? resJO.data : "未识别到内容"
-              });
-            } else {
-              console.log(resJO.errorMsg);
+            if(timer) {
+              clearInterval(timer);
             }
+            // console.log(resJO.data);
+            this.setData({
+              percent: 100,
+              content: res ? res : "未识别到内容"
+            });
           },
           failCb: err => {
             console.log(err);

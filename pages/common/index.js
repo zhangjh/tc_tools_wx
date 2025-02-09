@@ -175,9 +175,34 @@ module.exports = {
         'content-type': 'multipart/form-data'
       },
       formData: req.formData,
-      success: res => {
-        if(req.cb) {
-          req.cb(res);
+      success: ret => {
+        if(ret.statusCode === 200) {
+          if(req.cb) {
+            if(!ret.data) {
+              return req.cb();
+            } 
+            const retData = JSON.parse(ret.data);
+            if(retData.success) {
+              req.cb(retData.data);
+            } else {
+              if(req.failCb) {
+                req.failCb(retData.errorMsg);
+              }
+              wx.showToast({
+                title: '请求失败',
+                icon: 'error'
+              })
+            }
+          }
+        } else {
+          console.log(ret.data.errorMsg);
+          if(req.failCb) {
+            req.failCb(ret.data.errorMsg);
+          }
+          wx.showToast({
+            title: '请求错误',
+            icon: 'error'
+          })
         }
       },
       fail: err => {

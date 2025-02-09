@@ -72,21 +72,16 @@ Page({
           },
           cb: res => {
             console.log(res);
-            const resJO = JSON.parse(res.data);
-            if(!resJO.success) {
-              this.setData({
-                uploading: false
-              });
-              return wx.showToast({
-                title: resJO.errorMsg,
-                icon: 'error'
-              })
-            }
             let material = this.data.material;
-            material.image = resJO.data;
+            material.image = res;
             console.log(material.image);
             this.setData({
               material,
+              uploading: false
+            });
+          },
+          failCb: err => {
+            this.setData({
               uploading: false
             });
           }

@@ -69,12 +69,9 @@ Page({
           filePath,
           url: '/feedback/uploadFile',
           cb: res => {
-            const resJO = JSON.parse(res.data);
-            if(resJO.success) {
-              this.setData({
-                uploadedImgUrl: resJO.data
-              });
-            }
+            this.setData({
+              uploadedImgUrl: res
+            });
           },
           fail: err => {
             console.log(err);

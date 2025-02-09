@@ -70,73 +70,64 @@ Page({
       filePath,
       url: '/storage/putObject',
       formData: { bucket: 'resume' },
-      cb: res => {
-        console.log(res);
+      cb: ret => {
+        console.log(ret);
         wx.hideLoading();
-        const resJO = JSON.parse(res.data);
-        if(resJO.success) {
-          wx.showLoading({
-            title: '正在分析简历, 可能需要1分钟...',
-          })
-          common.wxRequest({
-            url: '/wxChat/resume',
-            method: 'POST',
-            data: {
-              file: resJO.data,
-              mimeType: 'application/pdf',
-              // fileName使用ossKey
-              fileName: resJO.data
-            },
-            cb: res => {
-              console.log(res);
-              wx.hideLoading();
-              // 展示简历内页，隐藏入口页
-              let circleColor = '#ef473a';
-              if(parseInt(res.score) >= 80) {
-                circleColor = '#33cd5f'
-              }
-              let adviceMd = '';
-              if(res.advice) {
-                adviceMd = app.towxml(res.advice, "markdown");
-              }
-              let auditMd = '';
-              if(res.audit) {
-                auditMd = app.towxml(res.audit, "markdown");
-              }
-              let guidanceMd = '';
-              if(res.guidance) {
-                guidanceMd = app.towxml(res.guidance, "markdown");
-              }
-              let updatedMd = '';
-              if(res.updated) {
-                updatedMd = app.towxml(res.updated, "markdown");
-              }
-              let actions = this.data.resumeDetail.actions;
-              this.setData({
-                indexShow: false,
-                resumeDetail: {
-                  score: res.score,
-                  circleColor,
-                  guidanceMd,
-                  auditMd,
-                  adviceMd,
-                  updated: res.updated,
-                  updatedMd,
-                  actions
-                }
-              });
-            },
-            failCb: err => {
-              console.log(err);
+        wx.showLoading({
+          title: '正在分析简历, 可能需要1分钟...',
+        })
+        common.wxRequest({
+          url: '/wxChat/resume',
+          method: 'POST',
+          data: {
+            file: ret,
+            mimeType: 'application/pdf',
+            // fileName使用ossKey
+            fileName: ret
+          },
+          cb: res => {
+            console.log(res);
+            wx.hideLoading();
+            // 展示简历内页，隐藏入口页
+            let circleColor = '#ef473a';
+            if(parseInt(res.score) >= 80) {
+              circleColor = '#33cd5f'
             }
-          });
-        } else {
-          wx.hideLoading();
-          wx.showToast({
-            title: resJO.errorMsg,
-            icon: 'error'
-          })
-        }
+            let adviceMd = '';
+            if(res.advice) {
+              adviceMd = app.towxml(res.advice, "markdown");
+            }
+            let auditMd = '';
+            if(res.audit) {
+              auditMd = app.towxml(res.audit, "markdown");
+            }
+            let guidanceMd = '';
+            if(res.guidance) {
+              guidanceMd = app.towxml(res.guidance, "markdown");
+            }
+            let updatedMd = '';
+            if(res.updated) {
+              updatedMd = app.towxml(res.updated, "markdown");
+            }
+            let actions = this.data.resumeDetail.actions;
+            this.setData({
+              indexShow: false,
+              resumeDetail: {
+                score: res.score,
+                circleColor,
+                guidanceMd,
+                auditMd,
+                adviceMd,
+                updated: res.updated,
+                updatedMd,
+                actions
+              }
+            });
+          },
+          failCb: err => {
+            console.log(err);
+          }
+        });
       },
       failCb: err => {
         console.log(err);

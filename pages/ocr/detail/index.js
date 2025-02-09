@@ -52,21 +52,17 @@ Page({
       url: '/wxChat/recog',
       cb: res => {
         // console.log(res);
-        const resJO = JSON.parse(res.data);
-        if(resJO.success) {
-          if(timer) {
-            clearInterval(timer);
-          }
-          // console.log(resJO.data);
-          const data = resJO.data;
-          const text = JSON.parse(data).text;
-          const ocrContent = app.towxml(text, "markdown");
-          this.setData({
-            percent: 100,
-            ocrText: text,
-            ocrContent
-          });
+        if(timer) {
+          clearInterval(timer);
         }
+        // console.log(resJO.data);
+        const text = JSON.parse(res).text;
+        const ocrContent = app.towxml(text, "markdown");
+        this.setData({
+          percent: 100,
+          ocrText: text,
+          ocrContent
+        });
       },
       failCb: err => {
         console.log(err);

@@ -32,6 +32,7 @@
 
   <!-- Header -->
   <view class="header">
+    <view class="tutor-tip" wx:if="{{showTutorTip}}">点击头像可切换发音人</view>
     <view class="avatar" bind:tap="changeTutor">
       <image src="{{tutor.avatar}}" mode="aspectFit"></image>
     </view>

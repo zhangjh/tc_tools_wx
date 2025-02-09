@@ -43,6 +43,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showTutorTip: true, 
     tutors,
     tutor: tutors[0],
     showTutorDialog: false,
@@ -70,6 +71,10 @@ Page({
     this.playContent();
     // 初始化获取话题
     this.getTopics();
+    // 新增延时提示
+    setTimeout(() => {
+      this.setData({ showTutorTip: false });
+    }, 3000);
   },
 
   onUnload() {
@@ -94,7 +99,8 @@ Page({
   },
   changeTutor() {
     this.setData({
-      showTutorDialog: true
+      showTutorDialog: true,
+      showTutorTip: false
     });
   },
   closeTutorDialog() {

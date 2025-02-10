@@ -118,6 +118,11 @@
         </view>
         <view class="user" wx:if="{{ item.role === 'user' }}">
           <view class="main">
+            <image 
+              src="/resources/play.gif" 
+              mode="aspectFit"
+              wx:if="{{!item.userContent}}"
+            ></image>
             <text user-select>{{ item.userContent }}</text>
             <audio src="{{item.content}}" wx:if="{{item.role === 'user'}}"></audio>
             <i class="iconfont icon-bofang" 

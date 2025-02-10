@@ -1,11 +1,11 @@
 <!--pages/oral/index.wxml-->
 <view class="container">
   <!-- Topic Selection Dialog -->
-  <view class="topic-dialog {{showTopicDialog ? 'show' : ''}}" wx:if="{{showTopicDialog}}">
-    <view class="topic-dialog-content">
-      <view class="topic-dialog-header">
-        <text class="topic-dialog-title">想聊点什么话题？</text>
-        <view class="topic-dialog-actions">
+  <view class="dialog" wx:if="{{showTopicDialog}}">
+    <view class="dialog-content">
+      <view class="dialog-header">
+        <text class="dialog-title">想聊点什么话题？</text>
+        <view class="dialog-actions">
           <view class="refresh-btn" bind:tap="refreshTopics">
             <i class="iconfont icon-refresh"></i>
           </view>
@@ -30,6 +30,22 @@
     </view>
   </view>
 
+  <vieww class="advice-dialog" wx:if="{{showAdvice && advice}}">
+    <view class="dialog-content advice-dialog-content">
+      <view class="dialog-header">
+        <text class="dialog-title">修改意见：</text>
+        <view class="dialog-actions">
+          <view class="close-btn" bind:tap="closeAdvice">
+            <i class="iconfont icon-close"></i>
+          </view>
+        </view>
+      </view>
+      <scroll-view scroll-y="true">
+        <view class="advice-item">{{advice}}</view>
+      </scroll-view>
+    </view>
+  </vieww>
+
   <!-- Header -->
   <view class="header">
     <view class="tutor-tip" wx:if="{{showTutorTip}}">点击头像可切换发音人</view>
@@ -39,11 +55,11 @@
   </view>
 
   <!-- 新增发音人选择弹窗 -->
-  <view class="topic-dialog" wx:if="{{showTutorDialog}}">
-    <view class="topic-dialog-content tutor-select">
-      <view class="topic-dialog-header">
-        <text class="topic-dialog-title">选择发音人</text>
-        <view class="topic-dialog-actions">
+  <view class="dialog" wx:if="{{showTutorDialog}}">
+    <view class="dialog-content tutor-select">
+      <view class="dialog-header">
+        <text class="dialog-title">选择发音人</text>
+        <view class="dialog-actions">
           <view class="close-btn" bind:tap="closeTutorDialog">
             <i class="iconfont icon-close"></i>
           </view>
@@ -81,12 +97,26 @@
     <view class="message-bubble">
       <block wx:for="{{ chatContent }}" wx:key="index">
         <view class="model" wx:if="{{ item.role === 'model' }}">
-          <text user-select>{{ item.content }}</text>
-          <i class="iconfont icon-bofang" 
-            wx:if="{{ !item.playing }}"
-            bind:tap="playContent" 
-            data-content="{{item.content}}"></i>
-          <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>
+          <view class="main">
+            <text user-select>{{ item.content }}</text>
+            <i class="iconfont icon-bofang" 
+              wx:if="{{ !item.playing }}"
+              bind:tap="playContent" 
+              data-content="{{item.content}}"></i>
+            <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>
+          </view>
+          <view class="evaluate" 
+            wx:if="{{item.pronunciation || item.grammar || item.advice}}">
+            <view wx:if="{{item.pronunciation}}">
+              <span>发音: </span><span class="score">{{item.pronunciation}}</span>
+            </view>
+            <view wx:if="{{item.grammar}}">
+              <span>语法: </span><span class="score">{{item.grammar}}</span>
+            </view>
+            <view wx:if="{{item.advice}}" bind:tap="viewAdvice">
+              <span data-advice="{{item.advice}}">修改意见(点击查看) </span>
+            </view>
+          </view>
         </view>
         <view class="user" wx:if="{{ item.role === 'user' }}">
           <text user-select>{{ item.userContent }}</text>

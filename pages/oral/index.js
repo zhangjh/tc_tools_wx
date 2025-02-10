@@ -60,7 +60,9 @@ Page({
     ttsAudio: '',
     recording: false,
     context: [],
-    tmpFiles: []
+    tmpFiles: [],
+    showAdvice: false,
+    advice: 'xxx'
   },
 
   /**
@@ -195,6 +197,23 @@ Page({
       if(resJO.userContent && len >= 2) {
         let userContent = chatContent[len - 1];
         userContent.userContent = resJO.userContent;
+        const advice = resJO.advice;
+        const pronunciation = resJO.pronunciation;
+        const grammar = resJO.grammar;
+        if(advice) {
+          userContent.advice = advice;
+          // 自动弹出修改意见，5s后消失
+          this.showAdvice(advice);
+          setTimeout(() => {
+            this.closeAdvice();
+          }, 5000);
+        }
+        if(pronunciation) {
+          userContent.pronunciation = pronunciation;
+        }
+        if(grammar) {
+          userContent.grammar = grammar;
+        }
       }
       this.buildChatContent('model', resJO.conversation);
       // play audio
@@ -382,5 +401,21 @@ Page({
       });
     });
     recorderManager.stop();
-  }
+  },
+  showAdvice(advice) {
+    this.setData({
+      showAdvice: true,
+      advice
+    });
+  },
+  closeAdvice() {
+    this.setData({
+      showAdvice: false,
+      advice: ''
+    });
+  },
+  viewAdvice(e) {
+    const advice = e.currentTarget.dataset.advice;
+    this.showAdvice(advice);
+  },
 })

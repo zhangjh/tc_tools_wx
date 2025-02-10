@@ -51,6 +51,8 @@ Page({
     showTopicDialog: false,
     topics: [
     ],
+    // 记录录音是否被取消
+    cancelled: false,
     /**
      * [{ role: 'model', content: '', type: 'base64', playing: false }]
      */
@@ -316,14 +318,16 @@ Page({
   onRecord() {
     console.log("record");
     this.setData({
-      recording: true
+      recording: true,
+      cancelled: false
     });
     common.requestRecordPermission();
   },
   cancelRecord() {
     recorderManager.stop();
     this.setData({
-      recording: false
+      recording: false,
+      cancelled: true
     });
   },
   buildChatContent(role, content, type) {
@@ -373,32 +377,35 @@ Page({
     // 获取录制的音频
     recorderManager.onStop((res) => {
       console.log('停止录音', res);
-      const { tempFilePath } = res;
-      // 获取文件管理器
-      const fileSystemManager = wx.getFileSystemManager();
-      // 读取文件并转为 Base64
-      fileSystemManager.readFile({
-        filePath: tempFilePath, // 录音文件的临时路径
-        encoding: 'base64', // 指定编码为 base64
-        success: (result) => {
-          const base64Data = result.data; // 获取 Base64 数据
-          console.log('Base64 数据:', base64Data);
-          // 你可以在这里将 Base64 数据上传到服务器或进行其他处理
-          this.buildChatContent('user', tempFilePath, 'base64');
-          this.buildContext('user', null, base64Data);
-          console.log(this.data.context);
-          this.conversation({
-            talkMode: 'tutor', 
-            audio: tempFilePath,
-            context: {
-              messages: this.data.context
-            }
-          });
-        },
-        fail: (err) => {
-          console.error('读取文件失败:', err);
-        },
-      });
+      // 主动取消的录音不发送
+      if(!this.data.cancelled) {
+        const { tempFilePath } = res;
+        // 获取文件管理器
+        const fileSystemManager = wx.getFileSystemManager();
+        // 读取文件并转为 Base64
+        fileSystemManager.readFile({
+          filePath: tempFilePath, // 录音文件的临时路径
+          encoding: 'base64', // 指定编码为 base64
+          success: (result) => {
+            const base64Data = result.data; // 获取 Base64 数据
+            console.log('Base64 数据:', base64Data);
+            // 你可以在这里将 Base64 数据上传到服务器或进行其他处理
+            this.buildChatContent('user', tempFilePath, 'base64');
+            this.buildContext('user', null, base64Data);
+            console.log(this.data.context);
+            this.conversation({
+              talkMode: 'tutor', 
+              audio: tempFilePath,
+              context: {
+                messages: this.data.context
+              }
+            });
+          },
+          fail: (err) => {
+            console.error('读取文件失败:', err);
+          },
+        });
+      }
     });
     recorderManager.stop();
   },

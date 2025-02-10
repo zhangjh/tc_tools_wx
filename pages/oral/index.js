@@ -64,7 +64,7 @@ Page({
     context: [],
     tmpFiles: [],
     showAdvice: false,
-    advice: 'xxx'
+    advice: '',
   },
 
   /**
@@ -197,7 +197,9 @@ Page({
       let chatContent = this.data.chatContent;
       const len = chatContent.length;
       if(resJO.userContent && len >= 2) {
-        let userContent = chatContent[len - 1];
+        // 倒序找到最后一个user content
+        let userContent = chatContent.reverse().find(item => item.role === 'user');
+        chatContent.reverse();
         userContent.userContent = resJO.userContent;
         const advice = resJO.advice;
         const pronunciation = resJO.pronunciation;
@@ -218,6 +220,11 @@ Page({
         }
       }
       this.buildChatContent('model', resJO.conversation);
+      const trans = resJO.trans;
+      // 倒序找到最后一个model content
+      let modelContent = chatContent.reverse().find(item => item.role === 'model');
+      chatContent.reverse();
+      modelContent.trans = trans;
       // play audio
       this.setData({
         ttsAudio: '',
@@ -285,6 +292,9 @@ Page({
       content = e.currentTarget.dataset.content;
     }
     console.log(content);
+    if(!content) {
+      return;
+    }
     // 开启播放状态
     this.setPlayStatus(content, true);
     if(this.data.playContent === content && this.data.ttsAudio) {
@@ -388,7 +398,7 @@ Page({
           encoding: 'base64', // 指定编码为 base64
           success: (result) => {
             const base64Data = result.data; // 获取 Base64 数据
-            console.log('Base64 数据:', base64Data);
+            // console.log('Base64 数据:', base64Data);
             // 你可以在这里将 Base64 数据上传到服务器或进行其他处理
             this.buildChatContent('user', tempFilePath, 'base64');
             this.buildContext('user', null, base64Data);
@@ -413,6 +423,22 @@ Page({
     this.setData({
       showAdvice: true,
       advice
+    });
+  },
+  toggleTrans(e) {
+    const item = e.currentTarget.dataset.item;
+    const currentContent = item.content;
+    let chatContent = 
+      this.data.chatContent.find(item => item.content === currentContent);
+    chatContent.showTrans = !chatContent.showTrans;
+    this.setData({
+      chatContent: this.data.chatContent
+    });
+  },
+  copyTrans(e) {
+    const text = e.currentTarget.dataset.content;
+    wx.setClipboardData({
+      data: text,
     });
   },
   closeAdvice() {

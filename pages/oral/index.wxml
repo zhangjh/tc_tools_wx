@@ -105,6 +105,28 @@
               data-content="{{item.content}}"></i>
             <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>
           </view>
+          <view class="trans-content" 
+              wx:if="{{item.showTrans && item.trans}}">{{item.trans}}</view>
+          <view class="operations">
+            <view bind:tap="toggleTrans" data-item="{{item}}">
+              <i class="iconfont icon-fy"></i>
+            </view>
+            <view bind:tap="copyTrans" data-content="{{item.content}}">
+              <i class="iconfont icon-copy"></i>
+            </view>
+          </view>
+        </view>
+        <view class="user" wx:if="{{ item.role === 'user' }}">
+          <view class="main">
+            <text user-select>{{ item.userContent }}</text>
+            <audio src="{{item.content}}" wx:if="{{item.role === 'user'}}"></audio>
+            <i class="iconfont icon-bofang" 
+              wx:if="{{ !item.playing }}"
+              bind:tap="playTmpUserAudio"
+              data-target="{{item.content}}"
+              data-content="{{item.userContent}}"></i>
+            <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>
+          </view>
           <view class="evaluate" 
             wx:if="{{item.pronunciation || item.grammar || item.advice}}">
             <view wx:if="{{item.pronunciation}}">
@@ -113,20 +135,12 @@
             <view wx:if="{{item.grammar}}">
               <span>语法: </span><span class="score">{{item.grammar}}</span>
             </view>
-            <view wx:if="{{item.advice}}" bind:tap="viewAdvice">
-              <span data-advice="{{item.advice}}">修改意见(点击查看) </span>
+            <view wx:if="{{item.advice}}" 
+              bind:tap="viewAdvice" 
+              data-advice="{{item.advice}}">
+              <span>修改意见(点击查看) </span>
             </view>
           </view>
-        </view>
-        <view class="user" wx:if="{{ item.role === 'user' }}">
-          <text user-select>{{ item.userContent }}</text>
-          <audio src="{{item.content}}" wx:if="{{item.role === 'user'}}"></audio>
-          <i class="iconfont icon-bofang" 
-            wx:if="{{ !item.playing }}"
-            bind:tap="playTmpUserAudio"
-            data-target="{{item.content}}"
-            data-content="{{item.userContent}}"></i>
-          <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>
         </view>
       </block>
     </view>

@@ -162,8 +162,8 @@
   background-color: #f3f6ff;
 }
 
-.message-bubble .model,
-.message-bubble .user {
+.model,
+.user {
   padding: 30rpx;
   border-radius: 20rpx;
   margin-bottom: 20rpx;
@@ -172,15 +172,31 @@
   flex-direction: column;
 }
 
-.message-bubble .main {
+.main {
   display: flex;
   flex-direction: row;
 }
 
-.message-bubble .evaluate {
-  border-top: 1px solid white;
-  color: yellow;
+.evaluate {
+  border-top: 1px dashed white;
+  color: orange;
   display: flex;
+}
+
+.operations {
+  display: flex;
+}
+
+.operations view {
+  margin: 0 20rpx;
+}
+
+.operations .iconfont {
+  padding: 0rpx;
+}
+
+.trans-content {
+  border-top: 1px dashed white;
 }
 
 .evaluate span {

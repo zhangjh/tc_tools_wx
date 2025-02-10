@@ -75,7 +75,7 @@ Page({
     // 新增延时提示
     setTimeout(() => {
       this.setData({ showTutorTip: false });
-    }, 3000);
+    }, 5000);
   },
 
   onUnload() {

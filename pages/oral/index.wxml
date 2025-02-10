@@ -80,13 +80,13 @@
             <view class="name">{{item.name}}</view>
             <view class="small">{{item.desc}}</view>
           </view>
-          <view class="play">
+          <!-- <view class="play">
             <i class="iconfont icon-bofang" 
               wx:if="{{ !item.playing }}"
               bind:tap="playTest" 
-              data-content="{{item.content}}"></i>
+              data-voice="{{item.voiceName}}"></i>
             <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>  
-          </view>
+          </view> -->
         </view>
       </scroll-view>
     </view>

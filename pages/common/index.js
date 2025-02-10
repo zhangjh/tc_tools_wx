@@ -1,5 +1,5 @@
 const debug = false;
-const domain = debug ? "http://localhost:3001" : "https://wx2.zhangjh.cn";
+const domain = debug ? "http://localhost:3001" : "https://tx.zhangjh.cn";
 
 const objectEmpty = function (object) {
   if(!object) {

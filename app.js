@@ -3,7 +3,12 @@ App({
   towxml: require('./towxml/index'),
   // 代存公用逻辑对应的调用页面实例
   page: null,
+  // 给需要onLaunch异步调用获取的openID场景一个回调
+  setBizCb(cb) {
+    this.cb = cb;
+  },
   onLaunch() {
+    console.log("onLaunch");
     // 登录
     wx.login({
       success: res => {
@@ -15,6 +20,9 @@ App({
               const data = ret.data.data;
               const openId = data.openId;
               this.globalData.userInfo.userId = openId;
+              if(this.cb) {
+                this.cb(openId);
+              }
             }
           },
           fail: err => {

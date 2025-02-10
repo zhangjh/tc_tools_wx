@@ -4,6 +4,7 @@ const fs = wx.getFileSystemManager();
 const canto = require("../canto/canto");
 const wxAudio = wx.createInnerAudioContext({});
 const recorderManager = wx.getRecorderManager();
+const app = getApp();
 
 const tutors = [
   // default
@@ -67,8 +68,6 @@ Page({
    */
   onLoad(options) {
     common.setTabBarTitle('英语开口说');
-    console.log("onready play");
-    this.playContent();
     // 初始化获取话题
     this.getTopics();
     // 新增延时提示
@@ -89,6 +88,27 @@ Page({
         },
       });
     }
+  },
+
+  onReady() {
+    console.log("onready play");
+    app.setBizCb((userId) => {
+      console.log(userId);
+      common.wxRequest({
+        url: '/wxChat/oral/getTutor?openId=' + userId,
+        cb: res => {
+          if(res && res.length) {
+            const voiceName = res[0].tutor_name;
+            const selectedTutor = 
+              this.data.tutors.find(item => item.voiceName === voiceName);
+            this.setData({
+              tutor: selectedTutor
+            });
+          }
+          this.playContent();
+        }
+      });
+    });
   },
 
   /**
@@ -117,6 +137,18 @@ Page({
     });
     // 切换发音人后立即播放当前内容
     this.playContent();
+    // 持久化发音人
+    common.wxRequest({
+      url: '/wxChat/oral/saveTutor',
+      method: 'POST',
+      data: {
+        openId: app.globalData.userInfo.userId,
+        tutorName: this.data.tutor.voiceName,
+      },
+      cb: res => {
+        console.log(res);
+      }
+    });
   },
   getTopics() {
     wx.showLoading({

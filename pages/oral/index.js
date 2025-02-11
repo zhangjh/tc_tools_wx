@@ -189,7 +189,11 @@ Page({
     });
   },
   conversation(data) {
+    wx.showLoading({
+      title: 'loading...',
+    });
     let cb = res => {
+      wx.hideLoading();
       console.log(res);
       const resJO = JSON.parse(res);
       // 更新用户音频文本(忽略第一个系统初始化打招呼的hello)

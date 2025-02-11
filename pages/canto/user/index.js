@@ -67,7 +67,7 @@ Page({
     const userId = app.globalData.userInfo.userId;
     this.data.userInfo.userId = userId;
     this.data.userInfo.nickName = userId;
-    // 获取存储在storage里的生效聊天对象
+    // 获取存储在storage里的生效发音人
     const activeVoiceRole = wx.getStorageSync("activeVoiceRole");
     this.setData({
       userInfo: this.data.userInfo,

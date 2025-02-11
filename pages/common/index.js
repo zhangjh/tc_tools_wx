@@ -49,6 +49,7 @@ const requestRecordPermission = function() {
 
 module.exports = {
   config: {
+    bizDomain: domain,
     r2Domain: "https://r2.zhangjh.cn",
     unsplashDomain: "https://unsplash.zhangjh.cn/",
   },
@@ -76,9 +77,13 @@ module.exports = {
       responseType: req.responseType ? req.responseType : 'text',
       complete: req.completeCb,
       success: ret => {
-        // ret.data为空（流式响应）或者对应success为true
+        // 流式响应直接返回ret.data或者对应success为true，返回ret.data.data
         if(ret.statusCode === 200) {
           if(req.cb) {
+            if(req.responseType === 'arraybuffer') {
+              req.cb(ret.data);
+              return;
+            }
             if(!ret.data) {
               req.cb();
             } else if(ret.data.success) {

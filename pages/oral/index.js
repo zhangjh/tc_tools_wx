@@ -1,7 +1,6 @@
 // pages/oral/index.js
 const common = require("../common/index");
 const fs = wx.getFileSystemManager();
-const canto = require("../canto/canto");
 const wxAudio = wx.createInnerAudioContext({});
 const recorderManager = wx.getRecorderManager();
 const app = getApp();
@@ -109,7 +108,7 @@ Page({
               tutor: selectedTutor
             });
           }
-          // this.playContent();
+          this.playContent();
         }
       });
     });
@@ -301,10 +300,10 @@ Page({
       this.playAudio(this.data.ttsAudio, content);
     } else {
       wx.downloadFile({
-        url: canto.cantoDomain + "/canto/voice/playByOral?text=" + content 
-        + "&voiceName=" + this.data.tutor.voiceName
-        + "&lang=" + this.data.tutor.lang
-        + "&rate=" + this.data.tutor.rate,
+        url: common.config.bizDomain + "/tts/playByOral?text=" + content 
+          + "&voiceName=" + this.data.tutor.voiceName
+          + "&lang=" + this.data.tutor.lang
+          + "&rate=" + this.data.tutor.rate,
         success: res => {
           if(res.statusCode === 200) {
             this.setData({

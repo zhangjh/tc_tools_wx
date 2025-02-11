@@ -109,7 +109,7 @@ Page({
               tutor: selectedTutor
             });
           }
-          this.playContent();
+          // this.playContent();
         }
       });
     });

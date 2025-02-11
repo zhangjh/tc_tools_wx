@@ -71,11 +71,11 @@ App({
         "path": "/pages/reader/index"
       }, 
       {
-        "name": "粤歌速成",
+        "name": "英语开口说",
         "type": "tools",
-        "desc": "粤语歌曲速成辅助练习工具，AI发音、跟读、智能评判",
-        "logo": "https://r2.zhangjh.cn/logo/canto.png",
-        "path": "/pages/canto/lyric/index"
+        "desc": "与AI陪练交流，大胆发声，告别窘迫，告别哑巴英语",
+        "logo": "/resources/oral_logo.png",
+        "path": "/pages/oral/index"
       },
       {
         "name": "赛博华佗",
@@ -98,19 +98,19 @@ App({
         "logo": "/resources/ocr.png",
         "path": "/pages/ocr/index"
       },
+      // {
+      //   "name": "助眠白噪声",
+      //   "type": "tools",
+      //   "desc": "多种不同类型白噪声，助您缓解压力、快速入眠",
+      //   "logo": "/resources/voice.png",
+      //   "path": "/pages/voice/index"
+      // },
       {
-        "name": "助眠白噪声",
+        "name": "粤歌速成",
         "type": "tools",
-        "desc": "多种不同类型白噪声，助您缓解压力、快速入眠",
-        "logo": "/resources/voice.png",
-        "path": "/pages/voice/index"
-      },
-      {
-        "name": "英语开口说",
-        "type": "tools",
-        "desc": "与AI陪练交流，大胆发声，告别窘迫，告别哑巴英语",
-        "logo": "/resources/oral_logo.png",
-        "path": "/pages/oral/index"
+        "desc": "粤语歌曲速成辅助练习工具，AI发音、跟读、智能评判",
+        "logo": "https://r2.zhangjh.cn/logo/canto.png",
+        "path": "/pages/canto/lyric/index"
       },
     ]
   },

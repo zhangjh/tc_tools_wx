@@ -138,9 +138,9 @@ Page({
       showTutorDialog: false,
       ttsAudio: ''        // 清空当前可能缓存的tts音频
     });
-    // 切换发音人后立即播放当前内容
+    // 切换聊天对象后立即播放当前内容
     this.playContent();
-    // 持久化发音人
+    // 持久化聊天对象
     common.wxRequest({
       url: '/wxChat/oral/saveTutor',
       method: 'POST',

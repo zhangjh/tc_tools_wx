@@ -48,17 +48,17 @@
 
   <!-- Header -->
   <view class="header">
-    <view class="tutor-tip" wx:if="{{showTutorTip}}">点击头像可切换发音人</view>
+    <view class="tutor-tip" wx:if="{{showTutorTip}}">点击头像可切换聊天对象</view>
     <view class="avatar" bind:tap="changeTutor">
       <image src="{{tutor.avatar}}" mode="aspectFit"></image>
     </view>
   </view>
 
-  <!-- 新增发音人选择弹窗 -->
+  <!-- 新增聊天对象选择弹窗 -->
   <view class="dialog" wx:if="{{showTutorDialog}}">
     <view class="dialog-content tutor-select">
       <view class="dialog-header">
-        <text class="dialog-title">选择发音人</text>
+        <text class="dialog-title">选择聊天对象</text>
         <view class="dialog-actions">
           <view class="close-btn" bind:tap="closeTutorDialog">
             <i class="iconfont icon-close"></i>

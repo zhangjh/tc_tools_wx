@@ -124,7 +124,7 @@
   border-radius: 50%;
 }
 
-/* 发音人选择样式 */
+/* 聊天对象选择样式 */
 .tutor-select {
   max-height: 60vh;
 }

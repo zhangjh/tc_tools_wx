@@ -67,7 +67,7 @@
           <wux-radio-group
               name="voiceRole"
               value="{{activeVoiceRole}}"
-              title="发音人设置"
+              title="选择聊天对象"
               hasLine="{{false}}"
               bind:change="onChangeVoiceRole"
             >

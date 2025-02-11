@@ -118,8 +118,18 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-
+    return {
+      title: "【英语开口说】我刚发现了一个很棒的口语训练小程序，你一定要尝试一下！快来免费使用~",
+      path: "/pages/oral/index"
+    }
   },
+  onShareTimeline() {
+    return {
+      title: "【英语开口说】我刚发现了一个很棒的口语训练小程序，你一定要尝试一下！快来免费使用~",
+      imageUrl: "/resources/oral_logo.png"
+    };
+  },
+
   changeTutor() {
     this.setData({
       showTutorDialog: true,

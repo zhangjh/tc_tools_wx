@@ -3,11 +3,19 @@ const common = require("../../common/index");
 
 Page({
   data: {
-    img: common.config.unsplashDomain + Math.ceil(Math.random() * 30) + ".jpg",
+    img: "",
     imgLoaded: false
   },
   onLoad(options) {
     common.setTabBarTitle('科技狠活鉴定器');
+    wx.showLoading({
+      title: 'Loading...',
+    });
+    this.setData({
+      img: common.config.unsplashDomain + Math.ceil(Math.random() * 30) + ".jpg"
+    }, () => {
+      wx.hideLoading();
+    });
   },
   onImgLoad() {
     this.setData({

@@ -1,4 +1,4 @@
-@import '/iconfont/icont_ocr.wxss';
+@import '/iconfont/icont_oral.wxss';
 
 .container {
   height: 100vh;

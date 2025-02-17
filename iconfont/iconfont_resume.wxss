@@ -1,6 +1,8 @@
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
-  font-family: "iconfont"; /* Project id 4810313 */
-  src: url('//at.alicdn.com/t/c/font_4810313_3wiyy42bayf.woff2?t=1736768964973') format('woff2')
+  font-family: 'iconfont';  /* Project id 4810313 */
+  src: 
+       url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAASAAAwAAAAACAQAAAQzAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIl4jLgZgAGQKh3CFeAE2AiQDPAsgAAQgBYF8ByAbGQbIHoVxw90iCC0WVzj/r+CBH5fv40C3G4AmhMqG5MzSdqGtxKXLAxuY//S/qY9QJeJQNSWpCakJW0XDNBcqGpurf/VXVqD1E9fkt8d/e/xeCA5oplGJiR80qgDaPQ5oPIoOm/EAfRbq5b6aokKavAZgBbxAOy4kMEAFJFozJRasCMA2pMERBOxYovvAicaFxo3CgxUvNtwIPIjugIREWVAvvjo0zG9y/zcwafj7+vzvLPrxnwZjqm0emL69A3qaCU0AfbTUMWQAMBPpBer4C3+UnPAzenYuKxFcBPl3W1j+/wSgoAhCCM7ClzdAnhwTFBAmk4iYmnkAfv0LCsi/Ed81P7x+Wf2z/Gf731RmmEfTdaZNJs/RH4Jfgu+LZyeTj/pngQCIGIjTxjJ99HSjRqILJqkQzI3oNbJLR3q79PfQF0jlU5+DzyLPPQsvnKUxNYXiB1547X9eQD8CJw8R5WOIetLPM+BCLEO+ZFay8ChvyzUOvn16FwAnOQ8RlvL5cwii9jBL0pfuMdn0gys9anAVhalpcSHc4mCs5VrNykUFM4iyX/n0aaTXcv8O7IWCmPQzCJw8bYMon+Oq7aIZjViuyKQlctdC8a4b7nu2uOHodqcnLyDqOc5qkuKoymm7qABxzuwEs7uYTOwMyy4Ua0+YlwQb0eYSTK1DUdVWUQyO6o72ax2eboSKZtDt5kzJ04KtqAqL2Wucv1RBV6ZtjxY8K9wWOZcZCmtA+NP3ENiOwaY8gvwIBksJ/vFtBU37Z+Y2BEmjhQyr9U0Hm+Hb6WStpVZroU1OVsNl0qIcb+949zPubq7eLVYObzmhYcRcNuGNxJyXxygD8E668J8YQL+A2BCrLLdbkTMfJPEPkASVsQIe92R3mWP4Fcd5xyPhjmUsAd4OaDQKU0WPWY+MOM3meVgscJIgKgq8SKdTsFkg3ZQTB/KGJs3Ko39/nTsfjWbW907EF2SuDCFkoSszMw07IctOy5TtqfXBB3+8uDE66JzYXTsdnDfbXWQGNZN8Wx9ywIL4L3Arw8JUhWWJm/r6NiWC3x0ThgkUNCaAXs/GlzO+kri+Ql4Lj63JyJ5hbLo4NYW0n4cOum1KJKHtgRv86zcGMjovQwc3gfDARX9c4f5RuXtvSLmU6iDDkgTFcUd98F7jPWvRy1dRZmTxt+jWTY9RU14UuF5GueS7q+piQhXIcgfVXVZ5PUZ2yNQK7uC/EXzN488vv2dEgw0M9UHJAcCKnKB+rU3rGlYK6sNrsvqeTIqGOQ3Dg6IacBkpqj453hwAYqrJkoTpfKGIj6E3l/OlzrMyC4zQxkDghywk8f4GSlCKbrKUJs8yZSHJ7jQreS5BAzW00Yos2G4JeRDUsZRmqujElzqtOjnALNmecCLhw6t5Olm7ZNkEcIggRNKAcpsNClrUBaMEzRH+VRUA') format('woff2');
 }
 
 .iconfont {
@@ -16,11 +18,11 @@
 }
 
 .icon-fenxikapian:before {
-  content: "\e72e";
+  content: "\ed1d";
 }
 
 .icon-yulann:before {
-  content: "\e665";
+  content: "\ed21";
 }
 
 .icon-a-AutoFlash:before {

@@ -499,7 +499,7 @@ Page({
         method: 'POST',
         data: {
           topic: this.data.currentTopic,
-          modelContent
+          modelContent: modelContent.content
         },
         cb: res => {
           console.log(res);
@@ -532,5 +532,10 @@ Page({
       this.buildChatContent('user', content);
       this.buildContext('user', content);
     }
+  },
+  closeSuggestion() {
+    this.setData({
+      showSuggestionDialog: false
+    });
   }
 })

@@ -285,7 +285,11 @@ Page({
   setPlayStatus(playContent, status) {
     let chatContent = this.data.chatContent;
     for (let chatItem of chatContent) {
-      if(chatItem.content === playContent) {
+      let chatContent = chatItem.content;
+      if(chatItem.role === 'user') {
+        chatContent = chatItem.userContent;
+      }
+      if(chatContent === playContent) {
         chatItem.playing = status;
         this.setData({
           chatContent: this.data.chatContent
@@ -294,6 +298,8 @@ Page({
     }
   },
   playAudio(target, playContent) {
+    // 设置播放状态
+    this.setPlayStatus(playContent, true);
     wxAudio.src = target;
     wxAudio.play();
     // 添加音频播放结束的监听器
@@ -304,7 +310,7 @@ Page({
   },
   playTmpUserAudio(e) {
     const tmpFile = e.currentTarget.dataset.target;
-    const content = e.currentTarget.dataset.userContent;
+    const content = e.currentTarget.dataset.content;
     this.playAudio(tmpFile, content);
   },
   playContent(e) {

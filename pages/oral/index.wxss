@@ -1,4 +1,4 @@
-@import '/iconfont/iconfont.wxss';
+@import '/iconfont/icont_ocr.wxss';
 
 .container {
   height: 100vh;
@@ -242,7 +242,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 40rpx;
+  margin: 55rpx;
 }
 
 .btn-group {
@@ -325,4 +325,33 @@
   50% {
     height: 40rpx;
   }
+}
+
+.btn-options {
+  /* border: 1px solid red; */
+  /* width: 60%; */
+  display: flex;
+  justify-content: center;
+}
+
+.btn-option {
+  /* border: 1px solid red; */
+  background-color: #f3f6ff;
+  width: 180rpx;
+  height: 60rpx;
+  margin: 0 20rpx;
+  padding: 0 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15rpx;
+}
+
+.btn-option .iconfont {
+  padding: 0 15rpx;
+  font-size: 1.2rem;
+}
+
+.btn-option span {
+  color: black;
 }

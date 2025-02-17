@@ -464,4 +464,10 @@ Page({
     const advice = e.currentTarget.dataset.advice;
     this.showAdvice(advice);
   },
+  onTipClick(e) {
+
+  },
+  onChangeTopic(e) {
+    this.getTopics();
+  }
 })

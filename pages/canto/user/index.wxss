@@ -25,7 +25,7 @@
 
 .icon-geshou {
   font-size: 4rem;
-  color: #1296db;
+  /* color: #1296db; */
 }
 
 .user-id {

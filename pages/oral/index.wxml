@@ -159,6 +159,16 @@
     <view class="wave-bar"></view>
   </view>
   <view class="bottom-toolbar">
+    <view class="btn-options" wx:if="{{!recording}}">
+      <view class="btn-option btn-tip" bind:tap="onTipClick">
+        <i class="iconfont icon-tip"></i>
+        <span>提示</span>
+      </view>
+      <view class="btn-option btn-changeTopic" bind:tap="onChangeTopic">
+        <i class="iconfont icon-topic"></i>
+        <span>换个话题</span>
+      </view>
+    </view>
     <view class="btn-group">
       <view class="cancel-btn" wx:if="{{ recording }}">
         <i class="iconfont icon-close" bind:tap="cancelRecord"></i>

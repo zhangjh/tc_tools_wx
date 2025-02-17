@@ -6,6 +6,8 @@
     "wux-card": "/miniprogram_npm/wux-weapp/card/index",
     "wux-wing-blank": "/miniprogram_npm/wux-weapp/wing-blank/index",
     "wux-radio-group": "/miniprogram_npm/wux-weapp/radio-group",
-    "wux-radio": "/miniprogram_npm/wux-weapp/radio"
+    "wux-radio": "/miniprogram_npm/wux-weapp/radio",
+    "wux-tabs": "/miniprogram_npm/wux-weapp/tabs/index", 
+    "wux-tab": "/miniprogram_npm/wux-weapp/tab/index"
   }
 }

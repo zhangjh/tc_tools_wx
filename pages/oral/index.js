@@ -48,8 +48,11 @@ Page({
     tutor: tutors[0],
     showTutorDialog: false,
     showTopicDialog: false,
+    showSuggestionDialog: false,
     topics: [
     ],
+    currentTopic: '',
+    suggestions: [],
     // 记录录音是否被取消
     cancelled: false,
     /**
@@ -190,6 +193,12 @@ Page({
   selectTopic(e) {
     const topic = e.currentTarget.dataset.item;
     this.closeTopicDialog();
+    // 切换topic时需清理当前对话
+    this.setData({
+      currentTopic: topic,
+      chatContent: [],
+      context: []
+    });
     // 选中主题后主动开启对话
     this.buildContext('user', 'hello');
     this.conversation({
@@ -361,11 +370,22 @@ Page({
     let chatContentItem = this.data.chatContent[len - 1];
     // 同角色累加信息
     if(chatContentItem && chatContentItem.role === role) {
-      chatContentItem.content = content;
+      // 此时用户没有录音，而是使用的推荐回答，没有audio
+      if(role === 'user' && !type) {
+        chatContentItem.userContent = content;
+      } else {
+        chatContentItem.content = content;
+      }
     } else {
-      this.data.chatContent.push({
-        role, content, type
-      });
+      if(role === 'user' && !type) {
+        this.data.chatContent.push({
+          role, userContent: content
+        });
+      } else {
+        this.data.chatContent.push({
+          role, content, type
+        });
+      }
     }
     this.setData({
       chatContent: this.data.chatContent
@@ -465,9 +485,52 @@ Page({
     this.showAdvice(advice);
   },
   onTipClick(e) {
-
+    const chatContent = this.data.chatContent;
+    let modelContent = '';
+    if(chatContent && chatContent.length) {
+      modelContent = chatContent.reverse().find(item => item.role === 'model');
+    }
+    if(modelContent) {
+      wx.showLoading({
+        title: 'loading...',
+      });
+      common.wxRequest({
+        url: '/wxChat/oral/suggestion',
+        method: 'POST',
+        data: {
+          topic: this.data.currentTopic,
+          modelContent
+        },
+        cb: res => {
+          console.log(res);
+          this.setData({
+            suggestions: JSON.parse(res),
+            showSuggestionDialog: true
+          });
+          wx.hideLoading();
+        }
+      });
+    }
   },
   onChangeTopic(e) {
     this.getTopics();
+  },
+  selectSuggestion(e) {
+    const item = e.currentTarget.dataset.item;
+    if(item) {
+      this.setData({
+        showSuggestionDialog: false
+      });
+      const content = item.replace(/^\d+\.\s*/, '');
+      this.conversation({
+        talkMode: 'tutor', 
+        content,
+        context: {
+          messages: this.data.context
+        }
+      });
+      this.buildChatContent('user', content);
+      this.buildContext('user', content);
+    }
   }
 })

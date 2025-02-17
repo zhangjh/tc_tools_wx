@@ -24,9 +24,31 @@
           bind:tap="selectTopic"
           data-item="{{item}}"
         >
-          <text>{{item}}</text>
+          <text user-select>{{item}}</text>
         </view>
       </scroll-view>
+    </view>
+  </view>
+
+  <!-- 回答提示弹窗 -->
+  <view class="dialog" wx:if="{{showSuggestionDialog}}">
+    <view class="dialog-content">
+      <view class="dialog-header">
+        <text class="dialog-title">你可以这样说：</text>
+      </view>
+      <scroll-view class="topics-list" scroll-y="true">
+          <view 
+            class="topic-item" 
+            hover-class="topic-item-hover"
+            wx:for="{{suggestions}}" 
+            wx:key="index"
+            data-index="{{index}}"
+            bind:tap="selectSuggestion"
+            data-item="{{item}}"
+          >
+            <text user-select>{{item}}</text>
+          </view>
+        </scroll-view>
     </view>
   </view>
 
@@ -133,7 +155,7 @@
             <i class="iconfont icon-voiceprint" wx:if="{{ item.playing }}"></i>
           </view>
           <view class="evaluate" 
-            wx:if="{{item.pronunciation || item.grammar || item.advice}}">
+            wx:if="{{item.content && (item.pronunciation || item.grammar || item.advice)}}">
             <view wx:if="{{item.pronunciation}}">
               <span>发音: </span><span class="score">{{item.pronunciation}}</span>
             </view>

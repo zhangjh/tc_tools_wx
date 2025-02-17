@@ -152,7 +152,7 @@
             ></image>
             <text user-select>{{ item.userContent }}</text>
             <audio src="{{item.content}}" wx:if="{{item.role === 'user'}}"></audio>
-            <i class="iconfont icon-bofang" 
+            <i class="iconfont icon-bofang-copy" 
               wx:if="{{ !item.playing }}"
               bind:tap="playTmpUserAudio"
               data-target="{{item.content}}"

@@ -1,5 +1,5 @@
 <view class="container">
-  <view class="" style="display: {{ indexShow ? 'block' : 'none' }}">
+  <view class="" wx:if="{{ indexShow }}">
     <view class="description">
       <view class="card-container">
         <view class="item-container">
@@ -51,7 +51,7 @@
     </view>
   </view>
 
-  <view class="content" style="display: {{ indexShow ? 'none' : 'block' }};">
+  <view class="content" wx:if="{{ !indexShow }}">
     <view>
       <wux-card title="简历评分" full="true" thumb="/resources/resume/score.png">
         <view slot="body"  class="audit-summary">

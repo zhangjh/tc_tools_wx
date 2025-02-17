@@ -19,8 +19,8 @@
     </view>
     <view class="text-content">
       <button class="arrow left-arrow" 
-      style="display: {{ visible.prev ? 'block' : 'none'}};"
-      bind:tap="goPrev">
+        wx:if="{{ visible.prev }}"
+        bind:tap="goPrev">
         <i class="iconfont icon-jiantouzuo"></i>
       </button> 
       <view class="text">
@@ -29,26 +29,26 @@
         <view class="lyric-next">{{lyrics.displayed.next}}</view>
       </view>
       <button class="arrow right-arrow"
-        style="display: {{ visible.next ? 'block' : 'none'}};"
-         bind:tap="goNext">
+        wx:if="{{ visible.next }}"
+        bind:tap="goNext">
         <i class="iconfont icon-jiantouyou"></i>
       </button>
     </view>
     <view class="buttons">
-      <view style="display: {{ visible.playBtn ? 'block' : 'none'}}"
+      <view wx:if="{{ visible.playBtn }}"
         bind:tap="playContent"
       >
         <i class="iconfont icon-bofang"></i> 
       </view>
-      <view style="display: {{ visible.recordBtn ? 'block' : 'none'}}"
+      <view wx:if="{{ visible.recordBtn }}"
         bind:tap="recordVoice"
       >
         <i class="iconfont icon-luyin"></i>
       </view>
-      <view bind:tap="onBack">
+      <view bind:tap="onBack" wx:if="{{ visible.recordBtn }}">
         <i class="iconfont icon-fanhui"></i>
       </view>
-      <view style="display: {{ visible.voicePrint ? 'block' : 'none'}}"
+      <view wx:if="{{visible.voicePrint}}"
         bind:tap="stopRecord"
       >
         <i class="iconfont icon-voiceprint {{ playStatus }}" style="animation-delay: 0s;"></i>

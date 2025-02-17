@@ -11,12 +11,12 @@
             <view class="user">
               <view class="user-profile-wrap">
                   <text 
-                  class="nickName"
-                  style="display: {{userInfo.nickName ? 'block' : 'none'}}"
+                    class="nickName"
+                    wx:if="{{ userInfo.nickName }}"
                   >用户ID：{{userInfo.nickName}}</text>
                   <text 
-                      class="user-id"
-                      style="display: {{userInfo.nickName ? 'none' : 'block'}}"
+                    class="user-id"
+                    wx:if="{{ !userInfo.nickName }}"
                   >用户ID：{{userInfo.userId}}</text>
               </view>
             </view>
